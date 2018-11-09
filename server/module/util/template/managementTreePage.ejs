@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <<%="%"%> include <%= path.basePath %>views/common/meta.ejs <%="%"%>>
+    <<%="%"%> include <%= path.basePath %>views/common/public.ejs <%="%"%>>
+</head>
+<body>
+<<%="%"%> include <%= path.basePath %>views/common/header.ejs <%="%"%>>
+
+<div class="container">
+    <div class="row">
+        <<%="%"%> include <%= path.basePath %>views/common/menu.ejs <%="%"%>>
+
+        <div id="content" class="col-lg-10 col-sm-11">
+            <div class="page-header">
+                <h1>
+                    <%= modelNameText %>管理
+                    <small id="parseInfo">
+
+                    </small>
+                </h1>
+                <div class="operationButton">
+                    <button class="btn btn-primary" id="addData">
+                        <span class="glyphicon glyphicon-plus"></span> 添加根节点
+                    </button>
+                    <button class="btn btn-info" id="addChildrenData">
+                        <span class="glyphicon glyphicon-plus"></span> 添加子节点
+                    </button>
+                    <button class="btn btn-default" id="editData">
+                        <span class="glyphicon glyphicon-pencil"></span> 修改
+                    </button>
+                    <button class="btn btn-default" id="removeData">
+                        <span class="glyphicon glyphicon-trash"></span> 删除
+                    </button>
+
+                    <!--<form id="imageButton" class="inline-block">-->
+                    <!--<div class="btn-group" role="group">-->
+                    <!--<button type="button" class="btn btn-primary fileinput-button">-->
+                    <!--<span class="glyphicon glyphicon-import"></span> 导入-->
+                    <!--<input id="importData" type="file" name="media" multiple>-->
+                    <!--</button>-->
+                    <!--<button class="btn btn-default" id="exportDate" type="button">-->
+                    <!--<span class="glyphicon glyphicon-export"></span> 导出-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</form>-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title"><%= modelNameText %>树</div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="dataTree"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title"><%= modelNameText %>信息</div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal detail-form" id="detail-form">
+                                <div class="row"><% for(key in field){if(!unDetail[key]){%>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label"><%= nameFormatter[key] || key %></label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static" name="<%= key=='parent'?'parent.name':key %>"></p>
+                                            </div>
+                                        </div>
+                                    </div><% }} %>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="dataList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="default-hidden">
+    <!------------------------------------------ edit form modal ------------------------------------------>
+    <form class="form-horizontal edit-form" id="edit-form"><% var key;%><% for(key in field){if(!unEditor[key]){%>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><%= nameFormatter[key] || key %></label>
+            <div class="col-md-10"><% if(key == 'parent'){%>
+                <input class="form-control" name="parentName" type="text" readonly />
+                <input class="form-control" name="parent" type="hidden" /><% }else{ %>
+                <input class="form-control" name="<%= key %>" type="text" /><% } %>
+            </div>
+        </div><% }} %>
+    </form>
+    <div id="edit_form_footer">
+        <button type="button" class="btn btn-primary btn-small" id="edit_form_save">保存</button>
+        <button type="button" class="btn btn-default btn-small dol-hideModal" id="edit_form_cancel">取消</button>
+    </div>
+</div>
+
+<<%="%"%> include <%= path.basePath %>views/common/footer.ejs <%="%"%>>
+<<%="%"%> include <%= path.basePath %>views/common/script.ejs <%="%"%>>
+
+
+</body>
+</html>

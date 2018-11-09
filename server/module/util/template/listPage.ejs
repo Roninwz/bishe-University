@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <<%="%"%> include <%= path.basePath %>views/common/meta.ejs <%="%"%>>
+    <<%="%"%> include ../common/public.ejs <%="%"%>>
+</head>
+<body>
+<<%="%"%> include <%= path.basePath %>views/common/header.ejs <%="%"%>>
+
+<div class="container">
+    <div class="row">
+        <<%="%"%> include <%= path.basePath %>views/common/menu.ejs <%="%"%>>
+
+        <div id="content" class="col-lg-10 col-sm-11">
+            <div class="page-header">
+                <h1>
+                    <%= modelNameText %>管理
+                    <small id="parseInfo">
+
+                    </small>
+                </h1>
+                <div class="operationButton">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-primary" id="addData">
+                            <span class="glyphicon glyphicon-plus"></span> 添加
+                        </button>
+                        <button class="btn btn-warning" id="editDate">
+                            <span class="glyphicon glyphicon-pencil"></span> 修改
+                        </button>
+                        <button class="btn btn-danger" id="removeDate">
+                            <span class="glyphicon glyphicon-trash"></span> 删除
+                        </button>
+                    </div>
+
+                    <form id="imageButton" class="inline-block">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary fileinput-button">
+                                <span class="glyphicon glyphicon-import"></span> 导入
+                                <input id="importData" type="file" name="media" multiple>
+                            </button>
+                            <button class="btn btn-default" id="exportDate" type="button">
+                                <span class="glyphicon glyphicon-export"></span> 导出
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="queryCondition">
+                <form class="form-horizontal query-form" id="queryConditionForm">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">名称</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="根据名称查询" name="name_like" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default btn-query" type="submit">
+                                搜索
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="datalist"></div>
+        </div>
+    </div>
+</div>
+
+<div class="default-hidden">
+
+</div>
+
+<<%="%"%> include <%= path.basePath %>views/common/footer.ejs <%="%"%>>
+<<%="%"%> include <%= path.basePath %>views/common/script.ejs <%="%"%>>
+
+
+</body>
+</html>

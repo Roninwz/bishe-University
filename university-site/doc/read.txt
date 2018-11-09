@@ -1,0 +1,7 @@
+
+去掉标签页的下划线
+.el-tabs__nav-wrap::after{
+  content: "";
+  width: 0;
+  height: 0;
+}

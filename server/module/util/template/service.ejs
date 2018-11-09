@@ -1,0 +1,27 @@
+/**
+* Created by wangshuyi on <%= new Date().toLocaleString() %>.
+*/
+
+'use strict';
+
+const extend = require('extend');
+const logger = require('log4js').getLogger("sys");
+
+const CommonService = require("<%= path.basePath %>service/common/<%= serviceType %>");
+const Model = require("<%= path.Model %>");
+
+const defaultParams = {
+    model : Model
+};
+
+class ModuleService extends CommonService{
+    constructor(param){
+        super(param);
+        this.opts = extend(true, {}, this.opts, defaultParams, param);
+        this._name = "<%= modelName %>Service";
+    }
+}
+
+module.exports = new ModuleService();
+
+
