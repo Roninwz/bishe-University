@@ -10,13 +10,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
     "axios": "^0.15.3",
+    "cors": "^2.8.5",
     "echarts": "^3.3.2",
     "element-ui": "^1.2.8",
     "font-awesome": "^4.7.0",
     "nprogress": "^0.2.0",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
     "vuex": "^2.0.0-rc.6"
   },
   "devDependencies": {

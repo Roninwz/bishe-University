@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-let base = 'localhost:8880';
+// let base = 'localhost:8880/api';
+let base = '/api';
 
-export const requestLogin = params => { return axios.post(`${base}/admin/login`, params).then(res => res.data); };
+export const requestLogin = params => { return axios.post(`${base}/admin/login/loginCheck`, params).then(res => res.data); };
 
 export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }); };
 

@@ -17,7 +17,7 @@ module.exports = (function () {
     Object.assign(config, {
         path : {
             projectPath: `${__dirname}/..`,
-            hostname: `http://127.0.0.1:${config.port}`,
+            hostname: `http://0.0.0.0:${config.port}`,
             contextPath : "",
             viewPrefix : "/view",
             publicPath : "",

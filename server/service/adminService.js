@@ -32,7 +32,7 @@ class ModuleService extends CommonService{
             this.findOne(curAdmin, {name: name}, '').then(admin => {
                 if(admin){
                     if(admin.password === password){
-                        resolve(admin)
+                        resolve({data:admin,message:"登录成功"})
                     }else{
                         reject({message: '密码不正确'});
                     }
