@@ -45,23 +45,27 @@
       },
       handleSubmit2(admin) {
         let _this = this;
-        this.$refs[admin].validate((valid) => {
+        _this.$refs[admin].validate((valid) => {
           if (valid) {
             //_this.$router.replace('/table');
-            this.logining = true;
-            let loginParams = { username: this.admin.username, password: this.admin.password };
+            _this.logining = true;
+            let loginParams = { username: _this.admin.username, password: _this.admin.password };
             console.log("data:"+loginParams);
             this.$ajax({
               method: 'post',
               url: '/api/admin/login/loginCheck',
               data:loginParams
             }).then(data=>{
-                   this.$message({
+              _this.$message({
                      message: data.data.message,
                      type: 'info'
                    });
-              sessionStorage.setItem('user', JSON.stringify(data.data.data));
-              this.$router.push({ path: '/table' });
+                   if(data.data.message.toString()==="登录成功"){
+                     sessionStorage.setItem('user', JSON.stringify(data.data.data));
+                     _this.$router.push({ path: '/view/admin' });
+                     // _this.$router.replace('/view/admin');
+                   }
+
             })
               .catch(function (error) {
                 console.log(error);

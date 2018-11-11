@@ -6,3 +6,12 @@ backoffice:8881
 site:8882  
 http://localhost:8882  
 
+
+####技术介绍  
+主要使用node+vue  
+数据库mongo  
+版本控制工具：码云  
+其它技术：element  scss  
+字体：font-awesome
+
+
