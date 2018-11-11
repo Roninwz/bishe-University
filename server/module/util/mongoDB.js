@@ -29,7 +29,7 @@ mongoose.connection.on('connected', function () {
 /**
  * 连接异常
  */
-mongoose.connection.on('error',function (err) {
+mongoose.connection.on('error', function (err) {
     logger.error('Mongoose connection error: ' + err);
 });
 

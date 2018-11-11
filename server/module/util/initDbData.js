@@ -30,8 +30,8 @@ InitDbData.initUser = function () {
     const dbUser = config.dbUser;
     let key, data = [];
     UserService.findById({}, dbUser.admin._id).then(flag => {
-        if(!flag){
-            for(key in dbUser){
+        if (!flag) {
+            for (key in dbUser) {
                 data.push(dbUser[key]);
             }
             UserService.create({}, data).then(() => {
@@ -44,8 +44,8 @@ InitDbData.initUser = function () {
 };
 
 InitDbData.initDict = function () {
-    DictService.findOne({}, {code : dictConfig[0].code}).then(flag => {
-        if(!flag){
+    DictService.findOne({}, {code: dictConfig[0].code}).then(flag => {
+        if (!flag) {
             DictService.create({}, dictConfig).then(() => {
                 logger.info("create " + "default menu" + " success");
             }, err => {
@@ -55,8 +55,8 @@ InitDbData.initDict = function () {
     })
 };
 InitDbData.initMenu = function () {
-    MenuService.findOne({}, {_id : menuConfig[0]._id}).then(flag => {
-        if(!flag){
+    MenuService.findOne({}, {_id: menuConfig[0]._id}).then(flag => {
+        if (!flag) {
             MenuService.create({}, menuConfig).then(() => {
                 logger.info("create " + "default menu" + " success");
             }, err => {
@@ -66,8 +66,8 @@ InitDbData.initMenu = function () {
     })
 };
 InitDbData.initRole = function () {
-    RoleService.findOne({}, {_id : roleConfig[0]._id}).then(flag => {
-        if(!flag){
+    RoleService.findOne({}, {_id: roleConfig[0]._id}).then(flag => {
+        if (!flag) {
             RoleService.create({}, roleConfig).then(() => {
                 logger.info("create " + "default role" + " success");
             }, err => {
@@ -77,8 +77,8 @@ InitDbData.initRole = function () {
     })
 };
 InitDbData.initTenant = function () {
-    TenantService.findOne({}, {_id : tenantConfig[0]._id}).then(flag => {
-        if(!flag){
+    TenantService.findOne({}, {_id: tenantConfig[0]._id}).then(flag => {
+        if (!flag) {
             TenantService.create({}, tenantConfig).then(() => {
                 logger.info("create " + "default tenant" + " success");
             }, err => {

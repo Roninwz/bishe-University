@@ -1,5 +1,5 @@
 /**
- * Created by wangshuyi on 2016/12/27.
+ * Created by Roninwz on 2018/11/11.
  */
 
 'use strict';
@@ -32,28 +32,15 @@ const schema = new Schema({
      * 密码
      */
     password: {type: String},
-
-    /**
-     * 用户类型: 1.移动端用户/2.web端用户
-     */
-    type: {type: Number, default: 2},
-    /**
-     * 微信openId
-     */
-    wxOpenId: {type: []},
+    /*
+    * 手机号
+    * */
+    phone: {type: String},
     /**
      * 头像
      */
-    icon: {type: String},
+    imgUrl: {type: String},
 
-    /**
-     * 家长姓名
-     */
-    parName: {type: String},
-    /**
-     * 家长手机号码
-     */
-    parPhone: {type: String,},
     /**
      * 省份
      */
@@ -73,19 +60,8 @@ const schema = new Schema({
     /**
      * 详细地址
      */
-    region:{type:String},
-    /**
-     * 积分
-     */
-    score: {type: Number, default: 0},
-    /**
-     * 捐赠次数
-     */
-    donateNum: {type: Number},
-    /**
-     * 申领次数
-     */
-    receiveNum: {type: Number},
+    detailAddress: {type: String},
+
     /**
      * 状态
      */
@@ -110,6 +86,6 @@ const schema = new Schema({
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('M_User', schema);
+const Model = mongoose.model('M_User', schema, 'm_user');
 
 module.exports = Model;

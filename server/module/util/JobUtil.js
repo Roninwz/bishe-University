@@ -11,7 +11,7 @@ const JobService = require('../../service/system/tool/JobService');
 const JobLogService = require('../../service/system/tool/JobLogService');
 
 const JobUtil = {
-    init:null,
+    init: null,
     method: null,
     schedule: {},
 
@@ -27,7 +27,7 @@ JobUtil.init = function () {
 
     JobService.find(config.dbUser.admin).then(jobList => {
         jobList.forEach(job => {
-            if(job.status === 'running'){
+            if (job.status === 'running') {
                 thisJob.start(job);
             }
         });
@@ -48,7 +48,7 @@ JobUtil.stop = function (id) {
     thisJob.schedule[id].cancel();
 };
 JobUtil.run = function (job) {
-    if(JobUtil.method[job.func]){
+    if (JobUtil.method[job.func]) {
         return new Promise((resolve, reject) => {
             let param = {};
             job.param.forEach(p => param[p.key] = p.value);
@@ -70,7 +70,7 @@ JobUtil.run = function (job) {
                 );
             })
         });
-    }else{
+    } else {
         return new Promise((resolve, reject) => {
             JobLogService.save(config.dbUser.admin, {
                 job: job._id,

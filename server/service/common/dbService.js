@@ -10,9 +10,9 @@ const config = require("../../config/config");
 
 const defaultParams = {
     model: null,
-    findCondition(curUser, thisService, condition){
+    findCondition(curUser, thisService, condition) {
         return new Promise(resolve => {
-            resolve({$and:[condition, { state: 1 }]});
+            resolve({$and: [condition, {state: 1}]});
         });
     },
     saveExtend: (curUser, thisService, data) => {
@@ -42,15 +42,15 @@ class CommonService {
             this.opts.findCondition(curUser, this, condition).then(condition => {
                 let exec = this.opts.model.find(condition);
 
-                if(populate instanceof Array){
+                if (populate instanceof Array) {
                     populate.forEach(p => {
                         exec.populate(p);
                     })
-                }else{
+                } else {
                     exec.populate(populate);
                 }
 
-                if(fields){
+                if (fields) {
                     exec.select(fields);
                 }
 
@@ -93,15 +93,15 @@ class CommonService {
                     } else {
                         let exec = thisService.opts.model.find(condition).skip(skip).limit(size);
 
-                        if(populate instanceof Array){
+                        if (populate instanceof Array) {
                             populate.forEach(p => {
                                 exec.populate(p);
                             })
-                        }else{
+                        } else {
                             exec.populate(populate);
                         }
 
-                        if(fields){
+                        if (fields) {
                             exec.select(fields);
                         }
 
@@ -132,15 +132,15 @@ class CommonService {
         return new Promise((resolve, reject) => {
             let exec = this.opts.model.findById(id);
 
-            if(populate instanceof Array){
+            if (populate instanceof Array) {
                 populate.forEach(p => {
                     exec.populate(p);
                 })
-            }else{
+            } else {
                 exec.populate(populate);
             }
 
-            if(fields){
+            if (fields) {
                 exec.select(fields);
             }
 
@@ -169,15 +169,15 @@ class CommonService {
             this.opts.findCondition(curUser, this, condition).then(condition => {
                 let exec = this.opts.model.findOne(condition);
 
-                if(populate instanceof Array){
+                if (populate instanceof Array) {
                     populate.forEach(p => {
                         exec.populate(p);
                     })
-                }else{
+                } else {
                     exec.populate(populate);
                 }
 
-                if(fields){
+                if (fields) {
                     exec.select(fields);
                 }
 
@@ -329,7 +329,7 @@ class CommonService {
      * @param option
      * @returns {Promise}
      */
-    updateById(curUser = null, id = "", data = {}, option = {new : true}) {
+    updateById(curUser = null, id = "", data = {}, option = {new: true}) {
         return new Promise((resolve, reject) => {
             data.updater = (curUser && curUser._id) || config.dbUser.robot._id;
             data.updateTime = new Date();
@@ -376,12 +376,12 @@ class CommonService {
      * @param pip
      * @return {Promise}
      */
-    aggregate(curUser, pip = []){
+    aggregate(curUser, pip = []) {
         return new Promise((resolve, reject) => {
             this.opts.model.aggregate(pip, (err, result) => {
-                if(err){
+                if (err) {
                     reject(err);
-                }else{
+                } else {
                     resolve(result);
                 }
             })
@@ -395,12 +395,12 @@ class CommonService {
      * @param options
      * @return {Promise}
      */
-    populate(curUser, data, options = []){
+    populate(curUser, data, options = []) {
         return new Promise((resolve, reject) => {
             this.opts.model.populate(data, options, (err, data) => {
-                if(err){
+                if (err) {
                     reject(err);
-                }else{
+                } else {
                     resolve(data);
                 }
             });

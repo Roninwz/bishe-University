@@ -1,11 +1,10 @@
 /**
- * Created by Roninwz on 2018/11/11.
+ * 资源model   --资源模块模仿小月博客https://www.aliyue.net/2306.html
+ * @author Roninwz
+ * @date 2018/11/11 14:24
+ * @since 1.0.0
  */
-'use strict';
 
-/**
- *管理员
- */
 
 const uuid = require('uuid');
 
@@ -16,11 +15,13 @@ const tool = require('./util/tool');
 
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
-    name: {type: String, default: 'default'},     //名称
-    password: {type: String},                    //密码
-    phone: {type: Number, default: () => parseInt(Math.random() * Math.pow(10, 11))},         //手机号
-    sex: {type: String},                      //性别
-    email: {type: String},                          //邮箱
+    title: {type: String, ref: 'T_Technology'},     //评论文章id
+    content: {type: String},                    //评论内容
+    lookNum: {type: Number}, //浏览量
+    zanNum: {type: Number},  //点赞量
+    link: {type: String},  //资源链接
+    pass: {type: String}, //资源链接密码
+    linkType: {type: Number},   //0 百度云资源  1 蓝奏云资源
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_User", default: config.dbUser.robot._id},          //创建者
@@ -30,5 +31,5 @@ const schema = new Schema({
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('M_Admin', schema, 'm_admin');
+const Model = mongoose.model('T_Resource', schema, 't_resource');
 module.exports = Model;

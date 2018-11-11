@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Index from '@/components/index'
-import Technology from '@/components/technology'
-import Forum from '@/components/forum'
+import HelloWorld from '../components/HelloWorld'
+import Index from '../page/index'
+import Technology from '../page/technology'
+import Forum from '../page/forum'
 
 Vue.use(Router);
 

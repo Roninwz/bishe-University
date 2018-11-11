@@ -6,42 +6,42 @@
 const tool = require('./tool');
 const util = {};
 
-util.formatCondition = function(condition){
+util.formatCondition = function (condition) {
     let key, realKey;
     delete condition._;
-    for(key in condition){
-        if(condition[key] === "" || condition[key] === null){
+    for (key in condition) {
+        if (condition[key] === "" || condition[key] === null) {
             delete condition[key];
-        }else if(condition[key] === "-"){
+        } else if (condition[key] === "-") {
             condition[key] = "";
-        }else if(/_like$/.test(key)){
+        } else if (/_like$/.test(key)) {
             condition[key.replace(/_like$/, '')] = {'$regex': condition[key]};
             delete condition[key];
-        }else if(/_dateTime_start$/.test(key)){
+        } else if (/_dateTime_start$/.test(key)) {
             realKey = key.replace(/_dateTime_start$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$gte'] = tool.string2date(condition[key], 'yyyy-MM-dd hh:mm');
-            }else{
+            } else {
                 condition[realKey] = {'$gte': tool.string2date(condition[key], 'yyyy-MM-dd hh:mm')};
             }
             condition[realKey]['$gte'].setSeconds(0);
             condition[realKey]['$gte'].setMilliseconds(0);
             delete condition[key];
-        }else if(/_dateTime_end$/.test(key)){
+        } else if (/_dateTime_end$/.test(key)) {
             realKey = key.replace(/_dateTime_end$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$lte'] = tool.string2date(condition[key], 'yyyy-MM-dd hh:mm')
-            }else{
+            } else {
                 condition[realKey] = {'$lte': tool.string2date(condition[key], 'yyyy-MM-dd hh:mm')};
             }
             condition[realKey]['$lte'].setSeconds(59);
             condition[realKey]['$lte'].setMilliseconds(59);
             delete condition[key];
-        }else if(/_date_start$/.test(key)){
+        } else if (/_date_start$/.test(key)) {
             realKey = key.replace(/_date_start$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$gte'] = tool.string2date(condition[key], 'yyyy-MM-dd')
-            }else{
+            } else {
                 condition[realKey] = {'$gte': tool.string2date(condition[key], 'yyyy-MM-dd')};
             }
             // condition[realKey]['$gte'].setDate(1);
@@ -50,11 +50,11 @@ util.formatCondition = function(condition){
             condition[realKey]['$gte'].setSeconds(0);
             condition[realKey]['$gte'].setMilliseconds(0);
             delete condition[key];
-        }else if(/_date_end$/.test(key)){
+        } else if (/_date_end$/.test(key)) {
             realKey = key.replace(/_date_end$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$lte'] = tool.string2date(condition[key], 'yyyy-MM-dd')
-            }else{
+            } else {
                 condition[realKey] = {'$lte': tool.string2date(condition[key], 'yyyy-MM-dd')};
             }
             // condition[realKey]['$lte'].setMonth(condition[realKey]['$lte'].getMonth() + 1);
@@ -64,8 +64,8 @@ util.formatCondition = function(condition){
             condition[realKey]['$lte'].setSeconds(59);
             condition[realKey]['$lte'].setMilliseconds(999);
             delete condition[key];
-        }else if(/_date_range$/.test(key)){
-            if(condition[key].length > 0) {
+        } else if (/_date_range$/.test(key)) {
+            if (condition[key].length > 0) {
                 realKey = key.replace(/_date_range$/, '');
                 condition[realKey] = {
                     '$gte': new Date(condition[key][0]),
@@ -77,39 +77,39 @@ util.formatCondition = function(condition){
                 condition[realKey]['$lte'].setMilliseconds(999);
             }
             delete condition[key];
-        }else if(/_notEquil$/.test(key)){
+        } else if (/_notEquil$/.test(key)) {
             condition[key.replace(/_notEquil$/, '')] = {'$ne': condition[key]};
             delete condition[key];
-        }else if(/_number_min$/.test(key)){
+        } else if (/_number_min$/.test(key)) {
             realKey = key.replace(/_number_min$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$gte'] = condition[key]
-            }else{
+            } else {
                 condition[realKey] = {'$gte': condition[key]};
             }
             delete condition[key];
-        }else if(/_number_max$/.test(key)){
+        } else if (/_number_max$/.test(key)) {
             realKey = key.replace(/_number_max$/, '');
-            if(condition[realKey]){
+            if (condition[realKey]) {
                 condition[realKey]['$lte'] = condition[key]
-            }else{
+            } else {
                 condition[realKey] = {'$lte': condition[key]};
             }
             delete condition[key];
-        }else if(/_in$/.test(key)){
-            if(condition[key].length > 0){
-                if(condition[key.replace(/_in$/, '')] && typeof condition[key.replace(/_in$/, '')] === 'object'){
+        } else if (/_in$/.test(key)) {
+            if (condition[key].length > 0) {
+                if (condition[key.replace(/_in$/, '')] && typeof condition[key.replace(/_in$/, '')] === 'object') {
                     condition[key.replace(/_in$/, '')]['$in'] = condition[key];
-                }else{
+                } else {
                     condition[key.replace(/_in$/, '')] = {'$in': condition[key]};
                 }
             }
             delete condition[key];
-        }else if(/_near$/.test(key)){
-            if(condition[key].length > 0){
-                if(condition[key.replace(/_near$/, '')] && typeof condition[key.replace(/_near$/, '')] === 'object'){
+        } else if (/_near$/.test(key)) {
+            if (condition[key].length > 0) {
+                if (condition[key.replace(/_near$/, '')] && typeof condition[key.replace(/_near$/, '')] === 'object') {
                     condition[key.replace(/_near$/, '')]['$near'] = condition[key];
-                }else{
+                } else {
                     condition[key.replace(/_near$/, '')] = {'$near': condition[key]};
                 }
             }
@@ -119,17 +119,17 @@ util.formatCondition = function(condition){
     }
     return condition;
 };
-util.formatData = function(data){
+util.formatData = function (data) {
     let key;
-    for(key in data){
-        if(/_array$/.test(key)){
+    for (key in data) {
+        if (/_array$/.test(key)) {
             data[key.replace(/_array$/, '')] = data[key] || [];
             delete data[key];
-        }else if(/_date$/.test(key)){
-            data[key.replace(/_date$/, '')] = data[key]?tool.string2date(data[key] + ' 00:00:00', 'yyyy-MM-dd hh:mm:ss'):'';
+        } else if (/_date$/.test(key)) {
+            data[key.replace(/_date$/, '')] = data[key] ? tool.string2date(data[key] + ' 00:00:00', 'yyyy-MM-dd hh:mm:ss') : '';
             delete data[key];
-        }else if(/_datetime$/.test(key)){
-            data[key.replace(/_datetime$/, '')] = data[key]?tool.string2date(data[key] + ':00', 'yyyy-MM-dd hh:mm:ss'):'';
+        } else if (/_datetime$/.test(key)) {
+            data[key.replace(/_datetime$/, '')] = data[key] ? tool.string2date(data[key] + ':00', 'yyyy-MM-dd hh:mm:ss') : '';
             delete data[key];
         }
     }

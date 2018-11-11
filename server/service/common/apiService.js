@@ -12,50 +12,51 @@ const defaultParams = {
     model: null,
     basePath: '',
     find: {
-        url : '/find',
-        method : 'post',
+        url: '/find',
+        method: 'post',
     },
     findForPage: {
-        url : '/list',
-        method : 'post',
+        url: '/list',
+        method: 'post',
     },
     findById: {
-        url : '/detail/{id}',
-        method : 'get',
+        url: '/detail/{id}',
+        method: 'get',
     },
     findOne: {
-        url : '/findOne',
-        method : 'post',
+        url: '/findOne',
+        method: 'post',
     },
     save: {
-        url : '/save',
-        method : 'post',
+        url: '/save',
+        method: 'post',
     },
     create: {
-        url : '/create',
-        method : 'post',
+        url: '/create',
+        method: 'post',
     },
     remove: {
-        url : '/remove',
-        method : 'post',
+        url: '/remove',
+        method: 'post',
     },
     removeById: {
-        url : '/remove/{id}',
-        method : 'get',
+        url: '/remove/{id}',
+        method: 'get',
     },
     update: {
-        url : '/update',
-        method : 'post',
+        url: '/update',
+        method: 'post',
     },
     updateById: {
-        url : '/save/{id}',
-        method : 'post',
+        url: '/save/{id}',
+        method: 'post',
     },
     count: {
-        url : '/count',
-        method : 'post',
+        url: '/count',
+        method: 'post',
     },
 };
+
 //TODO 是否需要传入当前用户，所有populate未支持
 class CommonService {
     constructor(param) {
@@ -77,8 +78,8 @@ class CommonService {
         let uri = `${config.server.url}${thisService.opts.basePath}${thisService.opts.find.url}`;
 
         return new Promise((resolve, reject) => {
-            uri += '?sort='+sort;
-            uri += '&fields='+fields;
+            uri += '?sort=' + sort;
+            uri += '&fields=' + fields;
 
             global.tool.request({
                 method: thisService.opts.find.method,
@@ -110,10 +111,10 @@ class CommonService {
         let uri = `${config.server.url}${thisService.opts.basePath}${thisService.opts.findForPage.url}`;
 
         return new Promise((resolve, reject) => {
-            uri += '?pageSize='+pageSize;
-            uri += '&pageNumber='+pageNumber;
-            uri += '&sort='+sort;
-            uri += '&fields='+fields;
+            uri += '?pageSize=' + pageSize;
+            uri += '&pageNumber=' + pageNumber;
+            uri += '&sort=' + sort;
+            uri += '&fields=' + fields;
 
             global.tool.request({
                 method: thisService.opts.findForPage.method,
@@ -140,11 +141,11 @@ class CommonService {
         const thisService = this;
 
         let uri = `${config.server.url}${thisService.opts.basePath}${thisService.opts.findById.url}`;
-        let pathData = {id : id};
+        let pathData = {id: id};
 
         return new Promise((resolve, reject) => {
-            uri += '&populate='+populate;
-            uri += '&fields='+fields;
+            uri += '&populate=' + populate;
+            uri += '&fields=' + fields;
 
             global.tool.request({
                 method: thisService.opts.findById.method,
@@ -172,7 +173,7 @@ class CommonService {
         let uri = `${config.server.url}${thisService.opts.basePath}${thisService.opts.findOne.url}`;
 
         return new Promise((resolve, reject) => {
-            uri += '?fields='+fields;
+            uri += '?fields=' + fields;
 
             global.tool.request({
                 method: thisService.opts.findOne.method,
@@ -272,7 +273,7 @@ class CommonService {
         const thisService = this;
 
         let uri = `${config.server.url}${thisService.opts.basePath}${thisService.opts.removeById.url}`;
-        let pathData = {id : id};
+        let pathData = {id: id};
 
         return new Promise((resolve, reject) => {
             global.tool.request({
@@ -304,7 +305,7 @@ class CommonService {
             global.tool.request({
                 method: thisService.opts.update.method,
                 uri: uri,
-                json: {condition:condition, data:data}
+                json: {condition: condition, data: data}
             }).then((body, response) => {
                 logger.info(thisService._name, "request update success", body);
                 resolve(body);

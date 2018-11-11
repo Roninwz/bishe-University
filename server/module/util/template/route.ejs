@@ -23,159 +23,159 @@ const fs = require('fs');
 /* GET users listing. */
 //列表
 router.post('/list', function(req, res, next) {
-    let condition = req.body, query = req.query,
-    populate = '';
-    condition = reqUtil.formatCondition(condition);
+let condition = req.body, query = req.query,
+populate = '';
+condition = reqUtil.formatCondition(condition);
 
-    service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate)
-        .then(
-            data => res.send(resUtil.success(data)),
-            err => res.send(resUtil.error())
-        );
+service
+.findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate)
+.then(
+data => res.send(resUtil.success(data)),
+err => res.send(resUtil.error())
+);
 });
 //所有
 router.get('/find', function(req, res, next) {
-    let condition = req.query;
-    condition = reqUtil.formatCondition(condition);
+let condition = req.query;
+condition = reqUtil.formatCondition(condition);
 
-    service
-        .find(req.curUser, condition)
-        .then(
-            data => res.send(resUtil.success({rows:data})),
-            err => res.send(resUtil.error())
-        );
+service
+.find(req.curUser, condition)
+.then(
+data => res.send(resUtil.success({rows:data})),
+err => res.send(resUtil.error())
+);
 });
 //更新
 router.post('/save/:id', function(req, res, next) {
-    let data = req.body;
-    let _id = req.params.id;
+let data = req.body;
+let _id = req.params.id;
 
-    service
-        .updateById(req.curUser, _id, data)
-        .then(
-            data => res.send(resUtil.success({data:data})),
-            err => res.send(resUtil.error())
-        );
-    });
+service
+.updateById(req.curUser, _id, data)
+.then(
+data => res.send(resUtil.success({data:data})),
+err => res.send(resUtil.error())
+);
+});
 //新增
 router.post('/save', function(req, res, next) {
-    let data = req.body;
+let data = req.body;
 
-    service
-        .save(req.curUser, data)
-        .then(
-            data => res.send(resUtil.success({data:data})),
-            err => res.send(resUtil.error())
-        );
+service
+.save(req.curUser, data)
+.then(
+data => res.send(resUtil.success({data:data})),
+err => res.send(resUtil.error())
+);
 });
 //删除
 router.get('/remove/:id', function(req, res, next) {
-    let _id = req.params.id;
+let _id = req.params.id;
 
-    service
-        .removeById(req.curUser, _id)
-        .then(
-            data => res.send(resUtil.success({data:data})),
-            err => res.send(resUtil.error())
-        );
+service
+.removeById(req.curUser, _id)
+.then(
+data => res.send(resUtil.success({data:data})),
+err => res.send(resUtil.error())
+);
 });
 //批量删除
 router.post('/remove', function(req, res, next) {
-    let body = req.body;
-    let condition = {
-        _id : {"$in" : body.ids}
-    };
+let body = req.body;
+let condition = {
+_id : {"$in" : body.ids}
+};
 
-    service
-        .remove(req.curUser, condition)
-        .then(
-            data => res.send(resUtil.success({data:data})),
-            err => res.send(resUtil.error())
-        );
+service
+.remove(req.curUser, condition)
+.then(
+data => res.send(resUtil.success({data:data})),
+err => res.send(resUtil.error())
+);
 });
 //详情
 router.get('/detail/:id', function(req, res, next) {
-    let _id = req.params.id;
-    let populate = "";
+let _id = req.params.id;
+let populate = "";
 
-    service
-        .findById(req.curUser, _id, populate)
-        .then(
-            data => res.send(resUtil.success({data:data})),
-            err => res.send(resUtil.error())
-        );
+service
+.findById(req.curUser, _id, populate)
+.then(
+data => res.send(resUtil.success({data:data})),
+err => res.send(resUtil.error())
+);
 });
 
 //导入
 router.post('/import', function (req, res, next) {
-    let form = new formidable.IncomingForm();   //创建上传表单
-    form.encoding = 'utf-8';		//设置编辑
-    form.keepExtensions = true;	 //保留后缀
-    form.maxFieldsSize = 5 * 1024 * 1024;   //文件大小
+let form = new formidable.IncomingForm();   //创建上传表单
+form.encoding = 'utf-8';        //设置编辑
+form.keepExtensions = true;     //保留后缀
+form.maxFieldsSize = 5 * 1024 * 1024;   //文件大小
 
-    form.parse(req, function (err, fields, files) {
-        if (err) {
-            logger.error("Error:" + err);
-            res.send(resUtil.error({
-                message : "文件上传失败"
-            }));
-        }else{
-            let file,
-            importData = [],
-            ids = [];
-            file = files.media;
+form.parse(req, function (err, fields, files) {
+if (err) {
+logger.error("Error:" + err);
+res.send(resUtil.error({
+message : "文件上传失败"
+}));
+}else{
+let file,
+importData = [],
+ids = [];
+file = files.media;
 
-            const workSheetsFromFile = xlsx.parse(file.path);
-            workSheetsFromFile[0].data.forEach(function (data,i) {
-                if(i > 0 && data.length > 0){
-                    let _data = {};
+const workSheetsFromFile = xlsx.parse(file.path);
+workSheetsFromFile[0].data.forEach(function (data,i) {
+if(i > 0 && data.length > 0){
+let _data = {};
 <% let count = 0;for(key in field){{ %>
-                    if(data[<%=count%>]){<%if(count==0){%>ids.push(data[<%=count%>]);<%}%>_data['<%= key %>'] = data[<%=count%>];}<% count++;}} %>
+if(data[<%= count %>]){<% if(count == 0){ %>ids.push(data[<%= count %>]);<% } %>_data['<%= key %>'] = data[<%= count %>];}<% count++;}} %>
 
-                    importData.push(_data);
-                }
-            });
+importData.push(_data);
+}
+});
 
-            service.remove(req.curUser, {_id:{'$in':ids}}).then(()=>{
-                service.create(req.curUser, importData).then(result => {
-                    fs.unlinkSync(file.path);
-                    res.send(resUtil.success());
-                }, err => {
-                    res.send(resUtil.error({massage: err}));
-                });
-            }, err => {
-                res.send(resUtil.error({massage: err}));
-            });
-        }
-    });
+service.remove(req.curUser, {_id:{'$in':ids}}).then(()=>{
+service.create(req.curUser, importData).then(result => {
+fs.unlinkSync(file.path);
+res.send(resUtil.success());
+}, err => {
+res.send(resUtil.error({massage: err}));
+});
+}, err => {
+res.send(resUtil.error({massage: err}));
+});
+}
+});
 });
 //导出
 router.get('/export', function(req, res, next) {
-    let condition = req.query, tableConfig,
-    _data = [],
-    i, j, y;
-    condition = reqUtil.formatCondition(condition);
+let condition = req.query, tableConfig,
+_data = [],
+i, j, y;
+condition = reqUtil.formatCondition(condition);
 
-    service.find(req.curUser, condition).then(data => {
-        _data.push([<% for(key in field){{%>
-            '<%= nameFormatter[key] || key %>',<% }} %>
-        ]);
+service.find(req.curUser, condition).then(data => {
+_data.push([<% for(key in field){{ %>
+'<%= nameFormatter[key] || key %>',<% }} %>
+]);
 
-        data.forEach(d => {
-            _data.push([<% for(key in field){{ %>
-                d['<%= key %>'],<% }} %>
-            ]);
-        });
+data.forEach(d => {
+_data.push([<% for(key in field){{ %>
+d['<%= key %>'],<% }} %>
+]);
+});
 
-        const buffer = xlsx.build([{name: "<%= modelName %>", data: _data}]);
-        let fileName = `/<%= modelName %>_export${tool.dateFormatter(new Date(), 'yyyyMMdd')}.xlsx`;
-        fs.writeFile(`${__dirname}/../../${fileName}`, buffer, function () {
-            res.download(`${__dirname}/../../${fileName}`, fileName, function () {
-                fs.unlink(`${__dirname}/../../${fileName}`);
-            });
-        });
-    });
+const buffer = xlsx.build([{name: "<%= modelName %>", data: _data}]);
+let fileName = `/<%= modelName %>_export${tool.dateFormatter(new Date(), 'yyyyMMdd')}.xlsx`;
+fs.writeFile(`${__dirname}/../../${fileName}`, buffer, function () {
+res.download(`${__dirname}/../../${fileName}`, fileName, function () {
+fs.unlink(`${__dirname}/../../${fileName}`);
+});
+});
+});
 });
 
 module.exports = router;

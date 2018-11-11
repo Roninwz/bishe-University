@@ -29,12 +29,15 @@
                         </span>
                     </div>
                     <el-form :model="detailForm" label-width="80px" size="small" class="detailForm">
-                        <el-row :gutter="10"><% var count = 0, key;%><% for (key in field){if(!unDetail[key]){ %>
+                        <el-row :gutter="10">
+                            <% var count = 0, key; %>
+                            <% for (key in field){if(!unDetail[key]){ %>
                             <el-col :span="12">
                                 <el-form-item label="<%= nameFormatter[key] || key %>">
                                     {{detailForm.<%= key %>}}
                                 </el-form-item>
-                            </el-col><% }} %>
+                            </el-col>
+                            <% }} %>
                         </el-row>
                     </el-form>
                 </el-card>
@@ -46,12 +49,15 @@
                 top="5vh"
                 :visible.sync="editDialog">
             <el-form ref="form" :model="editForm" label-width="80px" size="small">
-                <el-row :gutter="10"><% var count = 0, key;%><% for (key in field){if(!unEditor[key]){ %>
+                <el-row :gutter="10">
+                    <% var count = 0, key; %>
+                    <% for (key in field){if(!unEditor[key]){ %>
                     <el-col :span="12">
                         <el-form-item label="<%= nameFormatter[key] || key %>">
                             <el-input v-model="editForm.<%= key %>"></el-input>
                         </el-form-item>
-                    </el-col><% }} %>
+                    </el-col>
+                    <% }} %>
                 </el-row>
             </el-form>
 
@@ -65,16 +71,16 @@
 
 <script>
     export default {
-        data(){
+        data() {
             return {
-                url : {
-                    find : '<%=path.api%><%= path.route %>/find',
-                    tree : '<%=path.api%><%= path.route %>/tree',
-                    removeOne : '<%=path.api%><%= path.route %>/remove/{id}',
-                    save : '<%=path.api%><%= path.route %>/save/{id}',
-                    detail : '<%=path.api%><%= path.route %>/detail/{id}',
-                    importData : '<%=path.api%><%= path.route %>/import',
-                    exportData : '<%=path.api%><%= path.route %>/export',
+                url: {
+                    find: '<%= path.api %><%= path.route %>/find',
+                    tree: '<%= path.api %><%= path.route %>/tree',
+                    removeOne: '<%= path.api %><%= path.route %>/remove/{id}',
+                    save: '<%= path.api %><%= path.route %>/save/{id}',
+                    detail: '<%= path.api %><%= path.route %>/detail/{id}',
+                    importData: '<%= path.api %><%= path.route %>/import',
+                    exportData: '<%= path.api %><%= path.route %>/export',
                 },
                 editDialog: false,
                 editForm: {},
@@ -82,35 +88,34 @@
                 formId: '',
             };
         },
-        computed:{
-        },
-        methods:{
-            query(){
+        computed: {},
+        methods: {
+            query() {
                 this.$refs.tree.query();
             },
-            add(){
+            add() {
                 this.editForm = {};
                 this.formId = '';
                 this.editDialog = true;
             },
-            addChild(){
+            addChild() {
                 this.editForm = {
-                    parent : this.detailForm
+                    parent: this.detailForm
                 };
                 this.formId = '';
                 this.editDialog = true;
             },
-            edit(){
+            edit() {
                 this.editForm = Object.assign({}, this.detailForm);
                 this.formId = this.detailForm._id;
                 this.editDialog = true;
             },
-            save(){
+            save() {
                 this.$ajax({
-                    url : this.url.save,
-                    method : 'post',
-                    data : this.editForm,
-                    pathData : {id : this.formId},
+                    url: this.url.save,
+                    method: 'post',
+                    data: this.editForm,
+                    pathData: {id: this.formId},
                 }).then(reData => {
                     this.editDialog = false;
                     this.$message(reData.message);
@@ -118,20 +123,21 @@
                     this.query();
                 });
             },
-            removeOne(){
+            removeOne() {
                 this.$ajax({
-                    url : this.url.removeOne,
-                    pathData : {id : this.detailForm._id},
+                    url: this.url.removeOne,
+                    pathData: {id: this.detailForm._id},
                 }).then((reData) => {
                     this.$message(reData.message);
                     this.query();
                     this.detailForm = {};
                 });
             },
-            showDetail(data, node){
+            showDetail(data, node) {
                 this.detailForm = data;
             },
         },
-        created(){}
+        created() {
+        }
     }
 </script>

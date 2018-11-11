@@ -8,23 +8,22 @@ const config = require("../../config/config");
 const resUtil = require("../../module/util/resUtil");
 
 
-
 router.post('/loginCheck', function (req, res, next) {
-    logger.info("username:"+req.body.username);
-    console.log("body:"+JSON.stringify(req.body));
-    console.log("body:"+req.body.username);
+    logger.info("username:" + req.body.username);
+    console.log("body:" + JSON.stringify(req.body));
+    console.log("body:" + req.body.username);
     adminService.check({}, req.body.username, req.body.password).then(user => res.send(resUtil.success(user))
-    , e => res.send(resUtil.error(e)));
+        , e => res.send(resUtil.error(e)));
 });
 
 router.post('/addAdmin', function (req, res, next) {
-    let data={
-       name: req.body.name,
-       password:req.body.password
+    let data = {
+        name: req.body.name,
+        password: req.body.password
     }
-    logger.info("username:"+req.body.name);
-    logger.info("username:"+req.body.password);
-    adminService.save({},data).then(user => res.send(resUtil.success(user))
+    logger.info("username:" + req.body.name);
+    logger.info("username:" + req.body.password);
+    adminService.save({}, data).then(user => res.send(resUtil.success(user))
         , e => res.send(resUtil.error(e)));
 });
 

@@ -36,7 +36,7 @@ let smsUtil = {
      * @param data
      * @return Promise
      */
-    sendMsg(phone, code, data){
+    sendMsg(phone, code, data) {
         return new Promise((resolve, reject) => {
             smsClient.sendSMS({
                 PhoneNumbers: phone,
@@ -44,9 +44,9 @@ let smsUtil = {
                 TemplateCode: code,
                 TemplateParam: data
             }).then(result => {
-                if(result.Code === 'OK'){
+                if (result.Code === 'OK') {
                     resolve(result);
-                }else{
+                } else {
                     reject(result);
                 }
             }).catch(e => {
@@ -61,7 +61,7 @@ let smsUtil = {
      * @param data Object {name:司机名称, cname:注册人, dtype:司机, contacter:注册人手机号}
      * @return Promise
      */
-    registerDriver(phone, data){
+    registerDriver(phone, data) {
         return this.sendMsg(phone, 'SMS_26270162', JSON.stringify(data));
     },
 
@@ -71,7 +71,7 @@ let smsUtil = {
      * @param code
      * @return Promise
      */
-    loginPwd(phone, code){
+    loginPwd(phone, code) {
         return this.sendMsg(phone, 'SMS_26085209', JSON.stringify({code: code}));
     },
 
@@ -81,7 +81,7 @@ let smsUtil = {
      * @param code
      * @return Promise
      */
-    forgetPwd(phone, code){
+    forgetPwd(phone, code) {
         return this.sendMsg(phone, 'SMS_26205194', JSON.stringify({code: code}));
     },
 
@@ -91,7 +91,7 @@ let smsUtil = {
      * @param code
      * @return Promise
      */
-    registerUser(phone, code){
+    registerUser(phone, code) {
         return this.sendMsg(phone, 'SMS_12810794', JSON.stringify({code: code}));
     },
 };

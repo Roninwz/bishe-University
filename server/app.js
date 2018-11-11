@@ -27,39 +27,40 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(xmlParser({}));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(log4js.connectLogger(logger, {level:'info', format:':method | :status | :response-time ms | :url '}));
+app.use(log4js.connectLogger(logger, {level: 'info', format: ':method | :status | :response-time ms | :url '}));
 logger.debug('/--------------------- init Router -------------------/');
 logger.debug('/----------------------- routes ---------------------/');
 global.tool.traversalFolderSync(path.join(__dirname, 'routes'), {
-    eachFile : function (path, pathArr, level) {
+    eachFile: function (path, pathArr, level) {
         let url = pathArr.join('/').replace('.js', '');
         url = url.replace(/(\/?)(\d+)_/g, '$1');
-        switch (url){               //在这里可以有一些特殊处理
+        switch (url) {               //在这里可以有一些特殊处理
             case "index":
-                url = ''; break;
+                url = '';
+                break;
         }
         logger.info(url, path);
-        if(url.indexOf(".DS_Store")<0){
-            app.use('/'+url, require(path));
+        if (url.indexOf(".DS_Store") < 0) {
+            app.use('/' + url, require(path));
         }
     }
 });
 logger.debug('///////////////////////// routes //////////////////////');
 logger.debug('/--------------------- init Router shot down -------------------/');
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+    next(createError(404));
 });
 logger.debug('///////////////////////// routes //////////////////////');
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -67,7 +68,7 @@ app.use(function(req, res, next) {
 
 // error handler
 const resUtil = require("./module/util/resUtil");
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -97,9 +98,9 @@ app.use(function(err, req, res, next) {
 
 
 app.use(cors({
-    origin:['http://localhost'],
-    methods:['GET','POST'],
-    alloweHeaders:['Conten-Type', 'Authorization']
+    origin: ['http://localhost'],
+    methods: ['GET', 'POST'],
+    alloweHeaders: ['Conten-Type', 'Authorization']
 }));
 
 

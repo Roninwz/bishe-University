@@ -31,7 +31,7 @@ class Mail {
         this.init();
     }
 
-    init(){
+    init() {
         this.transporter = mailer.createTransport(this.opts);
     }
 
@@ -45,7 +45,7 @@ class Mail {
      * @param attachments []
      * @return {Promise}
      */
-    sendMail(options){
+    sendMail(options) {
         return new Promise((resolve, reject) => {
             let mailOption = Object.assign({}, options, {
                 from: this.opts.sendUser || this.opts.auth.user, // sender address
@@ -55,7 +55,7 @@ class Mail {
             this.transporter.sendMail(mailOption, (error, info) => {
                 if (error) {
                     reject(error);
-                }else{
+                } else {
                     resolve(info);
                 }
             });

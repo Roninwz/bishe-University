@@ -9,57 +9,63 @@ module.exports = (function () {
     //base
     const config = {
         title: 'IT大学网',
-        mock : true,
-        port : '8880',
+        mock: true,
+        port: '8880',
     };
 
     //path
     Object.assign(config, {
-        path : {
+        path: {
             projectPath: `${__dirname}/..`,
             hostname: `http://0.0.0.0:${config.port}`,
-            contextPath : "",
-            viewPrefix : "/view",
-            publicPath : "",
+            contextPath: "",
+            viewPrefix: "/view",
+            publicPath: "",
             uploadPath: `${__dirname}/../public/uploadFiles`,
             publicUploadPath: '/uploadFiles',
-            mode : ""
+            mode: ""
         },
-        api : {
-            serverUrl : 'http://127.0.0.1:3130',
-            filePath : '/../../config/apiConfig.json',
+        api: {
+            serverUrl: 'http://127.0.0.1:3130',
+            filePath: '/../../config/apiConfig.json',
         },
-        cdn : {
+        cdn: {
             // path : "//cdn.bootcss.com"              //boot cdn
-            path : "/libs"                        //locale
+            path: "/libs"                        //locale
         }
     });
     config.path.imagePath = `${config.path.hostname}${config.path.publicUploadPath}`;
 
     //system plugin
     Object.assign(config, {
-        session : {
+        session: {
             secret: "keyboard cat",
             name: "suis_section_server",                                //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-            cookie: {"maxAge": 1800000 },                  //设置maxAge是1800000ms，即30min后session和相应的cookie失效过期
+            cookie: {"maxAge": 1800000},                  //设置maxAge是1800000ms，即30min后session和相应的cookie失效过期
             rolling: true,                                 //每次用户交互后，重新计算时间
             resave: false,
             saveUninitialized: true,
-            store : new FileStore({
+            store: new FileStore({
                 path: path.join(__dirname, '../log/sessions')
             })
         },
-        i18n : {
+        i18n: {
             locales: ['en', 'zh'],
             directory: 'config/locales',
-            defaultLocale : 'zh',
+            defaultLocale: 'zh',
         },
-        log : {
+        log: {
             appenders: [
-                { type: 'console', category: 'sys' },
-                { type: 'dateFile', filename: __dirname + '/../log/login.log', pattern: "_yyyy-MM-dd", alwaysIncludePattern: false, category: 'login' }
+                {type: 'console', category: 'sys'},
+                {
+                    type: 'dateFile',
+                    filename: __dirname + '/../log/login.log',
+                    pattern: "_yyyy-MM-dd",
+                    alwaysIncludePattern: false,
+                    category: 'login'
+                }
             ],
-            levels : {
+            levels: {
                 sys: 'debug',
                 default: 'info',
                 http: 'info',
@@ -71,40 +77,40 @@ module.exports = (function () {
 
     //database
     Object.assign(config, {
-        db : {
-            host : 'localhost',
-            port : '27017',
-            database : "it_university",
-            username : 'it',
-            password : '123',
-            options : {
+        db: {
+            host: 'localhost',
+            port: '27017',
+            database: "it_university",
+            username: 'it',
+            password: '123',
+            options: {
                 autoReconnect: true,
                 poolSize: 10,
                 useMongoClient: true,
             }
         },
-        dbUser : {
-            admin : {
-                _id : "34bdca6e-7119-487f-8dc2-5ff2f951fa0a",
-                name : "管理员",
-                code : "admin",
-                password : "admin123",
-                role : "b8fa6284-6990-4798-84e6-2082fdbd4d3f",
-                tenant : "33f0fe38-fcd1-4f11-8a55-1831821b38c5",
+        dbUser: {
+            admin: {
+                _id: "34bdca6e-7119-487f-8dc2-5ff2f951fa0a",
+                name: "管理员",
+                code: "admin",
+                password: "admin123",
+                role: "b8fa6284-6990-4798-84e6-2082fdbd4d3f",
+                tenant: "33f0fe38-fcd1-4f11-8a55-1831821b38c5",
             },
-            robot : {
-                _id : "f07ffe71-7235-4231-8246-d64aaaadcc14",
-                name : "系统自动",
-                code : "system",
-                password : "system123",
-                role : "robot"
+            robot: {
+                _id: "f07ffe71-7235-4231-8246-d64aaaadcc14",
+                name: "系统自动",
+                code: "system",
+                password: "system123",
+                role: "robot"
             }
         },
     });
 
     //identifying code
     Object.assign(config, {
-        identifyingCode : {
+        identifyingCode: {
             expiryTime: 30,                 //有效时间（分钟）
         },
     });

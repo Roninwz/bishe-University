@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <<%="%"%> include <%= path.basePath %>views/common/meta.ejs <%="%"%>>
-    <<%="%"%> include <%= path.basePath %>views/common/public.ejs <%="%"%>>
+    <<%= "%" %> include <%= path.basePath %>views/common/meta.ejs <%= "%" %>>
+    <<%= "%" %> include <%= path.basePath %>views/common/public.ejs <%= "%" %>>
 </head>
 <body>
-<<%="%"%> include <%= path.basePath %>views/common/header.ejs <%="%"%>>
+<<%= "%" %> include <%= path.basePath %>views/common/header.ejs <%= "%" %>>
 
 <div class="container">
     <div class="row">
-        <<%="%"%> include <%= path.basePath %>views/common/menu.ejs <%="%"%>>
+        <<%= "%" %> include <%= path.basePath %>views/common/menu.ejs <%= "%" %>>
 
         <div id="content" class="col-lg-10 col-sm-11">
             <div class="page-header">
@@ -65,15 +65,18 @@
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal detail-form" id="detail-form">
-                                <div class="row"><% for(key in field){if(!unDetail[key]){%>
+                                <div class="row">
+                                    <% for(key in field){if(!unDetail[key]){ %>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label"><%= nameFormatter[key] || key %></label>
                                             <div class="col-md-9">
-                                                <p class="form-control-static" name="<%= key=='parent'?'parent.name':key %>"></p>
+                                                <p class="form-control-static"
+                                                   name="<%= key == 'parent' ? 'parent.name' : key %>"></p>
                                             </div>
                                         </div>
-                                    </div><% }} %>
+                                    </div>
+                                    <% }} %>
                                 </div>
                             </form>
                         </div>
@@ -88,15 +91,21 @@
 
 <div class="default-hidden">
     <!------------------------------------------ edit form modal ------------------------------------------>
-    <form class="form-horizontal edit-form" id="edit-form"><% var key;%><% for(key in field){if(!unEditor[key]){%>
+    <form class="form-horizontal edit-form" id="edit-form">
+        <% var key; %>
+        <% for(key in field){if(!unEditor[key]){ %>
         <div class="form-group">
             <label class="col-md-2 control-label"><%= nameFormatter[key] || key %></label>
-            <div class="col-md-10"><% if(key == 'parent'){%>
-                <input class="form-control" name="parentName" type="text" readonly />
-                <input class="form-control" name="parent" type="hidden" /><% }else{ %>
-                <input class="form-control" name="<%= key %>" type="text" /><% } %>
+            <div class="col-md-10">
+                <% if(key == 'parent'){ %>
+                <input class="form-control" name="parentName" type="text" readonly/>
+                <input class="form-control" name="parent" type="hidden"/>
+                <% }else{ %>
+                <input class="form-control" name="<%= key %>" type="text"/>
+                <% } %>
             </div>
-        </div><% }} %>
+        </div>
+        <% }} %>
     </form>
     <div id="edit_form_footer">
         <button type="button" class="btn btn-primary btn-small" id="edit_form_save">保存</button>
@@ -104,8 +113,8 @@
     </div>
 </div>
 
-<<%="%"%> include <%= path.basePath %>views/common/footer.ejs <%="%"%>>
-<<%="%"%> include <%= path.basePath %>views/common/script.ejs <%="%"%>>
+<<%= "%" %> include <%= path.basePath %>views/common/footer.ejs <%= "%" %>>
+<<%= "%" %> include <%= path.basePath %>views/common/script.ejs <%= "%" %>>
 
 
 </body>

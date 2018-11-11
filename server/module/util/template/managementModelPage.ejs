@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <<%="%"%> include <%= path.basePath %>views/common/meta.ejs <%="%"%>>
-    <<%="%"%> include <%= path.basePath %>views/common/public.ejs <%="%"%>>
+    <<%= "%" %> include <%= path.basePath %>views/common/meta.ejs <%= "%" %>>
+    <<%= "%" %> include <%= path.basePath %>views/common/public.ejs <%= "%" %>>
 </head>
 <body>
-<<%="%"%> include <%= path.basePath %>views/common/header.ejs <%="%"%>>
+<<%= "%" %> include <%= path.basePath %>views/common/header.ejs <%= "%" %>>
 <div class="container">
     <div class="row">
-        <<%="%"%> include <%= path.basePath %>views/common/menu.ejs <%="%"%>>
+        <<%= "%" %> include <%= path.basePath %>views/common/menu.ejs <%= "%" %>>
 
         <div id="content" class="col-lg-10 col-sm-11">
             <div class="page-header">
@@ -51,7 +51,7 @@
                                 <div class="col-xs-3">
                                     <div class="input-group date">
                                         <span class="input-group-addon">名称</span>
-                                        <input type="text" class="form-control" placeholder="根据名称查询" name="name_like" />
+                                        <input type="text" class="form-control" placeholder="根据名称查询" name="name_like"/>
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
@@ -72,13 +72,16 @@
 
 <div class="default-hidden">
     <!------------------------------------------ edit form modal ------------------------------------------>
-    <form class="form-horizontal edit-form" id="edit-form"><% var key;%><% for(key in field){if(!unEditor[key]){%>
+    <form class="form-horizontal edit-form" id="edit-form">
+        <% var key; %>
+        <% for(key in field){if(!unEditor[key]){ %>
         <div class="form-group">
             <label class="col-md-2 control-label"><%= nameFormatter[key] || key %></label>
             <div class="col-md-10">
-                <input class="form-control" name="<%= key %>" type="text" />
+                <input class="form-control" name="<%= key %>" type="text"/>
             </div>
-        </div><% }} %>
+        </div>
+        <% }} %>
     </form>
     <div id="edit_form_footer">
         <button type="button" class="btn btn-primary btn-small" id="edit_form_save">保存</button>
@@ -87,18 +90,20 @@
 
 
     <!------------------------------------------ detail modal ------------------------------------------>
-    <form class="form-horizontal detail-form" id="detail-form"><% for(key in field){if(!unDetail[key]){%>
+    <form class="form-horizontal detail-form" id="detail-form">
+        <% for(key in field){if(!unDetail[key]){ %>
         <div class="form-group">
             <label class="col-md-2 control-label"><%= nameFormatter[key] || key %></label>
             <div class="col-md-10">
                 <p class="form-control-static" name="<%= key %>"></p>
             </div>
-        </div><% }} %>
+        </div>
+        <% }} %>
     </form>
 </div>
 
-<<%="%"%> include <%= path.basePath %>views/common/footer.ejs <%="%"%>>
-<<%="%"%> include <%= path.basePath %>views/common/script.ejs <%="%"%>>
+<<%= "%" %> include <%= path.basePath %>views/common/footer.ejs <%= "%" %>>
+<<%= "%" %> include <%= path.basePath %>views/common/script.ejs <%= "%" %>>
 
 
 </body>

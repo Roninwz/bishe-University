@@ -55,7 +55,7 @@ module.exports = (function () {
          */
         get: function (uuid) {
             let url = '';
-            if(!global.config.mock){
+            if (!global.config.mock) {
                 url += global.config.api.serverUrl;
             }
             url += this._data[uuid];
@@ -69,9 +69,9 @@ module.exports = (function () {
         loadAll: function () {
             let me = this;
             fs.readFile(this._apiFile, "utf-8", function (error, context) {
-                if(error){
+                if (error) {
                     logger.error("api load error", error);
-                }else{
+                } else {
                     logger.info("api config update", context);
                     me._data = JSON.parse(context);
                 }
@@ -96,7 +96,7 @@ module.exports = (function () {
          *
          * @param path
          */
-        pathMapping : function(path) {
+        pathMapping: function (path) {
             let sUrl = path.match(/\/api\/([\w-]+)@*([^\?]*)\?*(.*)/),
                 uuid = sUrl[1],
                 pathVar = sUrl[2],

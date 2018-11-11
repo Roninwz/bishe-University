@@ -11,15 +11,15 @@ const CommonService = require("<%= path.basePath %>service/common/<%= serviceTyp
 const Model = require("<%= path.Model %>");
 
 const defaultParams = {
-    model : Model
+model : Model
 };
 
 class ModuleService extends CommonService{
-    constructor(param){
-        super(param);
-        this.opts = extend(true, {}, this.opts, defaultParams, param);
-        this._name = "<%= modelName %>Service";
-    }
+constructor(param){
+super(param);
+this.opts = extend(true, {}, this.opts, defaultParams, param);
+this._name = "<%= modelName %>Service";
+}
 }
 
 module.exports = new ModuleService();
