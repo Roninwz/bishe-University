@@ -47,6 +47,15 @@
 			}
 		},
 		methods: {
+		  initUserList:function () {
+        this.$ajax({
+          method: 'post',
+          url: '/api/users/list',
+        }).then(data=>{
+            console.log("data:"+data);
+            console.log("data:"+JSON.stringify(data.data.rows));
+        });
+      },
 			//性别显示转换
 			formatSex: function (row, column) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
@@ -67,7 +76,10 @@
 		},
 		mounted() {
 			this.getUser();
-		}
+		},
+    created:function () {
+      this.initUserList();
+    }
 	};
 
 </script>

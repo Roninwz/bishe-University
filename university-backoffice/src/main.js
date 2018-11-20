@@ -11,7 +11,8 @@ import router from './router'
 // import Mock from './mock'
 // Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
-
+import Dolphin from './components/Dolphin_vue'
+Vue.use(Dolphin);
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)

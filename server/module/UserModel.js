@@ -10,10 +10,10 @@
 
 const uuid = require('uuid');
 
-const mongoose = require('../../util/mongoDB'),
+const mongoose = require('./util/mongoDB'),
     Schema = mongoose.Schema;
-const config = require('../../../config/config');
-const tool = require('../../../module/util/tool');
+const config = require('../config/config');
+const tool = require('./util/tool');
 
 const schema = new Schema({
     /**
@@ -31,11 +31,19 @@ const schema = new Schema({
     /**
      * 密码
      */
-    password: {type: String},
+    password: {type: String,default:'123456'},
     /*
     * 手机号
     * */
     phone: {type: String},
+    /*
+    * 邮箱
+    * */
+    email: {type: String},
+    /*
+    * 性别
+    * */
+    sex: {type: Number},//0 男  1 女
     /**
      * 头像
      */
