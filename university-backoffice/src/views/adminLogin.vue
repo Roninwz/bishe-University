@@ -56,12 +56,13 @@
               url: '/api/admin/login/loginCheck',
               data:loginParams
             }).then(data=>{
+              console.log(JSON.stringify(data));
               _this.$message({
-                     message: data.data.message,
+                     message: data.message,
                      type: 'info'
                    });
-                   if(data.data.message.toString()==="登录成功"){
-                     sessionStorage.setItem('user', JSON.stringify(data.data.data));
+                   if(data.message==="登录成功"){
+                     sessionStorage.setItem('user', JSON.stringify(data.data));
                      _this.$router.push({ path: '/view/admin' });
                      // _this.$router.replace('/view/admin');
                    }

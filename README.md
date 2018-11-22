@@ -4,8 +4,10 @@
 server:8880  
 backoffice:8881  
 site:8882  
-http://localhost:8882  
-http://localhost:8881  
+http://localhost:8882 
+
+backoffice：      
+       http://localhost:8881    
 
 
 ####技术介绍  

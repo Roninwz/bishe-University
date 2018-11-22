@@ -19,7 +19,7 @@ router.post('/list', function(req, res, next) {
     let condition = req.body, query = req.query,
         populate = 'creater updater';
     service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate)
+        .findForPage(config['dbUser']['robot'], query.pageSize, query.pageNumber, condition, populate)
         .then(
             data => res.send(resUtil.success(data)),
             err => res.send(resUtil.error())
@@ -33,7 +33,7 @@ router.get('/find', function(req, res, next) {
     let condition = req.query;
     condition = reqUtil.formatCondition(condition);
     service
-        .find(req.curUser, condition)
+        .find(config['dbUser']['robot'], condition)
         .then(
             data => res.send(resUtil.success({rows:data})),
             err => res.send(resUtil.error())

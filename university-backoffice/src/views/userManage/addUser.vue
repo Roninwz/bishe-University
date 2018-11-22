@@ -48,6 +48,7 @@
         }).then(data=>{
           if(data.data.success){
             this.$message("添加成功");
+            this.$router.replace('/view/admin/userList');
           }
           console.log("data:"+data);
         });
