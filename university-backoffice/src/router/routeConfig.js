@@ -37,18 +37,38 @@ export default {
       children: [
         { path: '/main', component: Home, name: '主页',hidden:true},
         // { path: '/table', component: Table, name: 'Table' },
-        { path: '/addUser', component: AddUser, name: '添加用户' },
+        // { path: '/addUser', component: AddUser, name: '添加用户' },
         { path: '/userList', component: UserList, name: '用户列表' },
       ]
     },
     {
       path: '/view/admin',
       component: Home,
-      name: '文章管理',
+      name: '技术文章管理',
       iconCls: 'fa fa-list-alt',
       children: [
-        { path: '/page4', component: Page4, name: '页面4' },
-        { path: '/page5', component: Page5, name: '页面5' }
+        { path: '/page4', component: Page4, name: '文章列表' },
+        { path: '/page5', component: Page5, name: '评论列表' }
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '权限管理',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/page4', component: Page4, name: '管理员管理' },
+        { path: '/page5', component: Page5, name: '角色管理' }
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '系统管理',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/page4', component: Page4, name: '文章列表' },
+        { path: '/page5', component: Page5, name: '评论列表' }
       ]
     },
   ],

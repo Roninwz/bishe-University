@@ -39,6 +39,8 @@ Vue.config.productionTip = false;//阻止 vue 在启动时生成生产提示
 //1、Vue.beforeEach(function(to,form,next){}) /*在跳转之前执行*/
 
 //2.Vue.afterEach(function(to,form))/*在跳转之后判断*/
+
+
 router.beforeEach((to, from, next) => {
   //NProgress.start();
   if (to.path === '/view/admin/login') {

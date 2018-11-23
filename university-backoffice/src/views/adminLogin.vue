@@ -43,32 +43,37 @@
       handleReset2() {
         this.$refs.rules2.resetFields();
       },
+
+      /*登录*/
       handleSubmit2(admin) {
         let _this = this;
         _this.$refs[admin].validate((valid) => {
+
           if (valid) {
-            //_this.$router.replace('/table');
+
             _this.logining = true;
             let loginParams = { username: _this.admin.username, password: _this.admin.password };
-            console.log("data:"+loginParams);
+            //发送登录请求
             this.$ajax({
               method: 'post',
               url: '/api/admin/login/loginCheck',
               data:loginParams
             }).then(data=>{
-              console.log(JSON.stringify(data));
-              _this.$message({
-                     message: data.message,
-                     type: 'info'
-                   });
+
+
                    if(data.message==="登录成功"){
+                     _this.$message({
+                       message: data.message,
+                       type: 'success'
+                     });
                      sessionStorage.setItem('user', JSON.stringify(data.data));
                      _this.$router.push({ path: '/view/admin' });
                      // _this.$router.replace('/view/admin');
+                   }else {
+                     _this.$message(data.message);
                    }
 
-            })
-              .catch(function (error) {
+            }).catch(function (error) {
                 console.log(error);
               });
            // requestLogin(loginParams).then(data => {

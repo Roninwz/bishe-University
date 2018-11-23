@@ -23,7 +23,7 @@
     </el-form-item>
 
 		<el-form-item>
-			<el-button type="primary" @click="onSubmit">立即创建</el-button>
+			<el-button type="primary" @click="onSubmit"></el-button>
 			<el-button @click.native.prevent>取消</el-button>
 		</el-form-item>
 	</el-form>
@@ -39,6 +39,7 @@
 			}
 		},
 		methods: {
+		  /*添加方法*/
 			onSubmit() {
 			  this.form.address=this.showAddress.join("-");
         this.$ajax({
@@ -46,11 +47,10 @@
           url: '/api/users/save',
           data:this.form,
         }).then(data=>{
-          if(data.data.success){
+          if(data.success){
             this.$message("添加成功");
-            this.$router.replace('/view/admin/userList');
+            this.$router.push('/view/admin/userList');
           }
-          console.log("data:"+data);
         });
 			}
 		}
