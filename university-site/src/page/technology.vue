@@ -167,6 +167,9 @@
     height: 100%;
     background-color: #F6F6F6;
   }
+  .all-content a:hover{
+    color: #000;
+  }
   .content{
     width: 1200px;
     height: 100%;
@@ -193,6 +196,9 @@
     width: 80px;
     height: 75px;
   }
+  .thumbnail a{
+    color: #555;
+  }
   .hot-title{
     width: 130px;
     height: 35px;
@@ -200,6 +206,8 @@
     overflow: hidden;
     margin-top: 15px;
   }
+  .hot-title a{ color: #555;}
+
   .views{
     float: left;
     margin-top: 20px;
@@ -240,7 +248,11 @@
     display: block;
     overflow: hidden;
     font-size: 25px;
+
     top: 20px;
+  }
+  .con-article .article-title a{
+    color: #555;
   }
   .con-article .article-con{
     position: relative;
@@ -258,6 +270,7 @@
   }
   .con-article .article-con a{
     text-align:justify;
+    color: #999;
   }
   .article-eye{
     margin-left: 30px;

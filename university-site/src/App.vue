@@ -3,7 +3,7 @@
     <div class="nav">
     <el-row :gutter="20">
       <el-col :span="8"><div class="grid-content bg-purple">
-        <img class="logo" src="./assets/logo.png" alt="">
+        <img class="logo" src="../static/img/logo.png" alt="">
       </div></el-col>
       <el-col :span="16"><div class="grid-content bg-purple">
         <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" border="0" router>
@@ -49,6 +49,10 @@ export default {
 
 <style>
   @import "./assets/plugin/font-awesome/css/font-awesome.min.css";
+  #app{
+    width: 100%;
+    height: 100%;
+  }
 *{
   margin: 0;
   padding: 0;
@@ -80,8 +84,8 @@ export default {
   /*border-bottom: 1px solid #e6e6e6;*/
 }
   .nav .logo{
-    width: 100px;
-    height: 61px;
+    width: 180px;
+    /*height: 81px;*/
     /*margin-left: 200px;*/
     float: right;
     margin-right: 100px;

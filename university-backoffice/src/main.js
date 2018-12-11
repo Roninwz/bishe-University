@@ -13,9 +13,9 @@ Vue.use(VueAxios, axios);
 
 // import Mock from './mock'
 // Mock.bootstrap();
-import 'font-awesome/css/font-awesome.min.css'
-
-//Dolphin
+// import 'font-awesome/css/font-awesome.min.css'
+import './assets/font-awesome-4.7.0/css/font-awesome.min.css'
+//Dolphind
 import Dolphin from './components/Dolphin_vue'
 Vue.use(Dolphin);
 
@@ -44,9 +44,9 @@ Vue.config.productionTip = false;//阻止 vue 在启动时生成生产提示
 router.beforeEach((to, from, next) => {
   //NProgress.start();
   if (to.path === '/view/admin/login') {
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('adminInfo');
   }
-  let user = JSON.parse(sessionStorage.getItem('user'));
+  let user = JSON.parse(sessionStorage.getItem('adminInfo'));
   if (!user && to.path !== '/view/admin/login') {
     next({ path: '/view/admin/login' })
   } else {

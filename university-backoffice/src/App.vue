@@ -20,6 +20,9 @@ export default {
 body {
 	margin: 0px;
 	padding: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 	/*background: url(assets/bg1.jpg) center !important;
 		background-size: cover;*/
 	// background: #1F2D3D;

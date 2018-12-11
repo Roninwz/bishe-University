@@ -92,8 +92,8 @@ module.exports = (function () {
         dbUser: {
             admin: {
                 _id: "34bdca6e-7119-487f-8dc2-5ff2f951fa0a",
-                name: "管理员",
-                code: "admin",
+                name: "admin",
+                // code: "admin",
                 password: "admin123",
                 role: "b8fa6284-6990-4798-84e6-2082fdbd4d3f",
                 tenant: "33f0fe38-fcd1-4f11-8a55-1831821b38c5",

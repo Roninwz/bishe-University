@@ -1,0 +1,95 @@
+/*
+ * Copyright (c) 2016 Breezee.org. All Rights Reserved.
+ */
+
+module.exports = [
+    /* 1 */
+    /* 3 */
+    {
+        "_id": "33ee29c8-a240-43f0-abcd-4ec9c2142e65",
+        "name": "首页",
+        "code": "index",
+        "icon": "fa-home",
+        "sort": 1,
+        "link": "/view/admin/index",
+        "state": 1,
+        "__type": "leaf",
+    },
+    {
+        "_id": "1b746d8b-f65c-4d91-9a60-8b72f6c0e090",
+        "name": "用户管理",
+        "code": "UserMgr",
+        "link": "",
+        "sort": 10,
+        "icon": "fa-users",
+        "state": 1,
+        "__type": "folder",
+    },
+    {
+        "_id": "6926527e-7e1c-48c2-8995-ca0140b7deeb",
+        "code": "User",
+        "link": "/view/admin/userList",
+        "name": "用户列表",
+        "parent": "1b746d8b-f65c-4d91-9a60-8b72f6c0e090",
+        "sort": 11,
+        "icon": "fa-user",
+        "state": 1,
+        "__type": "leaf",
+    },
+
+    /* 2 */
+    {
+        "_id": "82e687c8-5a71-4174-898c-d317bc22e3b8",
+        "name": "权限管理",
+        "code": "authMgr",
+        "sort": 20,
+        "link": "",
+        "icon": "fa-wrench",
+        "state": 1,
+        "__type": "folder",
+    },
+    {
+        "_id": "61073d72-3e9f-4ffc-9466-eb6fda3d48d6",
+        "code": "Admin",
+        "link": "/view/admin/adminManage",
+        "name": "管理员管理",
+        "parent": "82e687c8-5a71-4174-898c-d317bc22e3b8",
+        "sort": 21,
+        "icon": "fa-address-book",
+        "state": 1,
+        "__type": "leaf",
+    },
+    {
+        "_id": "50c0524c-e761-4689-9778-9a4a7ff17167",
+        "code": "Role",
+        "link": "/view/admin/roleManage",
+        "name": "角色管理",
+        "parent": "82e687c8-5a71-4174-898c-d317bc22e3b8",
+        "sort": 22,
+        "icon": "fa-bars",
+        "state": 1,
+        "__type": "leaf",
+    },
+    {
+        "_id": "8910a997-e081-45a6-8dff-9ed1106c5456",
+        "code": "Menu",
+        "link": "/view/admin/menuManage",
+        "name": "菜单管理",
+        "parent": "82e687c8-5a71-4174-898c-d317bc22e3b8",
+        "sort": 23,
+        "icon": "fa-reorder",
+        "state": 1,
+        "__type": "leaf",
+    },
+    {
+        "_id": "a58bb953-fd92-4869-9b94-36984179b774",
+        "name": "系统设置",
+        "code": "systemTool",
+        "link": "",
+        "icon": "fa-gear",
+        "sort": 3,
+        "parent": "82e687c8-5a71-4174-898c-d317bc22e3b8",
+        "state": 1,
+        "__type": "folder",
+    },
+];

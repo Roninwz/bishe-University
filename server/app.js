@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const xmlParser = require('express-xml-bodyparser');
 const log4js = require('log4js');
 let logger = log4js.getLogger("sys");
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const fs = require('fs');
 var app = express();
@@ -18,9 +17,6 @@ console.log(global.config);
 console.log("///////////////////////// 系统配置信息 /////////////////////////");
 log4js.configure(global.config.log);
 global.tool = require(path.join(__dirname, 'module/util/tool'));
-
-
-var cors = require('cors')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -96,7 +92,9 @@ app.use(function (err, req, res, next) {
     // }
 });
 
-
+logger.debug('/----------------------- Init Data ---------------------/');
+const InitDbData = require('./module/util/initDbData');
+InitDbData.init();
 app.use(cors({
     origin: ['http://localhost'],
     methods: ['GET', 'POST'],

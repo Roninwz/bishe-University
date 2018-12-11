@@ -12,7 +12,12 @@ router.post('/loginCheck', function (req, res, next) {
     logger.info("username:" + req.body.username);
     console.log("body:" + JSON.stringify(req.body));
     console.log("body:" + req.body.username);
-    adminService.check({}, req.body.username, req.body.password).then(user => res.send(resUtil.success(user))
+    adminService.check({}, req.body.username, req.body.password).then(admin => {
+            adminService.login(req, admin.data).then(
+                s => res.send(resUtil.success(s))
+            );
+
+        }
         , e => res.send(resUtil.error(e)));
 });
 

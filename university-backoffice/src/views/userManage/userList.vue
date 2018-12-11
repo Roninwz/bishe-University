@@ -258,6 +258,10 @@
                 message: "更新用户成功"
               });
             }else {
+              _this.$message({
+                type: 'success',
+                message: "添加用户成功"
+              });
               _this.$message("添加用户成功");
             }
             // _this.$router.push('/view/admin/userList');

@@ -7,7 +7,7 @@
       :check-flag="false"
       title="账号管理"
       ref="list">
-      <el-button @click="add" slot="button" type="text">
+      <el-button @click="add" slot="button" type="text"  style="float: right;">
         <i class="fa fa-plus"></i> 新增
       </el-button>
       <el-form :inline="true" :model="queryForm" size="mini" slot="queryForm">
@@ -22,7 +22,6 @@
         </el-form-item>
       </el-form>
       <el-table-column prop="name" label="名称" />
-      <el-table-column prop="code" label="编码" />
       <el-table-column prop="role.name" label="角色" />
       <el-table-column prop="createTime" label="创建时间" />
       <el-table-column prop="creater.name" label="创建人" />
@@ -47,11 +46,6 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="编码">
-              <el-input v-model="editForm.code" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="角色">
               <dol-select v-model="editForm.role" source="server" :url="url.role.find" />
             </el-form-item>
@@ -61,21 +55,9 @@
               <el-input v-model="editForm.password" type="password" />
             </el-form-item>
           </el-col>
-          <el-col :span="12" v-if="isAdd">
-            <el-form-item label="用户类型">
-              <el-select v-model="editForm.type" placeholder="请选择用户类型">
-                <el-option
-                  v-for="item in userType"
-                  :key="item.code"
-                  :label="item.name"
-                  :value="item.code">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
           <el-col :span="12">
             <el-form-item label="手机号">
-              <el-input v-model="editForm.parPhone" />
+              <el-input v-model="editForm.phone" />
             </el-form-item>
           </el-col>
           <el-col :span="24">

@@ -109,12 +109,12 @@
           remove: '/api/admin/role/remove',
           removeOne: '/api/admin/role/remove/{id}',
           save: '/api/admin/role/save/{id}',
-          detail: '/system/auth/role/detail/{id}',
-          importData: '/system/auth/role/import',
-          exportData: '/system/auth/role/export',
+          detail: '/api/admin/role/detail/{id}',
+          importData: '/api/admin/role/import',
+          exportData: '/api/admin/role/export',
 
           menu: {
-            tree: '/system/menu/tree'
+            tree: '/api/admin/menu/tree'
           }
         },
         queryForm: {},

@@ -4,17 +4,13 @@
 
 'use strict';
 const config = require('../../config/config');
-const dictConfig = require('../../config/dictConfig');
 const menuConfig = require('../../config/menuConfig');
 const roleConfig = require('../../config/roleConfig');
-const tenantConfig = require('../../config/tenantConfig');
 const logger = require('log4js').getLogger("sys");
 
-const TenantService = require('../../service/system/TenantService');
-const DictService = require('../../service/system/DictService');
-const UserService = require('../../service/system/auth/UserService');
-const MenuService = require('../../service/system/MenuService');
-const RoleService = require('../../service/system/auth/RoleService');
+const AdminService = require('../../service/adminService');
+const MenuService = require('../../service/MenuService');
+const RoleService = require('../../service/RoleService');
 
 const InitDbData = {};
 
@@ -22,20 +18,18 @@ InitDbData.init = function () {
     this.initMenu();
     this.initRole();
     this.initUser();
-    this.initDict();
-    this.initTenant();
 };
 
 InitDbData.initUser = function () {
     const dbUser = config.dbUser;
     let key, data = [];
-    UserService.findById({}, dbUser.admin._id).then(flag => {
+    AdminService.findById({}, dbUser.admin._id).then(flag => {
         if (!flag) {
             for (key in dbUser) {
                 data.push(dbUser[key]);
             }
-            UserService.create({}, data).then(() => {
-                logger.info("create " + "default user" + " success");
+            AdminService.create({}, data).then(() => {
+                logger.info("create " + "default admin" + " success");
             }, err => {
                 logger.error("Error:" + err);
             });
@@ -43,17 +37,6 @@ InitDbData.initUser = function () {
     });
 };
 
-InitDbData.initDict = function () {
-    DictService.findOne({}, {code: dictConfig[0].code}).then(flag => {
-        if (!flag) {
-            DictService.create({}, dictConfig).then(() => {
-                logger.info("create " + "default menu" + " success");
-            }, err => {
-                logger.error("Error:" + err);
-            });
-        }
-    })
-};
 InitDbData.initMenu = function () {
     MenuService.findOne({}, {_id: menuConfig[0]._id}).then(flag => {
         if (!flag) {
@@ -76,16 +59,6 @@ InitDbData.initRole = function () {
         }
     })
 };
-InitDbData.initTenant = function () {
-    TenantService.findOne({}, {_id: tenantConfig[0]._id}).then(flag => {
-        if (!flag) {
-            TenantService.create({}, tenantConfig).then(() => {
-                logger.info("create " + "default tenant" + " success");
-            }, err => {
-                logger.error("Error:" + err);
-            });
-        }
-    })
-};
+
 
 module.exports = InitDbData;

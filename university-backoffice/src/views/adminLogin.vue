@@ -10,7 +10,8 @@
       </el-form-item>
       <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2('admin')" :loading="logining">登录</el-button>
+        <!--:loading="logining"-->
+        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2('admin')" >登录</el-button>
         <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
       </el-form-item>
     </el-form>
@@ -54,28 +55,45 @@
             _this.logining = true;
             let loginParams = { username: _this.admin.username, password: _this.admin.password };
             //发送登录请求
-            this.$ajax({
-              method: 'post',
-              url: '/api/admin/login/loginCheck',
-              data:loginParams
-            }).then(data=>{
+            // this.$ajax({
+            //   method: 'post',
+            //   url: '/api/admin/login/loginCheck',
+            //   data:loginParams
+            // }).then(data=>{
+            //   console.log("ddd:"+JSON.stringify(data));
+            //
+            //        if(data.message==="登录成功"){
+            //          _this.$message({
+            //            message: data.message,
+            //            type: 'success'
+            //          });
+            //          _this.$router.push({ path: '/view/admin' });
+            //          // _this.$router.replace('/view/admin');
+            //        }else {
+            //          _this.$message(data.message);
+            //        }
+            //
+            // }).catch(function (error) {
+            //     console.log(error);
+            //   });
 
-
-                   if(data.message==="登录成功"){
-                     _this.$message({
-                       message: data.message,
-                       type: 'success'
-                     });
-                     sessionStorage.setItem('user', JSON.stringify(data.data));
-                     _this.$router.push({ path: '/view/admin' });
-                     // _this.$router.replace('/view/admin');
-                   }else {
-                     _this.$message(data.message);
-                   }
-
-            }).catch(function (error) {
-                console.log(error);
-              });
+            //发送请求到store中actions.js的登录方法
+            this.$store.dispatch('login', loginParams).then(data => {
+              console.log("ddd:"+JSON.stringify(data));
+              if(data.message==="登录成功"){
+                _this.$message({
+                  message: data.message,
+                  type: 'success'
+                });
+                _this.goNext();
+                // _this.$router.push('/view/admin/main');
+                // _this.$router.replace('/view/admin');
+              }else {
+                _this.$message(data.message);
+              }
+            }, errorMsg => {
+              _this.$message(errorMsg);
+            });
            // requestLogin(loginParams).then(data => {
            //    console.log("data:"+data);
            //    this.logining = false;
@@ -99,6 +117,10 @@
       },
       login(){
 
+      },
+      goNext:function () {
+        this.$router.replace('/view/admin/userList');
+        // this.$router.push({ path: '/view/admin/main' });
       }
     }
   }
@@ -110,14 +132,16 @@
     position: relative;
     display: block;
     width: 100%;
-    /*height: 100%;*/
+    /*height: 1080px;*/
+    height: 100%;
     margin: 0;
-    background: url("../../static/image/back.png") no-repeat;
+
+    background: url("../../static/image/back1.png") no-repeat;
     background-size: 100% 100%;
     /*padding: 180px 0 180px 0;*/
     padding-top: 12%;
     padding-bottom: 12.5%;
-    overflow: hidden;
+    overflow-y: hidden;
     .login-container {
       /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
       -webkit-border-radius: 5px;

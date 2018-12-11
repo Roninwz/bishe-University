@@ -1,6 +1,6 @@
 <template>
 	<section>
-		main
+		index
 	</section>
 </template>
 
