@@ -1,0 +1,22 @@
+@import "constant";
+
+header.navbar{
+  background: $primaryColor;
+
+  a.navbar-brand{
+    background: $activeColor;
+  }
+}
+
+.btn-primary{
+  background-color: $primaryColor;
+  border-color: #204d74;
+  color: $whiteColor;
+
+  &:hover, &.disabled, &[disabled]{
+    background-color: #1e8fc6
+  }
+  &:active{
+    background-color: #1c89be
+  }
+}

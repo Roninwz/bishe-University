@@ -1,0 +1,41 @@
+//path
+$publicPath: '';
+//color
+$primaryColor: #409EFF;
+$activeColor: $primaryColor * 1.2;
+
+$successColor: #67C23A;
+$warningColor: #E6A23C;
+$dangerColor: #F56C6C;
+$infoColor: #909399;
+
+$whiteColor: #ffffff;
+
+//font
+$fontPrimary: #bbbbbb;
+$fontColor: #303133;
+$fontColor2: #606266;
+$fontColor3: #909399;
+$fontColor4: #C0C4CC;
+$fontColor5: #EFEFEF;
+
+//border
+$borderColor: #DCDFE6;
+$borderColor2: #E4E7ED;
+$borderColor3: #EBEEF5;
+$borderColor4: #F2F6FC;
+
+//background
+$bgColor: #FAFAFA;
+$bgColor2: #F5F5F5;
+
+//theme
+$header_bg: $primaryColor;
+$header_text: $whiteColor;
+
+$menu_bg: #383e4b;
+$menu_text: $whiteColor;
+$menu_text_active: $whiteColor;
+
+$main_bg: #fafafa;
+

@@ -17,7 +17,7 @@
 
 <script>
   import core from '../core/Dol-core'
-  let url = '/system/tool/file/save';
+  let url = '/admin/file/save';
   export default {
     props: {
       type: {type: String, default: ''},            //文件类型，可为空

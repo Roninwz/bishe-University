@@ -1,0 +1,43 @@
+@import "constant";
+
+label.el-form-item__label{
+  &:after{
+    //content:':'
+  }
+}
+
+.el-form{
+  .el-select, .el-date-editor.el-input{
+    width: 100%;
+  }
+
+  .el-select{
+    .el-tag{
+      margin: 0 0 0 6px;
+      height: 18px;
+      line-height: 16px;
+    }
+  }
+
+  .vc-slider{
+    width: 100%;
+  }
+}
+
+.detailForm{
+  .el-form-item--small.el-form-item{
+    margin-bottom: 0;
+  }
+}
+.editForm{
+  .el-form-item{
+    margin-bottom: 10px;
+  }
+
+  .el-form-item.form-item-static.el-form-item--small{
+    .el-form-item__content{
+      line-height: 33px;
+    }
+  }
+}
+

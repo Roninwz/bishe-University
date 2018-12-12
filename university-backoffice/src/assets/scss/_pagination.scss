@@ -1,0 +1,10 @@
+@import "constant";
+
+div.el-pagination{
+  text-align: right;
+  overflow: auto;
+
+  span.el-pagination__total, span.el-pagination__sizes{
+    float: left;
+  }
+}

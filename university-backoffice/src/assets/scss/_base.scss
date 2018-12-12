@@ -1,0 +1,284 @@
+@import "constant";
+
+body{
+  margin: 0;
+  font-size: 14px;
+  font-family: system-ui;
+}
+
+//-------------------------------------------- base
+body {
+  margin: 0;
+  font-size: 14px;
+}
+
+div.el-card + div.el-card{
+  margin-top: 10px;
+}
+
+//-------------------------------------------- header
+$header_height: 60px;
+header.el-header {
+  background: $header_bg;
+  color: $header_text;
+  padding: 0;
+
+  span.bland {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    line-height: $header_height;
+    font-size: 18px;
+  }
+
+  span.topMenu{
+    font-size: 16px;
+
+    a{
+      line-height: $header_height;
+      text-decoration: none;
+      margin-left: 20px;
+      display: inline-block;
+      padding: 0 20px;
+      color: $fontColor5;
+
+      &.router-link-active{
+        line-height: 50px;
+        border-bottom: 5px solid $whiteColor;
+        font-weight: 700;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  div.account {
+    float: right;
+
+    button {
+      padding: 14px 20px;
+      background: $header_bg;
+      border: 0;
+
+      &:hover {
+        background: $header_bg * 0.8;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+//-------------------------------------------- menu
+div.dolMenu{
+  background: $bgColor;
+
+  .menu-title{
+    padding: 15px 20px 15px;
+    background: $bgColor * 0.95;
+    height: 20px;
+    font-weight: 700;
+
+    .collapse-icon{
+      float: right;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    &.menu-title-collapse{
+      span{
+        display: none;
+      }
+      i{
+        float: none;
+      }
+    }
+  }
+
+  ul.el-menu{
+    width: 200px;
+    background: $bgColor;
+    border-right: 0;
+
+    &.el-menu--collapse{
+      width: auto;
+    }
+
+    .el-menu-item, .el-submenu__title{
+      height: 40px;
+      line-height: 40px;
+
+      &.is-active{
+        background: $bgColor;
+      }
+
+
+      i.fa{
+        width: 16px;
+        text-align: center;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+
+//-------------------------------------------- main
+main.el-main {
+  background: $bgColor2;
+  padding:0;
+
+  > div.mainContainer{
+    margin: 20px;
+  }
+}
+
+//-------------------------------------------- footer
+footer.el-footer {
+  line-height: 40px;
+  text-align: center;
+  color: $fontPrimary;
+}
+
+
+header{
+  .container{
+    padding: 0;
+
+    a.navbar-brand{
+      margin-left: 0 !important;
+      position: relative;
+      height: 40px;
+    }
+
+    a#main-menu-toggle.main-menu{
+      position: relative;
+      float: left;
+      padding: 9px 12px;
+      margin: 0;
+
+      &.active{
+        background: $whiteColor;
+        color: $primaryColor;
+        //background: #f5f5f5;
+        //color: #333333;
+      }
+    }
+  }
+}
+
+//左侧菜单
+.nav-tabs.nav-stacked{
+  > li{
+    > ul{
+      > li{
+        > a{
+          padding: 10px 20px 10px 40px;
+
+        }
+
+        &.active{
+          > a{
+            background: #000000;
+            border-left: 3px solid #fff;
+
+            &:hover{
+              border-left: 3px solid #fff;
+            }
+          }
+        }
+      }
+    }
+
+    &.active{
+      > a{
+        background: #000000;
+        border-left: 3px solid #fff;
+
+        &:hover{
+          border-left: 3px solid #fff;
+        }
+      }
+    }
+  }
+}
+
+//-------------------------------------------- index count
+.countPanel{
+  .el-col{
+    padding: 0 30px;
+    margin: 10px 0;
+    + .el-col{
+      border-left: 1px solid $borderColor;
+    }
+
+    .countBlock{
+      .blockIcon{
+        float: left;
+        background: $bgColor2;
+        border-radius: 30px;
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        line-height: 55px;
+        font-size: 30px;
+        text-align: center;
+        margin-right: 20px;
+      }
+
+      .blockInfo{
+        .blockNumber{
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+
+//-------------------------------------------- common
+img.img-responsive{
+  max-width: 100%;
+}
+
+$default-upload-img-size: 100px;
+div.el-upload{
+  img{
+    //height: $default-upload-img-size;
+    display: block;
+    margin: 0 auto;
+    vertical-align: bottom;
+  }
+  div.upload-img{
+    min-width: $default-upload-img-size;
+    min-height: $default-upload-img-size;
+    border: 1px dashed #c0c4cc;
+    color: #999999;
+    border-radius: 5px;
+    font-size: $default-upload-img-size / 3;
+    line-height: $default-upload-img-size;
+  }
+}
+
+.float-right{
+  float:right;
+}
+
+pre{
+  margin: 0;
+}
+
+.text-center{
+  text-align: center;
+}
+
+
+//-------------------------------------------- dolphin
+.dol-sign-box{
+  canvas {
+    border: 1px solid $primaryColor;
+  }
+}

@@ -16,13 +16,11 @@
       :url="url.list"
       :query-params="queryConditions"
       :default-query-params="queryConditions"
-      title="新闻动态列表"
+      title="技术文章列表"
       ref="list">
 
       <el-button @click="add()" slot="button" type="text">
-        <router-link  :to="{path:'/view/work/activityEdit'}">
           <i class="fa fa-plus"></i> 新增
-        </router-link>
       </el-button>
 
       <el-table-column prop="imgUrl" label="封面图片">
@@ -62,11 +60,11 @@
     data() {
       return {
         url: {
-          list: '/api/technology/list',
-          remove: '/api/technology/remove',
-          removeOne: '/api/technology/remove/{id}',
-          save: '/api/technology/save/{id}',
-          detail: '/api/technology/detail/{id}',
+          list: '/api/admin/technology/list',
+          remove: '/api/admin/technology/remove',
+          removeOne: '/api/admin/technology/remove/{id}',
+          save: '/api/admin/technology/save/{id}',
+          detail: '/api/admin/technology/detail/{id}',
         },
         queryConditions:{},
 
@@ -83,7 +81,7 @@
         this.$refs.list.query(this.queryConditions);
       },
       add:function () {
-        this.$router.replace('/view/work/addActivity');
+        this.$router.replace('/view/admin/technologyEdit');
       },
       removeOne: function (id) {
 

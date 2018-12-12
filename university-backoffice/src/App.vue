@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "assets/scss/common";
 body {
 	margin: 0px;
 	padding: 0px;

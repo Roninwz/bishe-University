@@ -105,3 +105,5 @@ router.get('/detail/:id', function (req, res, next) {
             err => res.send(resUtil.error())
         );
 });
+
+module.exports = router;

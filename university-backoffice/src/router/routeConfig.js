@@ -5,6 +5,8 @@ import  Home from '../views/Home.vue'
 import Table from '../views/userManage/Table.vue'
 import AddUser from '../views/userManage/addUser.vue'
 import UserList from '../views/userManage/userList.vue'
+import TechnologyList from '../views/technologyManage/technologyList.vue'
+import TechnologyEdit from '../views/technologyManage/technologyEdit.vue'
 import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
 import MenuManage from '../views/auth/menu.vue'
@@ -41,16 +43,17 @@ export default {
         { path: '/view/admin/userList', component: UserList, name: '用户列表' },
       ]
     },
-    // {
-    //   path: '/view/admin',
-    //   component: Home,
-    //   name: '技术文章管理',
-    //   iconCls: 'fa fa-list-alt',
-    //   children: [
-    //     { path: '/techManage', component: Home, name: '文章列表' },
-    //     { path: '/page5', component: Home, name: '评论列表' }
-    //   ]
-    // },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '技术文章管理',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/view/admin/technologyManage', component: TechnologyList, name: '技术文章列表' },
+        { path: '/view/admin/technologyEdit', component: TechnologyEdit, name: '技术文章维护' },
+        // { path: '/page5', component: Home, name: '评论列表' }
+      ]
+    },
     {
       path: '/view/admin',
       component: Home,

@@ -1,0 +1,77 @@
+@import "constant";
+
+//-------------------------------------------- card
+div.el-card{
+  div.el-card__header{
+    .el-button{
+      padding: 0;
+
+      + .el-button{
+        margin-left: 3px;
+      }
+    }
+
+    .card-button{
+      float: right;
+
+      > * {
+        display: inline-block;
+
+        + * {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.el-card__body, .el-card__header{
+  padding: 10px 20px;
+}
+
+//-------------------------------------------- transfer
+.el-transfer{
+  div.el-transfer-panel{
+    width: 45%
+  }
+  > div.el-transfer__buttons{
+    width: 10%;
+    padding: 0;
+
+    .el-button{
+      display: block;
+      margin: 5px auto;
+    }
+  }
+}
+//-------------------------------------------- dialog
+div.el-dialog__body{
+  //max-height: 500px;
+  overflow: auto;
+}
+.el-dialog.is-fullscreen{
+  div.el-dialog__body{
+    max-height: none;
+  }
+}
+
+//-------------------------------------------- el-switch
+.editForm {
+  div.el-switch {
+    height: 33px;
+  }
+}
+
+//-------------------------------------------- el-autocomplete
+div.el-autocomplete {
+  width: 100%;
+}
+//-------------------------------------------- el-cascader
+span.el-cascader {
+  width: 100%;
+  //border-radius: 40%;
+}
+//.el-input__inner,el-input,el-input--suffix{
+//  border: none;
+//  border-radius: 40%;
+//}

@@ -1,0 +1,35 @@
+@import "constant";
+
+//-------------------------------------------- query condition
+//div.queryCondition{
+//  div.el-form-item{
+//    margin-bottom: 0;
+//  }
+//}
+
+div.dolphin-list{
+  position: relative;
+
+  .cell{
+    .el-button{
+      padding: 0;
+
+      + .el-button{
+        margin-left: 3px;
+      }
+    }
+  }
+
+  img.thumbnail {
+    max-width: 40px;
+    max-height: 40px;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 3px;
+    vertical-align: middle;
+    padding: 0;
+    border: 0;
+    cursor: pointer; }
+}
+
+//-------------------------------------------- list button

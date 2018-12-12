@@ -8,7 +8,8 @@
     name: 'UE',
     data () {
       return {
-        editor: null
+        editor: null,
+        id:'technology'
       }
     },
     props: {

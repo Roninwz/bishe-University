@@ -10,7 +10,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
 
-
+//ueditor
+import '../static/UEditor/ueditor.config.js'
+import '../static/UEditor/ueditor.all.min.js'
+import '../static/UEditor/lang/zh-cn/zh-cn.js'
+import '../static/UEditor/ueditor.parse.min.js'
 // import Mock from './mock'
 // Mock.bootstrap();
 // import 'font-awesome/css/font-awesome.min.css'

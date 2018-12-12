@@ -1,6 +1,7 @@
 "use strict";
 
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 
 const editorConfig = require('../config/editorConfig');
 const CONSTANT = require("../config/systemConstant");
