@@ -35,12 +35,12 @@
       <el-table-column prop="_id" width="90px" label="">
         <template slot-scope="scope">
           <el-button slot="button" type="text">
-            <router-link tag="a" :to="{path:'/view/work/activityDetail',query:{article:scope.row._id}}">
+            <router-link tag="a" :to="{path:'/view/admin/technologyDetail',query:{technologyId:scope.row._id}}">
               <i class="fa fa-search"></i>
             </router-link>
           </el-button>
           <el-button slot="button" type="text">
-            <router-link tag="a" :to="{path:'/view/work/activityEdit',query:{article:scope.row._id}}">
+            <router-link tag="a" :to="{path:'/view/admin/technologyEdit',query:{technologyId:scope.row._id}}">
               <i class="fa fa-edit"></i>
             </router-link>
           </el-button>

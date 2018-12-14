@@ -5,12 +5,14 @@
 'use strict';
 const config = require('../../config/config');
 const menuConfig = require('../../config/menuConfig');
+const dictConfig = require('../../config/dictConfig');
 const roleConfig = require('../../config/roleConfig');
 const logger = require('log4js').getLogger("sys");
 
 const AdminService = require('../../service/adminService');
 const MenuService = require('../../service/MenuService');
 const RoleService = require('../../service/RoleService');
+const DictService = require('../../service/DictService');
 
 const InitDbData = {};
 
@@ -18,6 +20,7 @@ InitDbData.init = function () {
     this.initMenu();
     this.initRole();
     this.initUser();
+    this.initDict();
 };
 
 InitDbData.initUser = function () {
@@ -60,5 +63,15 @@ InitDbData.initRole = function () {
     })
 };
 
-
+InitDbData.initDict = function () {
+    DictService.findOne({}, {code : dictConfig[0].code}).then(flag => {
+        if(!flag){
+            DictService.create({}, dictConfig).then(() => {
+                logger.info("create " + "default menu" + " success");
+            }, err => {
+                logger.error("Error:" + err);
+            });
+        }
+    })
+};
 module.exports = InitDbData;

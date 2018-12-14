@@ -66,7 +66,7 @@ module.exports = [
         "name": "角色管理",
         "parent": "82e687c8-5a71-4174-898c-d317bc22e3b8",
         "sort": 22,
-        "icon": "fa-bars",
+        "icon": "fa-user-md",
         "state": 1,
         "__type": "leaf",
     },

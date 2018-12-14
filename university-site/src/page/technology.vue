@@ -5,15 +5,13 @@
         <el-col :span="18"><div class="grid-content bg-purple">
           <div class="con-article">
           <ul>
-            <li>
+            <li v-for="data in technologyList">
 				<span class="article">
-					<a href="http://www.pcdaxue.com/wannacry-precautions-and-solutions.html"><img src="http://www.pcdaxue.com/wp-content/themes/begin/timthumb.php?src=http://www.pcdaxue.com/wp-content/uploads/2017/05/1f2539bc1ae084c33370.jpg&amp;w=280&amp;h=210&amp;a=&amp;zc=1" alt="WannaCry 比特币勒索病毒防范和解决办法"></a>				</span>
+					<a href="http://www.pcdaxue.com/wannacry-precautions-and-solutions.html"><img :src="$Roninwz.path.publicPath+data.imgUrl" alt="WannaCry 比特币勒索病毒防范和解决办法"></a>				</span>
               <span class="article-right">
-              <span class="article-title"><a href="http://www.pcdaxue.com/wannacry-precautions-and-solutions.html" rel="bookmark">WannaCry 比特币勒索病毒防范和解决</a></span>
+              <span class="article-title"><a href="http://www.pcdaxue.com/wannacry-precautions-and-solutions.html" rel="bookmark">{{data.title}}</a></span>
               <span class="article-con"><a href="http://www.pcdaxue.com/wannacry-precautions-and-solutions.html" rel="bookmark">
-                WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决
-                WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决
-                WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决WannaCry 比特币勒索病毒防范和解决
+                {{data.content}}
               </a></span>
               <span class="article-boot">
                 <span class="article-date">2017年6月28日</span><span class="article-eye"><i class="fa fa-eye"></i>34</span>
@@ -156,9 +154,50 @@
 </template>
 
 <script>
-    export default {
-        name: "technology"
+  export default {
+    data: function() {
+      return {
+        url : {
+          list: '/api/admin/technology/list',
+          find: '/api/admin/technology/find',
+          remove: '/api/admin/technology/remove',
+          removeOne: '/api/admin/technology/remove/{id}',
+          save: '/api/admin/technology/save/{id}',
+          detail: '/api/admin/technology/detail/{id}',
+        },
+        technologyList:[],
+
+      };
+    },
+    computed: {
+
+    },
+    methods: {
+    //  初始化数据
+      initArticleData:function(){
+        // this.$api.get(this.url.find, {
+        //
+        // }, response => {
+        //   if (response.status >= 200 && response.status < 300) {
+        //     console.log(response.data);
+        //   } else {
+        //     console.log(response.message);
+        //   }
+        // });
+        this.$fetch(this.url.find).then(reData => {
+          console.log("redata:"+JSON.stringify(reData));
+          console.log("redata:"+reData);
+          if(reData.success){
+            this.technologyList=reData.rows;
+          }
+        });
+      }
+
+    },
+    created:function () {
+      this.initArticleData();
     }
+  }
 </script>
 
 <style scoped>

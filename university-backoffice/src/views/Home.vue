@@ -40,7 +40,7 @@
 					<template v-for="(item,index) in adminInfo['menu']['rows']">
 						<el-submenu :index="index+''" v-if="item.__type==='folder'">
 							<template slot="title"><span class="fa" :class="item.icon"></span>{{item.name}}</template>
-							<el-menu-item v-for="child in item.children" :index="child.link" :key="child.id">{{child.name}}</el-menu-item>
+							<el-menu-item v-for="child in item.children" :index="child.link" :key="child.id"><span class="fa" :class="child.icon"></span>{{child.name}}</el-menu-item>
 						</el-submenu>
 						<el-menu-item v-else :index="item.link"><span class="fa" :class="item.icon"></span>{{item.name}}</el-menu-item>
 					</template>

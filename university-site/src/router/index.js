@@ -8,6 +8,7 @@ import Forum from '../page/forum'
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',// 访问路径不带井号
   routes: [
     {
       path: '/',

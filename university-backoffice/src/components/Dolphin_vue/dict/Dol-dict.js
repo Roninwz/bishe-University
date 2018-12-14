@@ -3,7 +3,7 @@
 'use strict';
 const defaultParam = {
   ajaxFlag: true,
-  server: '/system/dict/options/{code}',
+  server: '/dict/options/{code}',
   Vue: null,
 };
 
