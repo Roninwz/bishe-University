@@ -66,27 +66,27 @@
         <el-row :gutter="10">
           <el-col :span="12">
             <el-form-item label="名称">
-              <el-input v-model="editForm.name" />
+              <el-input v-model="editForm.name"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="编码">
-              <el-input v-model="editForm.code" />
+              <el-input v-model="editForm.code"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="链接">
-              <el-input v-model="editForm.link" />
+              <el-input v-model="editForm.link"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="icon">
-              <el-input v-model="editForm.icon" />
+              <el-input v-model="editForm.icon"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="排序">
-              <el-input v-model="editForm.sort" />
+              <el-input v-model="editForm.sort"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -107,16 +107,16 @@
 
 <script>
   export default {
-    data: function() {
+    data: function () {
       return {
-        url : {
-          find : '/admin/menu/find',
-          tree : '/api/admin/menu/tree',
-          removeOne : '/api/admin/menu/remove/{id}',
-          save : '/api/admin/menu/save/{id}',
-          detail : '/api/admin/menu/detail/{id}',
-          importData : '/api/admin/menu/import',
-          exportData : '/api/admin/menu/export',
+        url: {
+          find: '/admin/menu/find',
+          tree: '/api/admin/menu/tree',
+          removeOne: '/api/admin/menu/remove/{id}',
+          save: '/api/admin/menu/save/{id}',
+          detail: '/api/admin/menu/detail/{id}',
+          importData: '/api/admin/menu/import',
+          exportData: '/api/admin/menu/export',
         },
         editDialog: false,
         editForm: {},
@@ -124,9 +124,8 @@
         formId: '',
       };
     },
-    computed:{
-    },
-    methods:{
+    computed: {},
+    methods: {
       query: function () {
         this.$refs.tree.query();
       },
@@ -137,7 +136,7 @@
       },
       addChild: function () {
         this.editForm = {
-          parent : this.detailForm
+          parent: this.detailForm
         };
         this.formId = '';
         this.editDialog = true;
@@ -149,10 +148,10 @@
       },
       save: function () {
         this.$ajax({
-          url : this.url.save,
-          method : 'post',
-          data : this.editForm,
-          pathData : {id : this.formId},
+          url: this.url.save,
+          method: 'post',
+          data: this.editForm,
+          pathData: {id: this.formId},
         }).then(reData => {
           this.editDialog = false;
           this.$message(reData.message);
@@ -162,8 +161,8 @@
       },
       removeOne: function () {
         this.$ajax({
-          url : this.url.removeOne,
-          pathData : {id : this.detailForm._id},
+          url: this.url.removeOne,
+          pathData: {id: this.detailForm._id},
         }).then((reData) => {
           this.$message(reData.message);
           this.query();
@@ -174,6 +173,7 @@
         this.detailForm = data;
       },
     },
-    created:function () {}
+    created: function () {
+    }
   }
 </script>

@@ -6,11 +6,13 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css';
+import './assets/plugin/bootstrap/css/bootstrap.min.css'
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
 import store from './vuex/store'
 
+import './assets/css/global.css'
 //import Api from './util/http';
 // Vue.prototype.$api = Api;
 import axios from 'axios'

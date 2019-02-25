@@ -1,6 +1,7 @@
 <template>
   <div class="loginPage">
-    <el-form :model="admin" :rules="rules2" ref="admin" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+    <el-form :model="admin" :rules="rules2" ref="admin" label-position="left" label-width="0px"
+             class="demo-ruleForm login-container">
       <h3 class="title">IT大学网后台管理系统</h3>
       <el-form-item prop="username">
         <el-input type="text" v-model="admin.username" auto-complete="off" placeholder="账号"></el-input>
@@ -11,7 +12,7 @@
       <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
         <!--:loading="logining"-->
-        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2('admin')" >登录</el-button>
+        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2('admin')">登录</el-button>
         <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
       </el-form-item>
     </el-form>
@@ -21,6 +22,7 @@
 
 <script>
   import {requestLogin} from '../api/api';
+
   export default {
     data() {
       return {
@@ -31,10 +33,10 @@
         },
         rules2: {
           username: [
-            { required: true, message: '请输入账号', trigger: 'blur' },
+            {required: true, message: '请输入账号', trigger: 'blur'},
           ],
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
+            {required: true, message: '请输入密码', trigger: 'blur'},
           ]
         },
         checked: true
@@ -53,7 +55,7 @@
           if (valid) {
 
             _this.logining = true;
-            let loginParams = { username: _this.admin.username, password: _this.admin.password };
+            let loginParams = {username: _this.admin.username, password: _this.admin.password};
             //发送登录请求
             // this.$ajax({
             //   method: 'post',
@@ -79,8 +81,8 @@
 
             //发送请求到store中actions.js的登录方法
             this.$store.dispatch('login', loginParams).then(data => {
-              console.log("ddd:"+JSON.stringify(data));
-              if(data.message==="登录成功"){
+              console.log("ddd:" + JSON.stringify(data));
+              if (data.message === "登录成功") {
                 _this.$message({
                   message: data.message,
                   type: 'success'
@@ -88,37 +90,37 @@
                 _this.goNext();
                 // _this.$router.push('/view/admin/main');
                 // _this.$router.replace('/view/admin');
-              }else {
+              } else {
                 _this.$message(data.message);
               }
             }, errorMsg => {
               _this.$message(errorMsg);
             });
-           // requestLogin(loginParams).then(data => {
-           //    console.log("data:"+data);
-           //    this.logining = false;
-           //    //NProgress.done();
-           //    let { message, code, user } = data;
-           //    if (code !== 200) {
-           //      this.$message({
-           //        message: message,
-           //        type: 'error'
-           //      });
-           //    } else {
-           //      sessionStorage.setItem('user', JSON.stringify(user));
-           //      this.$router.push({ path: '/table' });
-           //    }
-           //  });
+            // requestLogin(loginParams).then(data => {
+            //    console.log("data:"+data);
+            //    this.logining = false;
+            //    //NProgress.done();
+            //    let { message, code, user } = data;
+            //    if (code !== 200) {
+            //      this.$message({
+            //        message: message,
+            //        type: 'error'
+            //      });
+            //    } else {
+            //      sessionStorage.setItem('user', JSON.stringify(user));
+            //      this.$router.push({ path: '/table' });
+            //    }
+            //  });
           } else {
             console.log('error submit!!');
             return false;
           }
         });
       },
-      login(){
+      login() {
 
       },
-      goNext:function () {
+      goNext: function () {
         this.$router.replace('/view/admin/userList');
         // this.$router.push({ path: '/view/admin/main' });
       }
@@ -128,7 +130,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .loginPage{
+  .loginPage {
     position: relative;
     display: block;
     width: 100%;
@@ -162,6 +164,6 @@
       .remember {
         margin: 0px 0px 35px 0px;
       }
-  }
+    }
   }
 </style>

@@ -22,9 +22,9 @@ const schema = new Schema({
     linkType: {type: Number},   //0 百度云资源  1 蓝奏云资源
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
-    creater: {type: String, ref: "M_User", default: config.dbUser.robot._id},          //创建者
+    creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者
     updateTime: {type: Date, default: Date.now},  //最后更新时间
-    updater: {type: String, ref: "M_User", default: config.dbUser.robot._id}         //最后更新者
+    updater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id}         //最后更新者
 });
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});

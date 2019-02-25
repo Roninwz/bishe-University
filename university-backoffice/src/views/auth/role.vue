@@ -20,8 +20,8 @@
           <el-button type="primary" @click="query">查询</el-button>
         </el-form-item>
       </el-form>
-      <el-table-column prop="name" width="100" label="名称" />
-      <el-table-column prop="code" width="100" label="编码" />
+      <el-table-column prop="name" width="100" label="名称"/>
+      <el-table-column prop="code" width="100" label="编码"/>
       <el-table-column prop="menus" label="菜单">
         <template slot-scope="scope">
           <template v-for="(menu, index) in scope.row.menus">{{index > 0 ? '、' : ''}}{{menu.name}}</template>
@@ -46,12 +46,12 @@
         <el-row :gutter="10">
           <el-col :span="12">
             <el-form-item label="名称">
-              <el-input v-model="editForm.name" />
+              <el-input v-model="editForm.name"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="编码">
-              <el-input v-model="editForm.code" />
+              <el-input v-model="editForm.code"/>
             </el-form-item>
           </el-col>
           <el-col :span="24">

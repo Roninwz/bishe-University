@@ -108,6 +108,16 @@ module.exports = (function () {
         },
     });
 
+    Object.assign(config, {
+
+        baiduLocation:{
+            api:'http://api.map.baidu.com/location/ip',
+            apis:'https://api.map.baidu.com/location/ip',
+            ak:'1rxSa9qV2YPWiP7o6fdZKmzPp2FZqa8e',
+            coor:'bd09ll'
+        }
+    });
+
     //identifying code
     Object.assign(config, {
         identifyingCode: {

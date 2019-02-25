@@ -19,12 +19,12 @@ const schema = new Schema({
     link: {type: String},   //网址
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
-    creater: {type: String, ref: "M_User", default: config.dbUser.robot._id},          //创建者
+    creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者
     updateTime: {type: Date, default: Date.now},  //最后更新时间
-    updater: {type: String, ref: "M_User", default: config.dbUser.robot._id}         //最后更新者
+    updater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id}         //最后更新者
 });
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('T_Technology', schema, 't_technology');
+const Model = mongoose.model('T_Website', schema, 't_website');
 module.exports = Model;

@@ -103,8 +103,6 @@
     </el-dialog>
 
 
-
-
     <!--用户详情-->
     <el-dialog title="用户详情" top="5vh" :visible.sync="detailDialog">
       <el-form ref="form" :model="detailForm" label-width="80px" size="small" class="editForm">
@@ -114,8 +112,8 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="性别:">
-                <span v-if="detailForm.sex===0">男</span>
-                <span v-else>女</span>
+              <span v-if="detailForm.sex===0">男</span>
+              <span v-else>女</span>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -155,7 +153,7 @@
           removeUser: '/api/users/remove/{id}',
         },
         queryForm: {},
-        detailForm:{},
+        detailForm: {},
         filters: {
           name: ''
         },
@@ -164,7 +162,7 @@
         loading: false,
         users: [],
         showCreateOrEditDialog: false,
-        detailDialog:false,
+        detailDialog: false,
         userForm: {},
       }
     },
@@ -196,7 +194,7 @@
 
       /*添加用户*/
       addUser: function () {
-        this.showAddress=[];
+        this.showAddress = [];
         this.userForm = {};
         this.formId = '';
         this.showCreateOrEditDialog = true;
@@ -205,7 +203,7 @@
       edit: function (data) {
         this.userForm = Object.assign({}, data);
         this.showAddress = this.userForm.address.split('-');
-        this.formId=this.userForm._id;
+        this.formId = this.userForm._id;
         this.showCreateOrEditDialog = true;
       },
 
@@ -252,12 +250,12 @@
         }).then(data => {
           if (data.success) {
 
-            if(_this.formId){
+            if (_this.formId) {
               _this.$message({
                 type: 'success',
                 message: "更新用户成功"
               });
-            }else {
+            } else {
               _this.$message({
                 type: 'success',
                 message: "添加用户成功"
@@ -279,7 +277,7 @@
         this.detailForm = data;
         this.detailDialog = true;
       },
-      detailSure:function () {
+      detailSure: function () {
         this.detailDialog = false;
       },
       /**

@@ -81,7 +81,7 @@ const schema = new Schema({
     /**
      * 创建人
      */
-    creater: {type: String, ref: "M_User", default: config.dbUser.robot._id},
+    creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},
     /**
      * 更新时间
      */
@@ -89,7 +89,7 @@ const schema = new Schema({
     /**
      * 最后更新人
      */
-    updater: {type: String, ref: "M_User", default: config.dbUser.robot._id}
+    updater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id}
 });
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import Index from '../page/index'
-import Technology from '../page/technology'
+import Technology from '../page/technology2'
 import Forum from '../page/forum'
 
 Vue.use(Router);
@@ -15,16 +15,16 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld
     },{
-      path: '/index',
+      path: '/view/user/index',
       name: 'Index',
       component: Index
     },{
-      path: '/technology',
+      path: '/view/user/technology',
       name: 'Technology',
       component: Technology
     }
     ,{
-      path: '/forum',
+      path: '/view/user/forum',
       name: 'Forum',
       component: Forum
     }

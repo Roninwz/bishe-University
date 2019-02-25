@@ -12,6 +12,7 @@ import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
 import MenuManage from '../views/auth/menu.vue'
 import FileManage from '../views/system/file.vue'
+import LoginLogList from '../views/logManage/loginLogList.vue'
 
 
 export default {
@@ -75,6 +76,16 @@ export default {
       iconCls: 'fa fa-list-alt',
       children: [
         { path: '/view/admin/fileManage', component: FileManage, name: '文件管理' },
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '日志管理',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/view/admin/loginLogManage', component: LoginLogList, name: '登录日志' },
+        { path: '/view/admin/operaLogManage', component: FileManage, name: '操作日志' },
       ]
     },
   ],

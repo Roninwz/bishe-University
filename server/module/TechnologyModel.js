@@ -21,13 +21,13 @@ const schema = new Schema({
     title: {type: String, default: 'default'},     //标题
     content: {type: String},                    //内容
     imgUrl: {type: String},                          //图片
-    lookNum: {type: Number}, //浏览量
-    zanNum: {type: Number},  //点赞量
+    lookNum: {type: Number,default:0}, //浏览量
+    zanNum: {type: Number,default:0},  //点赞量
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
-    creater: {type: String, ref: "M_User", default: config.dbUser.robot._id},          //创建者
+    creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者
     updateTime: {type: Date, default: Date.now},  //最后更新时间
-    updater: {type: String, ref: "M_User", default: config.dbUser.robot._id}         //最后更新者
+    updater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id}         //最后更新者
 });
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
