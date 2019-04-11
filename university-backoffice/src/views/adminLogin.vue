@@ -138,11 +138,11 @@
     height: 100%;
     margin: 0;
 
-    background: url("../../static/image/back1.png") no-repeat;
+    background: url("../../static/image/back_white2.png") no-repeat;
     background-size: 100% 100%;
     /*padding: 180px 0 180px 0;*/
     padding-top: 12%;
-    padding-bottom: 12.5%;
+    /*padding-bottom: 12.5%;*/
     overflow-y: hidden;
     .login-container {
       /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/

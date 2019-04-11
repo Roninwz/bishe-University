@@ -21,4 +21,9 @@ http://www.zhanzhangs.com/
 其它技术：element  scss  
 字体：font-awesome
 
+后期拓展：  
+    用户订阅邮件通知  
+    消息推送  
+
+
 

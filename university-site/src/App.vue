@@ -51,10 +51,11 @@
     }
   }
 </script>
-
 <style>
   @import "./assets/plugin/font-awesome/css/font-awesome.min.css";
-
+  .el-menu--horizontal>.el-menu-item.is-active{
+    border-bottom:2px solid #16a085;
+  }
   #app {
     width: 100%;
     height: 100%;

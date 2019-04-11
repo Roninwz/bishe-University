@@ -130,7 +130,7 @@
 </script>
 
 <style scoped>
-  @import "../assets/plugin/bootstrap/css/bootstrap.min.css";
+  @import "../../assets/plugin/bootstrap/css/bootstrap.min.css";
 
   .all-content {
     width: 100%;
