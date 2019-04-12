@@ -4,6 +4,7 @@ import HelloWorld from '../components/HelloWorld'
 import Index from '../page/index'
 import Technology from '../page/technology/technology2'
 import ResourceShare from '../page/resource/resource'
+import ResourceShareDetail from '../page/resource/resourceDetail'
 import TechnologyArticleDetail from '../page/technology/articleDetail'
 import Forum from '../page/forum'
 
@@ -28,15 +29,21 @@ export default new Router({
       component: Technology
     },
     {
+      path: '/view/user/technologyArticleDetail',
+      name: 'TechnologyArticleDetail',
+      component: TechnologyArticleDetail
+    },
+    {
       path: '/view/user/resource',
       name: 'ResourceShare',
       component: ResourceShare
     },
     {
-      path: '/view/user/technologyArticleDetail',
-      name: 'TechnologyArticleDetail',
-      component: TechnologyArticleDetail
+      path: '/view/user/resourceDetail',
+      name: 'ResourceShareDetail',
+      component: ResourceShareDetail
     },
+
     {
       path: '/view/user/forum',
       name: 'Forum',

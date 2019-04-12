@@ -30,7 +30,7 @@
                 <div class="row">
                   <div class="col-md-5">
                     <figure class="thumbnail art_thum">
-                      <img src="https://ws3.sinaimg.cn/large/005BYqpggy1fxgm4df82yj30xm0fx0x3.jpg" alt=""
+                      <img :src="$Roninwz.path.publicPath+article.imgUrl" alt=""
                            class="attachment-300x180 wp-post-image">
                     </figure>
                   </div>

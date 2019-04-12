@@ -1,28 +1,17 @@
 <template>
   <div class="main">
     <div class="my_contain">
-      <div class="resource_div">
-        <router-link to="">
+      <div class="resource_div" v-for="(resource,index) in resourceList">
+        <router-link :to="{path:'/view/user/resourceDetail',query:{id:resource._id}}">
           <div class="resource_img">
-            <img src="../../../static/img/logo.png" alt="">
+            <img :src="$Roninwz.path.publicPath+resource.imgUrl" alt="">
           </div>
-          <h2 class="resource_title">微信小程序入门与实战 常用组件API开发技巧项目实战</h2>
-          <p class="resource_info"><span>2018-2-2</span><span class="read">阅读</span><span class="pinglun">评论</span>
-            <span class="resource_zan" @click="zan"><img v-if="isZan" class="zan" src="../../../static/img/zaned.png" alt=""><img v-if="!isZan" class="zan" src="../../../static/img/zan.png" alt=""><span>14</span></span>
+          <h2 class="resource_title">{{resource.title}}</h2>
+          <p class="resource_info"><span>{{resource.createTime}}</span><span class="read">阅读({{resource.lookNum}})</span>
+            <!--<span class="pinglun">评论</span>-->
+            <span class="resource_zan" @click="zan(resource,index)"><img v-if="resource.isZan" class="zan" src="../../../static/img/zaned.png" alt=""><img v-if="!resource.isZan" class="zan" src="../../../static/img/zan.png" alt=""><span>{{resource.zanNum}}</span></span>
           </p>
         </router-link>
-      </div>
-      <div class="resource_div">
-
-      </div>
-      <div class="resource_div">
-
-      </div>
-      <div class="resource_div">
-
-      </div>
-      <div class="resource_div">
-
       </div>
     </div>
   </div>
@@ -34,14 +23,57 @@
     name: "resource",
     data: function () {
       return {
+        url:{
+          findResource:'/api/admin/resource/find',
+          updateZanNum:'/api/admin/resource/updateZanNum',
+        },
         isZan:false,
+        resourceList:[],
       };
     },
     methods:{
-      zan:function () {
-        this.isZan=!this.isZan;
+      zan:function (resource,index) {
+        if(resource.isZan){
+          if(resource.zanNum>0){
+            resource.zanNum--;
+          }
+          resource.isZan = false;
+          localStorage.setItem("isZan"+resource._id,"nozan");
+        }else {
+          resource.zanNum++;
+          resource.isZan = true;
+          localStorage.setItem("isZan"+resource._id,"zan");
+        }
+        this.$set(this.resourceList,index,resource);
+        this.updateZanNum(resource._id,resource.zanNum);
+      },
+      initResourceData:function () {
+        let _this = this;
+        _this.$fetch(this.url.findResource).then(reData => {
+          if (reData.success) {
 
-      }
+            _this.resourceList = reData.rows;
+            for (let i = 0;i<_this.resourceList.length;i++){
+              if(localStorage.getItem("isZan"+_this.resourceList[i]._id)=='zan'){
+                _this.$set(_this.resourceList[i],"isZan",true);
+              }else {
+                _this.$set(_this.resourceList[i],"isZan",false);
+              }
+            }
+          }
+        });
+      },
+      updateZanNum:function (id,zanNum) {
+        let _this = this;
+        _this.$fetch(this.url.updateZanNum,{id:id,zanNum:zanNum}).then(reData => {
+          if (reData.success) {
+
+          }
+        });
+      },
+    },
+    created:function () {
+      this.initResourceData();
     }
   }
 </script>
@@ -59,6 +91,7 @@
       min-height: 800px;
       padding-top: 2%;
       .resource_div {
+        position:relative;
         width: 23%;
         height: 260px;
         margin-right: 2%;
@@ -89,6 +122,9 @@
           line-height: 20px;
         }
         .resource_info{
+          position:absolute;
+          bottom:0;
+          width: 100%;
           font-size: 14px;
           color: #bbb;
           line-height: 30px;
@@ -100,6 +136,7 @@
           }
           .resource_zan{
             float: right;
+            margin-right: 30px;
             .zan{
               width: 20px;
               height: 20px;

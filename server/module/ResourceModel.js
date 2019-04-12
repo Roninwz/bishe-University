@@ -18,8 +18,8 @@ const schema = new Schema({
     title: {type: String, ref: 'T_Technology'},
     content: {type: String},
     imgUrl: {type: String},                          //图片
-    lookNum: {type: Number}, //浏览量
-    zanNum: {type: Number},  //点赞量
+    lookNum: {type: Number,default:0}, //浏览量
+    zanNum: {type: Number,default:0},  //点赞量
     link: {type: String},  //资源链接
     pass: {type: String}, //资源链接密码
     linkType: {type: Number},   //0 百度云资源  1 蓝奏云资源

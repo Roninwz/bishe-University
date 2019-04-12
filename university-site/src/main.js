@@ -24,9 +24,12 @@ Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
 
 
+
 import Roninwz from './components/Roninwz_vue'
 Vue.use(Roninwz);
 
+import Common from './components/common'
+Vue.use(Common);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -60,7 +60,7 @@ router.get('/findLastFive', function (req, res, next) {
 });
 
 
-//查找最新的五篇文章
+//更新浏览量
 router.post('/updateLookNum/:id', function (req, res, next) {
     let _id = req.params.id;
     let condition = req.body;

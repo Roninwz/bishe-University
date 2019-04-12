@@ -47,7 +47,23 @@ router.get('/find', function (req, res, next) {
         );
 });
 
+//更新浏览量
+router.get('/updateZanNum', function (req, res, next) {
+    let _id = req.query.id;
+    let zanNum = req.query.zanNum;
+    let condition = req.body;
+    condition = reqUtil.formatCondition(condition);
+    let populate = "creater";
+    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+        result.zanNum = zanNum;
+        service.updateById(req.curUser,_id,result).then(
+            res.send(resUtil.success({data: result})),
+            err => res.send(resUtil.error())
+        );
 
+
+    });
+});
 
 //更新
 router.post('/save/:id', function (req, res, next) {
