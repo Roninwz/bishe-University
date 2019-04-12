@@ -61,11 +61,15 @@
     height: 100%;
     overflow-x: hidden;
   }
-
+  img {
+    max-width: 100%; /*图片自适应宽度*/
+  }
   body {
     color: #333;
   }
-
+  a {
+    text-decoration: none!important;
+  }
   .el-menu-item {
     width: 150px;
     text-align: center;

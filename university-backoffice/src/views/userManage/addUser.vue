@@ -47,7 +47,10 @@
           data: this.form,
         }).then(data => {
           if (data.success) {
-            this.$message("添加成功");
+            this.$message({
+              message: "添加成功",
+              type: 'success'
+            });
             this.$router.push('/view/admin/userList');
           }
         });

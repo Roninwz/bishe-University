@@ -6,7 +6,7 @@
  */
 import Cookies from 'js-cookie'
 import axios from 'axios';
-
+var qs = require('qs');
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='';
 
@@ -81,7 +81,7 @@ export function fetch(url,params={}){
 
 export function post(url,data = {}){
   return new Promise((resolve,reject) => {
-    axios.post(url,data)
+    axios.post(url,qs.stringify(data,{ indices: false }))
       .then(response => {
         resolve(response.data);
       },err => {

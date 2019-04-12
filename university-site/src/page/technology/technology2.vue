@@ -23,7 +23,9 @@
               <section class="visible-md visible-lg">
                 <span class="label  art_tag"><router-link to="/view/user/technology">技术教程</router-link></span>
                 <!--标题-->
-                <h3>{{article.title}}</h3>
+                <router-link :to="{path:'/view/user/technologyArticleDetail',query:{id:article.id}}">
+                  <h3>{{article.title}}</h3>
+                </router-link>
                 <hr>
                 <div class="row">
                   <div class="col-md-5">
@@ -37,9 +39,11 @@
                   </div>
                 </div>
                 <hr/>
-                <div class="pull-right post-info"><span><i class="fa fa-calendar"></i> {{article.createTime | formatDate}}</span> <span><i
-                  class="fa fa-user"></i> <span class="upp">{{article.creater.name}}</span></span> <span><i
-                  class="fa fa-eye"></i> {{article.lookNum}}人</span> <span><i class="fa fa-comment"></i> 暂无</span></div>
+                <div class="pull-right post-info"><span><i class="fa fa-calendar"></i> {{article.createTime | formatDate}}</span>
+                  <span><i
+                    class="fa fa-user"></i> <span class="upp">{{article.creater.name}}</span></span> <span><i
+                    class="fa fa-eye"></i> {{article.lookNum}}人</span> <span><i class="fa fa-comment"></i> 暂无</span>
+                </div>
               </section>
             </div>
 
@@ -60,21 +64,11 @@
                 </div>
                 <div class="panel-body">
                   <ul class="list-group">
-                    <router-link to="">
-                      <li class="clearfix new_art">一键检测自己的邮箱是否被泄露 输入邮箱在线即可查看</li>
+                    <template v-for="lastArticle in lastFiveArticles">
+                    <router-link :to="{path:'/view/user/technologyArticleDetail',query:{id:lastArticle._id}}">
+                      <li class="clearfix new_art">{{lastArticle.title}}</li>
                     </router-link>
-                    <router-link to="">
-                      <li class="clearfix new_art">Cloud Studio 插件评选大赛，免费领取20元话费</li>
-                    </router-link>
-                    <router-link to="">
-                      <li class="clearfix new_art">腾讯云服务器 8元/月，新用户每买4个月送2个月！</li>
-                    </router-link>
-                    <router-link to="">
-                      <li class="clearfix new_art">VS Code书写vue项目配置 eslint+prettier 统一代码风格</li>
-                    </router-link>
-                    <router-link to="">
-                      <li class="clearfix new_art2">VS Code书写vue项目配置 jslint统一代码风格</li>
-                    </router-link>
+                    </template>
                   </ul>
                 </div>
               </div>
@@ -104,7 +98,7 @@
                 </div>
                 <div class="panel-body">
                   <p class="panel_p">文章总数：{{technologyList.length}}篇</p>
-                  <p class="panel_p">浏览总数：221条</p>
+                  <p class="panel_p">浏览总数：{{lookSumNum}}</p>
                 </div>
               </div>
             </aside>
@@ -121,6 +115,7 @@
 
 <script>
   import {formatDate} from '../../util/date.js';
+
   export default {
 
     data: function () {
@@ -132,18 +127,19 @@
           removeOne: '/api/admin/technology/remove/{id}',
           save: '/api/admin/technology/save/{id}',
           detail: '/api/admin/technology/detail/{id}',
+          findLastFiveArticles: '/api/admin/technology/findLastFive'
         },
         technologyList: [],
-
+        lastFiveArticles: [],
+        lookSumNum: 0,
       };
     },
     filters: {
-      formatDate: function(time) {
-        if(time!=null&&time!="")
-        {
+      formatDate: function (time) {
+        if (time != null && time != "") {
           var date = new Date(time);
           return formatDate(date, "yyyy-MM-dd");
-        }else{
+        } else {
           return "";
         }
       }
@@ -161,11 +157,23 @@
         //     console.log(response.message);
         //   }
         // });
-        this.$fetch(this.url.find).then(reData => {
-          console.log("redata:" + JSON.stringify(reData));
-          console.log("redata:" + reData);
+        let _this = this;
+        _this.$fetch(this.url.find).then(reData => {
           if (reData.success) {
-            this.technologyList = reData.rows;
+
+            _this.technologyList = reData.rows;
+            _this.technologyList.forEach(te => {
+              _this.lookSumNum += te.lookNum;
+            });
+          }
+        });
+      },
+      initLastFiveArticlesData: function () {
+        let _this = this;
+        _this.$fetch(this.url.findLastFiveArticles).then(reData => {
+          if (reData.success) {
+
+            _this.lastFiveArticles = reData.rows;
           }
         });
       }
@@ -173,15 +181,13 @@
     },
     created: function () {
       this.initArticleData();
+      this.initLastFiveArticlesData();
     }
 
   }
 </script>
 
 <style lang="scss" scoped>
-  a {
-    text-decoration: none;
-  }
 
   .myContain {
     width: 100%;

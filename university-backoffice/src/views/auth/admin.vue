@@ -163,7 +163,10 @@
           pathData: {id: this.formId},
         }).then(reData => {
           this.editDialog = false;
-          this.$message(reData.message);
+          this.$message({
+            message: reData.message,
+            type: 'success'
+          });
           this.query();
         });
       },

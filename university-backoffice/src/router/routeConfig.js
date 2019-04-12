@@ -6,8 +6,11 @@ import Table from '../views/userManage/Table.vue'
 import AddUser from '../views/userManage/addUser.vue'
 import UserList from '../views/userManage/userList.vue'
 import TechnologyList from '../views/technologyManage/technologyList.vue'
+import ResourceList from '../views/resourceManage/resourceList.vue'
 import TechnologyEdit from '../views/technologyManage/technologyEdit.vue'
+import ResourceEdit from '../views/resourceManage/resourceEdit.vue'
 import TechnologyDetail from '../views/technologyManage/technologyDetail.vue'
+import ResourceDetail from '../views/resourceManage/resourceDetail.vue'
 import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
 import MenuManage from '../views/auth/menu.vue'
@@ -55,6 +58,18 @@ export default {
         { path: '/view/admin/technologyManage', component: TechnologyList, name: '技术文章列表' },
         { path: '/view/admin/technologyEdit', component: TechnologyEdit, name: '技术文章维护' },
         { path: '/view/admin/technologyDetail', component: TechnologyDetail, name: '技术文章详情' },
+        // { path: '/page5', component: Home, name: '评论列表' }
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '资源分享管理',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/view/admin/resourceManage', component: ResourceList, name: '资源分享列表' },
+        { path: '/view/admin/resourceEdit', component: ResourceEdit, name: '技术文章维护' },
+        { path: '/view/admin/resourceDetail', component: ResourceDetail, name: '技术文章详情' },
         // { path: '/page5', component: Home, name: '评论列表' }
       ]
     },
