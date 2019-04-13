@@ -93,7 +93,7 @@
         let _this = this;
         _this.$post(this.url.updateLookNum+_this.articleId,{id:_this.articleId}).then(reData => {
           if (reData.success) {
-
+            _this.$set(_this.article, "lookNum", reData.data.lookNum);
           }
         });
       },

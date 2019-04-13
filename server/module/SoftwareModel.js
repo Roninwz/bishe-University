@@ -13,13 +13,17 @@ const tool = require('./util/tool');
 
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
-    title: {type: String, ref: 'T_Technology'},     //评论文章id
-    content: {type: String},                    //评论内容
+    name: {type: String},//软件名称
+    introduction: {type: String},
+    score:{type: Number},// 评分
+    imgUrl:{type: String},//应用缩略图
+    version:{type: String},// 版本
+    size:{type: String},// 大小
     lookNum: {type: Number}, //浏览量
-    zanNum: {type: Number},  //点赞量
     link: {type: String},  //资源链接
     pass: {type: String}, //资源链接密码
     linkType: {type: Number},   //0 百度云资源  1 蓝奏云资源
+    softType: {type: Number},   //资源类型  1编程软件 2娱乐软件 3影视音图 4实用工具 5其它
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者

@@ -15,7 +15,7 @@ const tool = require('./util/tool');
 
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
-    title: {type: String, ref: 'T_Technology'},
+    title: {type: String},
     content: {type: String},
     imgUrl: {type: String},                          //图片
     lookNum: {type: Number,default:0}, //浏览量

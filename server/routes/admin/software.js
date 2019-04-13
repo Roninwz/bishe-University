@@ -14,7 +14,7 @@ const logger = require('log4js').getLogger("sys");
 const resUtil = require("../../module/util/resUtil");
 const reqUtil = require("../../module/util/reqUtil");
 
-const service = require("../../service/ResourceService");
+const service = require("../../service/SoftWareService");
 
 const formidable = require('formidable');
 const xlsx = require('node-xlsx');

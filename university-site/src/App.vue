@@ -14,12 +14,13 @@
               <el-menu-item index="/view/user/technology">技术分享</el-menu-item>
               <el-menu-item index="/view/user/forum">论坛</el-menu-item>
               <el-menu-item index="/view/user/resource">资源分享</el-menu-item>
-              <el-submenu index="/view/user/software">
-                <template slot="title">软件中心</template>
-                <el-menu-item index="5-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项1</el-menu-item>
-                <el-menu-item index="5-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项2</el-menu-item>
-                <el-menu-item index="5-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项3</el-menu-item>
-              </el-submenu>
+              <el-menu-item index="/view/user/software">软件中心</el-menu-item>
+              <!--<el-submenu index="/view/user/software">-->
+                <!--<template slot="title">软件中心</template>-->
+                <!--<el-menu-item index="5-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项1</el-menu-item>-->
+                <!--<el-menu-item index="5-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项2</el-menu-item>-->
+                <!--<el-menu-item index="5-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项3</el-menu-item>-->
+              <!--</el-submenu>-->
             </el-menu>
 
           </div>

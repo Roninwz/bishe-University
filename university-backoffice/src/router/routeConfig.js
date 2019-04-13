@@ -6,11 +6,16 @@ import Table from '../views/userManage/Table.vue'
 import AddUser from '../views/userManage/addUser.vue'
 import UserList from '../views/userManage/userList.vue'
 import TechnologyList from '../views/technologyManage/technologyList.vue'
-import ResourceList from '../views/resourceManage/resourceList.vue'
 import TechnologyEdit from '../views/technologyManage/technologyEdit.vue'
-import ResourceEdit from '../views/resourceManage/resourceEdit.vue'
 import TechnologyDetail from '../views/technologyManage/technologyDetail.vue'
+
+import ResourceList from '../views/resourceManage/resourceList.vue'
+import ResourceEdit from '../views/resourceManage/resourceEdit.vue'
 import ResourceDetail from '../views/resourceManage/resourceDetail.vue'
+import SoftwareList from '../views/softwareManage/softwareList.vue'
+import SoftwareEdit from '../views/softwareManage/softwareEdit.vue'
+import SoftwareDetail from '../views/softwareManage/softwareDetail.vue'
+
 import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
 import MenuManage from '../views/auth/menu.vue'
@@ -68,9 +73,19 @@ export default {
       iconCls: 'fa fa-list-alt',
       children: [
         { path: '/view/admin/resourceManage', component: ResourceList, name: '资源分享列表' },
-        { path: '/view/admin/resourceEdit', component: ResourceEdit, name: '技术文章维护' },
-        { path: '/view/admin/resourceDetail', component: ResourceDetail, name: '技术文章详情' },
-        // { path: '/page5', component: Home, name: '评论列表' }
+        { path: '/view/admin/resourceEdit', component: ResourceEdit, name: '资源分享维护' },
+        { path: '/view/admin/resourceDetail', component: ResourceDetail, name: '资源分享详情' },
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '软件中心',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/view/admin/softwareManage', component: SoftwareList, name: '软件管理' },
+        { path: '/view/admin/softwareEdit', component: SoftwareEdit, name: '软件维护' },
+        { path: '/view/admin/softwareDetail', component: SoftwareDetail, name: '软件详情' },
       ]
     },
     {

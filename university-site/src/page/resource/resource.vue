@@ -7,11 +7,12 @@
             <img :src="$Roninwz.path.publicPath+resource.imgUrl" alt="">
           </div>
           <h2 class="resource_title">{{resource.title}}</h2>
+        </router-link>
           <p class="resource_info"><span>{{resource.createTime}}</span><span class="read">阅读({{resource.lookNum}})</span>
             <!--<span class="pinglun">评论</span>-->
             <span class="resource_zan" @click="zan(resource,index)"><img v-if="resource.isZan" class="zan" src="../../../static/img/zaned.png" alt=""><img v-if="!resource.isZan" class="zan" src="../../../static/img/zan.png" alt=""><span>{{resource.zanNum}}</span></span>
           </p>
-        </router-link>
+
       </div>
     </div>
   </div>

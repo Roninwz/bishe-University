@@ -2,10 +2,16 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import Index from '../page/index'
+
 import Technology from '../page/technology/technology2'
+import TechnologyArticleDetail from '../page/technology/articleDetail'
+
 import ResourceShare from '../page/resource/resource'
 import ResourceShareDetail from '../page/resource/resourceDetail'
-import TechnologyArticleDetail from '../page/technology/articleDetail'
+
+
+import Software from '../page/software/software'
+
 import Forum from '../page/forum'
 
 Vue.use(Router);
@@ -42,6 +48,12 @@ export default new Router({
       path: '/view/user/resourceDetail',
       name: 'ResourceShareDetail',
       component: ResourceShareDetail
+    },
+
+    {
+      path: '/view/user/software',
+      name: 'Software',
+      component: Software
     },
 
     {
