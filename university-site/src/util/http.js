@@ -62,7 +62,6 @@ export function fetch(url,params={}){
       params:params
     })
       .then(response => {
-        console.log("response.data:"+response);
         resolve(response.data);
       })
       .catch(err => {

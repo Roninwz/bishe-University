@@ -15,6 +15,7 @@ import ResourceDetail from '../views/resourceManage/resourceDetail.vue'
 import SoftwareList from '../views/softwareManage/softwareList.vue'
 import SoftwareEdit from '../views/softwareManage/softwareEdit.vue'
 import SoftwareDetail from '../views/softwareManage/softwareDetail.vue'
+import Topic from '../views/topic/topicManage.vue'
 
 import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
@@ -86,6 +87,15 @@ export default {
         { path: '/view/admin/softwareManage', component: SoftwareList, name: '软件管理' },
         { path: '/view/admin/softwareEdit', component: SoftwareEdit, name: '软件维护' },
         { path: '/view/admin/softwareDetail', component: SoftwareDetail, name: '软件详情' },
+      ]
+    },
+    {
+      path: '/view/admin',
+      component: Home,
+      name: '话题',
+      iconCls: 'fa fa-list-alt',
+      children: [
+        { path: '/view/admin/topicManage', component: Topic, name: '话题管理' },
       ]
     },
     {

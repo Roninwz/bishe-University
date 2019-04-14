@@ -210,6 +210,7 @@
                localStorage.setItem("userInfo",JSON.stringify(reData.data));
                _this.userInfo = reData.data;
               _this.isLogin = false;
+              _this.$store.dispatch('saveUserInfo',_this.userInfo);
             }else {
               _this.$message({
                 message: reData.message,
@@ -220,15 +221,16 @@
         }
       },
       logout:function () {
-        console.log("llllllllllllll")
         this.userInfo = null;
         this.loginUser={};
         localStorage.setItem("userInfo",'');
+        this.$store.dispatch('saveUserInfo',null);
       }
     },
     created() {
       if(localStorage.getItem("userInfo")){
         this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        this.$store.dispatch('saveUserInfo',this.userInfo);
       }
 
     }

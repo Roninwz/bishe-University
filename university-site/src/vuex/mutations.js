@@ -14,7 +14,7 @@ export default {
     sessionStorage.setItem('userInfo', JSON.stringify(state.userInfo));
   },
   saveUserInfo(state, userInfo){
-    state.adminInfo = userInfo;
+    state.userInfo = userInfo;
     this.commit('session');
   },
 }

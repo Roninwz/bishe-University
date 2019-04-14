@@ -32,7 +32,7 @@
     UEDITOR_HOME_URL: URL
 
     // 服务器统一请求接口路径 --上线的环境路径修改：/uniformBackoffice
-    , serverUrl: 'http://localhost:8880/api/editor'
+    , serverUrl: '/api/editor'
     // , serverUrl: URL + "config.json"
 
     //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义

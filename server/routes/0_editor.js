@@ -11,6 +11,9 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('uuid');
 
+const resUtil = require("../module/util/resUtil");
+const reqUtil = require("../module/util/reqUtil");
+
 // ueditor validate
 router.get('/', function(req, res, next) {
     res.send(editorConfig);
@@ -34,7 +37,6 @@ router.post('/', function(req, res, next) {
 
             form.parse(req, function (err, fields, files) {
                 if (err) {
-                    logger.error("Error:" + err);
                     res.send(resUtil.error({
                         message : "文件上传失败"
                     }));

@@ -13,8 +13,6 @@ const tool = require('./util/tool');
 
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
-    content: {type: String},//话题帖子内容
-    zanNum: {type: Number,default: 0}, //点赞量
     user:{type:String, ref: "M_User"},
     topic:{type:String, ref: "T_Topic"},
     state: {type: Number, default: 1},           //状态  1启用 0禁用
@@ -26,5 +24,5 @@ const schema = new Schema({
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('T_TopicPost', schema, 't_topic_post');
+const Model = mongoose.model('T_TopicAttention', schema, 't_topic_attention');
 module.exports = Model;

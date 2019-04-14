@@ -20,7 +20,7 @@ const schema = new Schema({
     screenImgUrl:{type: String},//应用截图
     version:{type: String},// 版本
     size:{type: String},// 大小
-    lookNum: {type: Number}, //浏览量
+    lookNum: {type: Number,default: 0}, //浏览量
     link: {type: String},  //资源链接
     pass: {type: String}, //资源链接密码
     linkType: {type: Number},   //0 百度云资源  1 蓝奏云资源

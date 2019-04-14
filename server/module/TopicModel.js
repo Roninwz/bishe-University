@@ -16,7 +16,7 @@ const schema = new Schema({
     name: {type: String},//话题名称
     introduction: {type: String},//话题简介
     imgUrl:{type: String},//话题缩略图
-    attentionNum: {type: Number}, //关注量
+    zanNum: {type: Number,default: 0}, //点赞量
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者

@@ -17,6 +17,9 @@ export default {
           });
     });
   },
+  saveUserInfo({commit, state},userInfo){
+      commit('saveUserInfo',userInfo);
+  },
 
 }
 
