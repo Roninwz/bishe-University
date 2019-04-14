@@ -12,9 +12,10 @@
             <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" border="0" router>
               <el-menu-item index="/view/user/index">首页</el-menu-item>
               <el-menu-item index="/view/user/technology">技术分享</el-menu-item>
-              <el-menu-item index="/view/user/forum">论坛</el-menu-item>
+              <el-menu-item index="/view/user/topic">话题</el-menu-item>
               <el-menu-item index="/view/user/resource">资源分享</el-menu-item>
               <el-menu-item index="/view/user/software">软件中心</el-menu-item>
+              <el-menu-item index="/view/user/person">我的</el-menu-item>
               <!--<el-submenu index="/view/user/software">-->
                 <!--<template slot="title">软件中心</template>-->
                 <!--<el-menu-item index="5-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选项1</el-menu-item>-->

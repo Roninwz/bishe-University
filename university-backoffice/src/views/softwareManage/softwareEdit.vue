@@ -68,11 +68,11 @@
           </el-form-item>
         </el-col>
 
-        <el-col :span="24">
-          <el-form-item label="软件简介">
-            <el-input rows="10" type="textarea" v-model="editForm.introduction" placeholder="不超过1000字" ></el-input>
-          </el-form-item>
-        </el-col>
+        <!--<el-col :span="24">-->
+          <!--<el-form-item label="软件简介">-->
+            <!--<el-input rows="10" type="textarea" v-model="editForm.introduction" placeholder="不超过1000字" ></el-input>-->
+          <!--</el-form-item>-->
+        <!--</el-col>-->
       </el-card>
 
       <el-card>
@@ -83,6 +83,22 @@
           <img class="uImg" v-if="uniformFile" :src="$Dolphin.path.publicPath+editForm.imgUrl"/>
           <div v-else class="upload-img"><i class="fa fa-plus"></i></div>
         </dol-upload>
+      </el-card>
+      <el-card>
+        <div slot="header">
+          <span>应用截图</span>
+        </div>
+        <dol-upload v-model="editForm.screenImgUrl" :on-success="uploadSuccessScreenImgUrl" type="software" maxWidth="300px" maxHeight="200px">
+          <img class="uImg" v-if="uniformFileScreenImgUrl" :src="$Dolphin.path.publicPath+editForm.screenImgUrl"/>
+          <div v-else class="upload-img"><i class="fa fa-plus"></i></div>
+        </dol-upload>
+      </el-card>
+
+      <el-card>
+        <div slot="header">
+          <span>软件简介</span>
+        </div>
+        <u-editor v-model="editForm.introduction" ref="ue"></u-editor>
       </el-card>
     </el-form>
 
@@ -109,12 +125,15 @@
           },
         },
         uniformFile:false,
+        uniformFileScreenImgUrl:false,
         editForm: {
           type: 'local',
           port: [],
           tag: [],
           content: '',
           imgUrl:'',
+          screenImgUrl:'',
+          introduction:'',
           bookcase: this.$route.query['bookcase'],
         },
         softwareId: this.$route.query['softwareId'] || '',
@@ -149,6 +168,15 @@
         this.$set(this, 'uniformFile', response.data);
 
       },
+      /*
+     * 图片上传成功回调
+     * */
+      uploadSuccessScreenImgUrl(response, file, fileList) {
+
+        this.editForm.screenImgUrl = response.data.filePath;
+        this.$set(this, 'uniformFileScreenImgUrl', response.data);
+
+      },
     },
     created(){
       this.$emit('set-menu', 'Article');
@@ -160,6 +188,7 @@
         }).then(reData => {
           this.editForm = reData.data;
           this.uniformFile=true;
+          this.uniformFileScreenImgUrl=true;
           this.$refs['ue'].editor && this.$refs['ue'].editor.setContent(this.editForm.content);
         }).catch(e => {
         });

@@ -29,6 +29,12 @@
           <img  :src="$Dolphin.path.publicPath+scope.row.imgUrl" class="activityImg" alt="">
         </template>
       </el-table-column>
+      <el-table-column prop="screenImgUrl" label="应用截图">
+        <template slot-scope="scope">
+          <!--<img v-for="url in scope.row.imgUrls" :src="$Dolphin.path.publicPath+url" class="uniform_img" alt="">-->
+          <img  :src="$Dolphin.path.publicPath+scope.row.screenImgUrl" class="activityImg" alt="">
+        </template>
+      </el-table-column>
       <el-table-column prop="name" label="软件名"/>
       <el-table-column prop="version" label="版本"/>
       <el-table-column prop="size" label="大小"/>

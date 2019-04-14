@@ -4,7 +4,7 @@
       <div class="container">
         <section class="row">
           <section class="col-md-8 myArticle" id="mainstay">
-            <div class="article clearfix" v-html="article">
+            <div class="article clearfix" v-html="article.content">
 
             </div>
 
@@ -63,7 +63,10 @@
           updateLookNum: '/api/admin/technology/updateLookNum/'
         },
         articleId: '',
-        article: {},
+        article: {
+          content:'',
+          lookNum:0,
+        },
         lastFiveArticles:[],
       };
 
@@ -74,7 +77,7 @@
         _this.$fetch(this.url.findArticleById, {_id: _this.articleId}).then(reData => {
           if (reData.success) {
             if(reData.rows.length>0){
-              _this.article = reData.rows[0].content;
+              _this.article = reData.rows[0];
             }
           }
         });
@@ -88,8 +91,6 @@
         });
       },
       updateLookNum:function () {
-        console.log("lllllllllllllllllllllllll")
-        console.log("ll:"+this.articleId)
         let _this = this;
         _this.$post(this.url.updateLookNum+_this.articleId,{id:_this.articleId}).then(reData => {
           if (reData.success) {

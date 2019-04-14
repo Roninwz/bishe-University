@@ -28,7 +28,7 @@
           <div class="soft_list">
 
             <div class="soft_one" v-for="software in softwareList">
-              <router-link :to="{path:'/view/user/softwareDetail',query:{id:software._id,}}">
+              <router-link :to="{path:'/view/user/softwareDetail',query:{id:software._id,type:software.softType}}">
                 <div class="soft_one_img">
                   <img :src="$Roninwz.path.publicPath+software.imgUrl" alt="">
                 </div>

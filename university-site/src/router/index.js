@@ -11,8 +11,9 @@ import ResourceShareDetail from '../page/resource/resourceDetail'
 
 
 import Software from '../page/software/software'
+import SoftwareDetail from '../page/software/softwareDetail'
 
-import Forum from '../page/forum'
+import Topic from '../page/topic/topic'
 
 Vue.use(Router);
 
@@ -55,11 +56,16 @@ export default new Router({
       name: 'Software',
       component: Software
     },
+    {
+      path: '/view/user/softwareDetail',
+      name: 'SoftwareDetail',
+      component: SoftwareDetail
+    },
 
     {
-      path: '/view/user/forum',
-      name: 'Forum',
-      component: Forum
+      path: '/view/user/topic',
+      name: 'Topic',
+      component: Topic
     }
   ]
 })

@@ -84,6 +84,12 @@
         </div>
         <img class="uImg"  :src="$Dolphin.path.publicPath+editForm.imgUrl"/>
       </el-card>
+      <el-card>
+        <div slot="header">
+          <span>应用截图</span>
+        </div>
+        <img class="uImg"  :src="$Dolphin.path.publicPath+editForm.screenImgUrl"/>
+      </el-card>
     </el-form>
 
   </div>
