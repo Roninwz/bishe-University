@@ -51,8 +51,8 @@
           <aside class="col-md-4 myAside" id="sidebar">
             <aside class="search_bj">
               <div class="search">
-                <input type="text" class="form-control search_input">
-                <div class="search_btn">
+                <input type="text" v-model="searchTxt" class="form-control search_input">
+                <div class="search_btn" @click="searchTechnology">
                   <span class="search_txt"> <i class="fa fa-search"></i> 查找</span>
                 </div>
               </div>
@@ -130,8 +130,10 @@
           findLastFiveArticles: '/api/admin/technology/findLastFive'
         },
         technologyList: [],
+        technologyListAll: [],
         lastFiveArticles: [],
         lookSumNum: 0,
+        searchTxt:'',
       };
     },
     filters: {
@@ -162,7 +164,11 @@
           if (reData.success) {
 
             _this.technologyList = reData.rows;
+            _this.technologyListAll = reData.rows;
             _this.technologyList.forEach(te => {
+              _this.lookSumNum += te.lookNum;
+            });
+            _this.technologyListAll.forEach(te => {
               _this.lookSumNum += te.lookNum;
             });
           }
@@ -176,6 +182,22 @@
             _this.lastFiveArticles = reData.rows;
           }
         });
+      },
+      searchTechnology:function () {
+        let oldTechnologyList = this.technologyList;
+        let newTechnologyList = [];
+        if(this.searchTxt!=''){
+          oldTechnologyList.forEach(tech=>{
+            if(tech.title.indexOf(this.searchTxt)!=-1){
+              newTechnologyList.push(tech);
+            }
+          });
+          this.technologyList = newTechnologyList;
+        }else {
+
+          this.technologyList = this.technologyListAll;
+        }
+
       }
 
     },

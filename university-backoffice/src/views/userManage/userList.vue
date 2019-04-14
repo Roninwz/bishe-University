@@ -177,7 +177,15 @@
         console.log("serverData:" + serverData);
         console.log("serverData:" + JSON.stringify(serverData));
         serverData.rows.forEach(user => {
-          user.userAddress = user.address + ' ' + user.detailAddress;
+          if(user.address){
+            user.userAddress = user.address;
+          }
+          if(user.address&&user.detailAddress){
+            user.userAddress = user.address + ' ' + user.detailAddress;
+          }else {
+            user.userAddress = '';
+          }
+
         });
       },
 
@@ -202,7 +210,13 @@
       /*编辑用户*/
       edit: function (data) {
         this.userForm = Object.assign({}, data);
-        this.showAddress = this.userForm.address.split('-');
+        if(this.userForm.address){
+          if(this.userForm.address.indexOf('-')){
+            this.showAddress = this.userForm.address.split('-');
+          }
+        }
+
+
         this.formId = this.userForm._id;
         this.showCreateOrEditDialog = true;
       },

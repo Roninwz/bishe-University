@@ -18,7 +18,7 @@ axios.interceptors.request.use(
     // const token = Cookies.get('token');//注意使用的时候需要引入cookie方法，推荐js-cookie
     config.data = JSON.stringify(config.data);
     config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded'
+      'Content-Type':'application/json'
     };
     //
     // if(token){
@@ -81,7 +81,7 @@ export function fetch(url,params={}){
 
 export function post(url,data = {}){
   return new Promise((resolve,reject) => {
-    axios.post(url,qs.stringify(data,{ indices: false }))
+    axios.post(url,data)
       .then(response => {
         resolve(response.data);
       },err => {

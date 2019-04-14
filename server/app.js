@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const session = require('express-session');
 var path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(xmlParser({}));
 
 app.use(cookieParser());
+app.use(session(global.config.session));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(log4js.connectLogger(logger, {level: 'info', format: ':method | :status | :response-time ms | :url '}));

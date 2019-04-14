@@ -1,10 +1,9 @@
 /**
  *
  * @author Roninwz
- * @date 2018/12/10 18:08
+ * @date 2019/4/12 下午13:44
  * @since 1.0.0
  */
-
 
 'use strict';
 const express = require('express');
@@ -15,7 +14,7 @@ const logger = require('log4js').getLogger("sys");
 const resUtil = require("../../module/util/resUtil");
 const reqUtil = require("../../module/util/reqUtil");
 
-const service = require("../../service/TechnologyService");
+const service = require("../../service/TopicService");
 
 const formidable = require('formidable');
 const xlsx = require('node-xlsx');
@@ -25,7 +24,7 @@ const fs = require('fs');
 //列表
 router.post('/list', function (req, res, next) {
     let condition = req.body, query = req.query,
-        populate = 'creater updater menus';
+        populate = 'creater updater';
     condition = reqUtil.formatCondition(condition);
 
     service
@@ -39,7 +38,7 @@ router.post('/list', function (req, res, next) {
 router.get('/find', function (req, res, next) {
     let condition = req.query;
     condition = reqUtil.formatCondition(condition);
-  let populate = "creater";
+    let populate = "creater";
     service
         .find(req.curUser, condition,populate, {createTime: -1})
         .then(
@@ -48,17 +47,24 @@ router.get('/find', function (req, res, next) {
         );
 });
 
-//查找最新的五篇文章
-router.get('/findLastFive', function (req, res, next) {
+
+
+router.get('/updateZanNum', function (req, res, next) {
+    let _id = req.query.id;
+    let zanNum = req.query.zanNum;
+    let condition = req.body;
+    condition = reqUtil.formatCondition(condition);
     let populate = "creater";
-    service
-        .aggregate(req.curUser, [{$limit:5},{$sort: {createTime: -1}}])
-        .then(
-            data => res.send(resUtil.success({rows: data})),
+    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+        result.zanNum = zanNum;
+        service.updateById(req.curUser,_id,result).then(
+            res.send(resUtil.success({data: result})),
             err => res.send(resUtil.error())
         );
-});
 
+
+    });
+});
 
 //更新浏览量
 router.post('/updateLookNum/:id', function (req, res, next) {
@@ -76,6 +82,7 @@ router.post('/updateLookNum/:id', function (req, res, next) {
 
     });
 });
+
 
 //更新
 router.post('/save/:id', function (req, res, next) {

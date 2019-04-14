@@ -13,10 +13,10 @@ const tool = require('./util/tool');
 
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
-    name: {type: String},//话题名称
-    introduction: {type: String},//话题简介
-    imgUrl:{type: String},//话题缩略图
-    attentionNum: {type: Number}, //关注量
+    content: {type: String},//话题帖子内容
+    zanNum: {type: Number}, //点赞量
+    user:{type:String, ref: "M_User"},
+    topic:{type:String, ref: "T_Topic"},
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者
@@ -26,5 +26,5 @@ const schema = new Schema({
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('T_Topic', schema, 't_topic');
+const Model = mongoose.model('T_TopicPost', schema, 't_topic_post');
 module.exports = Model;

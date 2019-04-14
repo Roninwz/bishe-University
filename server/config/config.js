@@ -106,6 +106,12 @@ module.exports = (function () {
                 role: "robot"
             }
         },
+
+        miaodi:{
+            api:'https://api.miaodiyun.com/20150822/industrySMS/sendSMS',
+            accountSid:'a0d480909f6a4356bba919a74452621f',
+            token:'86d7e33d68bf4c0db2dbe7d7a1902d66'
+        }
     });
 
     Object.assign(config, {
