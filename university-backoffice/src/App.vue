@@ -28,7 +28,7 @@ body {
 		background-size: cover;*/
 	// background: #1F2D3D;
 	font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -48,6 +48,7 @@ body {
 	vertical-align: baseline;
 	margin-right: 10px;
 }
+
 
 .toolbar {
 	background: #f2f2f2;

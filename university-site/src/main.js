@@ -23,7 +23,11 @@ Vue.prototype.$fetch=fetch;
 Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
 
-
+//ueditor
+import '../static/UEditor/ueditor.config.js'
+import '../static/UEditor/ueditor.all.js'
+import '../static/UEditor/lang/zh-cn/zh-cn.js'
+import '../static/UEditor/ueditor.parse.min.js'
 
 import Roninwz from './components/Roninwz_vue'
 Vue.use(Roninwz);

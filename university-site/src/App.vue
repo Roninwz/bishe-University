@@ -41,7 +41,7 @@
         </div>
         <div class="login_input">
           <input type="text" v-model="loginUser.name" placeholder="请输入用户名">
-          <input type="text" v-model="loginUser.password" placeholder="请输入密码">
+          <input type="password" v-model="loginUser.password" placeholder="请输入密码">
         </div>
         <div class="login_btn" @click="login">
           登陆

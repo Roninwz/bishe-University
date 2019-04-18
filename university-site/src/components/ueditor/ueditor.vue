@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :id="`editor_${id}`" ></div>
+    <div :id="`editor_${id}`" style="width: 100%;height: 150px;"></div>
   </div>
 </template>
 <script>
@@ -9,7 +9,7 @@
     data () {
       return {
         editor: null,
-        id:'technology'
+        id:'topicDetail '
       }
     },
     props: {
@@ -23,6 +23,7 @@
     mounted() {
       this.editor = UE.getEditor(`editor_${this.id}`, this.config); // 初始化UE
       this.editor.addListener("ready", () => {
+        this.editor.setHeight(150);
         this.editor.setContent(this.value); // 确保UE加载完成后，放入内容。
       });
       this.editor.addListener("contentChange", () => {

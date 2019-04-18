@@ -2,14 +2,14 @@
 
 body{
   margin: 0;
-  font-size: 14px;
+  font-size: 16px!important;
   font-family: system-ui;
 }
 
 //-------------------------------------------- base
 body {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px!important;
 }
 
 div.el-card + div.el-card{
@@ -22,7 +22,7 @@ header.el-header {
   background: $header_bg;
   color: $header_text;
   padding: 0;
-
+  font-size: 16px;
   span.bland {
     display: inline-block;
     width: 200px;
@@ -172,6 +172,7 @@ header{
 
 //左侧菜单
 .nav-tabs.nav-stacked{
+  font-size: 20px;
   > li{
     > ul{
       > li{
@@ -282,3 +283,38 @@ pre{
     border: 1px solid $primaryColor;
   }
 }
+
+
+div.el-table{
+  font-size: 16px;
+}
+
+div.el-card__body{
+  font-size: 16px;
+}
+
+.el-form-item__label{
+  height: 33px!important;
+  line-height: 33px!important;
+  font-size: 16px!important;
+}
+.el-form-item__content{
+  font-size: 16px!important;
+}
+.el-button--mini, .el-button--small{
+  font-size: 16px!important;
+}
+.el-input__inner{
+  height: 33px!important;
+  font-size: 16px!important;
+}
+.el-button{
+  font-size: 16px!important;
+}
+.el-menu-item,.el-submenu__title{
+  font-size: 16px!important;
+}
+.el-tree-node__content,.el-tree-node__label,.el-tree-node{
+  font-size: 16px!important;
+}
+

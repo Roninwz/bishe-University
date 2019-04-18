@@ -16,6 +16,7 @@ import SoftwareList from '../views/softwareManage/softwareList.vue'
 import SoftwareEdit from '../views/softwareManage/softwareEdit.vue'
 import SoftwareDetail from '../views/softwareManage/softwareDetail.vue'
 import Topic from '../views/topic/topicManage.vue'
+import TopicPost from '../views/topic/topicPostManage.vue'
 
 import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
@@ -96,6 +97,7 @@ export default {
       iconCls: 'fa fa-list-alt',
       children: [
         { path: '/view/admin/topicManage', component: Topic, name: '话题管理' },
+        { path: '/view/admin/topicPostManage', component: TopicPost, name: '话题帖子管理' },
       ]
     },
     {

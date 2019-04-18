@@ -24,7 +24,7 @@ const fs = require('fs');
 //列表
 router.post('/list', function (req, res, next) {
     let condition = req.body, query = req.query,
-        populate = 'creater updater';
+        populate = 'creater updater user topic';
     condition = reqUtil.formatCondition(condition);
 
     service
@@ -38,15 +38,14 @@ router.post('/list', function (req, res, next) {
 router.get('/find', function (req, res, next) {
     let condition = req.query;
     condition = reqUtil.formatCondition(condition);
-    let populate = "creater";
+    let populate = 'creater updater user topic';
     service
-        .find(req.curUser, condition,populate, {createTime: -1})
+        .find(req.curUser, condition, populate, {createTime: -1})
         .then(
             data => res.send(resUtil.success({rows: data})),
             err => res.send(resUtil.error())
         );
 });
-
 
 
 router.get('/updateZanNum', function (req, res, next) {
@@ -55,9 +54,9 @@ router.get('/updateZanNum', function (req, res, next) {
     let condition = req.body;
     condition = reqUtil.formatCondition(condition);
     let populate = "creater";
-    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+    service.findOne(req.curUser, {_id: _id}, populate).then((result) => {
         result.zanNum = zanNum;
-        service.updateById(req.curUser,_id,result).then(
+        service.updateById(req.curUser, _id, result).then(
             res.send(resUtil.success({data: result})),
             err => res.send(resUtil.error())
         );
@@ -72,9 +71,9 @@ router.post('/updateLookNum/:id', function (req, res, next) {
     let condition = req.body;
     condition = reqUtil.formatCondition(condition);
     let populate = "creater";
-    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+    service.findOne(req.curUser, {_id: _id}, populate).then((result) => {
         result.lookNum = result.lookNum + 1;
-        service.updateById(req.curUser,_id,result).then(
+        service.updateById(req.curUser, _id, result).then(
             res.send(resUtil.success({data: result})),
             err => res.send(resUtil.error())
         );
@@ -133,7 +132,7 @@ router.post('/remove', function (req, res, next) {
 //详情
 router.get('/detail/:id', function (req, res, next) {
     let _id = req.params.id;
-    let populate = "creater";
+    let populate = 'creater updater user topic';
 
     service
         .findById(req.curUser, _id, populate)

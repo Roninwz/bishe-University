@@ -11,7 +11,9 @@
                   <img :src="$Roninwz.path.publicPath+myTopic.imgUrl" alt="">
                 </div>
                 <div class="topic_info">
-                  <span class="topic_title">{{myTopic.name}}</span>
+                  <router-link :to="{path:'/view/user/topicDetail',query:{id:myTopic.id}}">
+                    <span class="topic_title">{{myTopic.name}}</span>
+                  </router-link>
                   <span class="topic_num">{{myTopic.attentionNum}}关注</span>
                   <span class="topic_attention" @click="cancelAttention(myTopic)">取消关注</span>
                 </div>
@@ -28,7 +30,9 @@
                   <img :src="$Roninwz.path.publicPath+topic.imgUrl" alt="">
                 </div>
                 <div class="topic_info">
+                  <router-link :to="{path:'/view/user/topicDetail',query:{id:topic.id}}">
                   <span class="topic_title">{{topic.name}}</span>
+                  </router-link>
                   <span class="topic_num">{{topic.attentionNum}}关注</span>
                   <span class="topic_attention" v-if="!topic.isAttention" @click="attention(topic)">+关注</span>
                   <span class="topic_attention" v-if="topic.isAttention">已关注</span>
@@ -104,7 +108,8 @@
             if (reData.success) {
               _this.$message({
                 message: '关注成功',
-                type: 'success'
+                type: 'success',
+                duration:1000
               });
               _this.MyTopicList = [];
               _this.topicList = [];
@@ -116,7 +121,8 @@
         } else {
           _this.$message({
             message: '请登录',
-            type: 'warning'
+            type: 'warning',
+            duration:1000
           });
         }
       },
@@ -126,7 +132,8 @@
           if (reData.success) {
             _this.$message({
               message: '取消关注成功',
-              type: 'success'
+              type: 'success',
+              duration:1000
             });
             _this.MyTopicList = [];
             _this.topicList = [];

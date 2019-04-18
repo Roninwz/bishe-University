@@ -27,6 +27,11 @@
         </template>
       </el-table-column>
       <el-table-column prop="phone" label="手机号"/>
+      <el-table-column prop="imgUrl" label="头像">
+        <template slot-scope="scope">
+          <img  :src="$Dolphin.path.publicPath+scope.row.imgUrl" class="activityImg" alt="">
+        </template>
+      </el-table-column>
       <el-table-column prop="email" label="邮箱"/>
       <el-table-column prop="userAddress" label="地址">
         <template slot-scope="scope">
@@ -74,6 +79,16 @@
             <el-form-item label="手机号">
               <el-input v-model="userForm.phone"/>
             </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="头像">
+              <dol-upload v-model="userForm.imgUrl" :on-success="uploadSuccess" type="user" maxWidth="300px" maxHeight="200px">
+                <img class="activityImg" v-if="uniformFile" :src="$Dolphin.path.publicPath+userForm.imgUrl"/>
+                <div v-else class="upload-img"><i class="fa fa-plus"></i></div>
+              </dol-upload>
+            </el-form-item>
+
           </el-col>
 
           <el-col :span="24">
@@ -128,6 +143,10 @@
           <el-col :span="12">
             <el-form-item label="详细地址:">{{detailForm.detailAddress}}</el-form-item>
           </el-col>
+          <el-col :span="24">
+            <el-form-item label="头像:">
+            <img class="activityImg"  :src="$Dolphin.path.publicPath+detailForm.imgUrl"/></el-form-item>
+          </el-col>
 
 
         </el-row>
@@ -164,6 +183,7 @@
         showCreateOrEditDialog: false,
         detailDialog: false,
         userForm: {},
+        uniformFile:false,
       }
     },
     methods: {
@@ -174,8 +194,6 @@
 
       /*处理list数据的回调函数*/
       callBackData: function (serverData) {
-        console.log("serverData:" + serverData);
-        console.log("serverData:" + JSON.stringify(serverData));
         serverData.rows.forEach(user => {
           if(user.address){
             user.userAddress = user.address;
@@ -188,7 +206,15 @@
 
         });
       },
+      /*
+          * 图片上传成功回调
+          * */
+      uploadSuccess(response, file, fileList) {
 
+        this.userForm.imgUrl = response.data.filePath;
+        this.$set(this, 'uniformFile', response.data);
+
+      },
       /*初始化用户列表*/
       initUserList: function () {
         this.$ajax({
@@ -316,5 +342,8 @@
   }
 </style>
 <style scoped>
-
+.activityImg{
+  width: 100px;
+  height: 100px;
+}
 </style>

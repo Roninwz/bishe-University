@@ -14,6 +14,8 @@ import Software from '../page/software/software'
 import SoftwareDetail from '../page/software/softwareDetail'
 
 import Topic from '../page/topic/topic'
+import TopicDetail from '../page/topic/topicDetal'
+import Person from '../page/person/person'
 
 Vue.use(Router);
 
@@ -66,6 +68,16 @@ export default new Router({
       path: '/view/user/topic',
       name: 'Topic',
       component: Topic
+    },
+    {
+      path: '/view/user/topicDetail',
+      name: 'TopicDetail',
+      component: TopicDetail
+    },
+    {
+      path: '/view/user/person',
+      name: 'Person',
+      component: Person
     }
   ]
 })

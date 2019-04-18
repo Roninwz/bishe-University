@@ -31,7 +31,7 @@ const schema = new Schema({
     /**
      * 密码
      */
-    password: {type: String,default:'123456'},
+    password: {type: String, default: '123456'},
     /*
     * 手机号
     * */
@@ -40,6 +40,18 @@ const schema = new Schema({
     * 邮箱
     * */
     email: {type: String},
+    /*
+    * github
+    * */
+    github: {type: String},
+    /*
+    * blog
+    * */
+    blog: {type: String},
+    /*
+    * blog
+    * */
+    introduce: {type: String},
     /*
     * 性别
     * */
