@@ -26,19 +26,19 @@
                 <router-link :to="{path:'/view/user/technologyArticleDetail',query:{id:article.id}}">
                   <h3>{{article.title}}</h3>
                 </router-link>
-                <hr>
+                <div class="article_hr"></div>
                 <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                     <figure class="thumbnail art_thum">
                       <img :src="$Roninwz.path.publicPath+article.imgUrl" alt=""
                            class="attachment-300x180 wp-post-image">
                     </figure>
                   </div>
-                  <div class="col-md-7 art_con" v-html="article.content">
+                  <div class="col-md-8 art_con" v-html="article.content">
 
                   </div>
                 </div>
-                <hr/>
+                <div class="article_hr"></div>
                 <div class="pull-right post-info"><span><i class="fa fa-calendar"></i> {{article.createTime | formatDate}}</span>
                   <span><i
                     class="fa fa-user"></i> <span class="upp">{{article.creater.name}}</span></span> <span><i
@@ -168,9 +168,6 @@
             _this.technologyList.forEach(te => {
               _this.lookSumNum += te.lookNum;
             });
-            _this.technologyListAll.forEach(te => {
-              _this.lookSumNum += te.lookNum;
-            });
           }
         });
       },
@@ -217,7 +214,7 @@
     min-height: 900px;
     background-color: #F6F6F6;
     .myArticle {
-      margin: 16px auto;
+      margin: 12px auto;
       .notice {
         position: relative;
         width: 100%;
@@ -225,7 +222,7 @@
         background-color: #eaeaea;
         overflow: hidden;
         line-height: 1.42857143;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         .notice_title {
           display: block;
           background-color: #16a085;
@@ -256,9 +253,21 @@
 
       .article {
         position: relative;
-        padding: 0 20px 20px 20px;
+        padding: 0 30px 15px 30px;
         background-color: #fff;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        .article_hr{
+          width: 100%;
+          background-color: #e3e3e3;
+          height: 1px;
+        }
+        .row{
+          margin-top: 15px;
+        }
+        .post-info{
+          margin-top: 10px;
+          line-height: 25px;
+        }
         .art_tag {
           border-radius: 0 !important;
           background-color: #16a085;
@@ -273,10 +282,10 @@
           }
         }
         .art_thum {
-          line-height: 1.42857143;
+          line-height: 1.2;
           img {
-            width: 300px;
-            height: 180px;
+            width: 180px;
+            height: 110px;
           }
           img:hover {
             animation: myfirst 5s;
@@ -311,7 +320,7 @@
         .art_con {
           font-size: 14px;
           color: #c1c1c1;
-          height: 200px;
+          height: 130px;
           line-height: 28px;
           overflow: hidden;
           text-overflow: ellipsis;

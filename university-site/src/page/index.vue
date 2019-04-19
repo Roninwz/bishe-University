@@ -98,10 +98,10 @@
         activeName2: 'first',
         mark: 0,
         img: [
-          '../../static/img/logo.png',
-          '../../static/img/logo.png',
-          '../../static/img/logo.png',
-          '../../static/img/logo.png'
+          '../../static/img/lun1.jpg',
+          '../../static/img/lun2.jpg',
+          '../../static/img/lun3.jpg',
+          '../../static/img/lun4.jpeg'
         ],
         time: null
       };
@@ -206,6 +206,9 @@
           }
           span:first-child {
             margin-left: 0;
+          }
+          .active{
+            background-color: #16a085;
           }
         }
 
