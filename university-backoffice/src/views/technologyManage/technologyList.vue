@@ -81,7 +81,7 @@
         this.$refs.list.query(this.queryConditions);
       },
       add:function () {
-        this.$router.replace('/view/admin/technologyEdit');
+        this.$router.push('/view/admin/technologyEdit');
       },
       removeOne: function (id) {
 

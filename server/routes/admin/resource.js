@@ -28,7 +28,7 @@ router.post('/list', function (req, res, next) {
     condition = reqUtil.formatCondition(condition);
 
     service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate)
+        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate,{createTime: -1})
         .then(
             data => res.send(resUtil.success(data)),
             err => res.send(resUtil.error())

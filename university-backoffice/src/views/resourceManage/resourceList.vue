@@ -89,7 +89,7 @@
         this.$refs.list.query(this.queryConditions);
       },
       add:function () {
-        this.$router.replace('/view/admin/resourceEdit');
+        this.$router.push('/view/admin/resourceEdit');
       },
       removeOne: function (id) {
 

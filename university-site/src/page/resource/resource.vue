@@ -14,22 +14,33 @@
           </p>
 
       </div>
+      <div class="my_pagination">
+        <v-pagination :total="total" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
+      </div>
     </div>
   </div>
 
 </template>
 
 <script>
+  import pagination from '@/components/pagination'
   export default {
     name: "resource",
+    components: {
+      'v-pagination': pagination,
+    },
     data: function () {
       return {
         url:{
           findResource:'/api/admin/resource/find',
+          listResource:'/api/admin/resource/list',
           updateZanNum:'/api/admin/resource/updateZanNum',
         },
         isZan:false,
         resourceList:[],
+        total: 0,     // 记录总条数
+        display: 12,   // 每页显示条数
+        current: 1,   // 当前的页数
       };
     },
     methods:{
@@ -50,10 +61,11 @@
       },
       initResourceData:function () {
         let _this = this;
-        _this.$fetch(this.url.findResource).then(reData => {
+        _this.$post(this.url.listResource+'?pageSize='+_this.display+'&pageNumber='+ parseInt(_this.current - 1)).then(reData => {
           if (reData.success) {
 
             _this.resourceList = reData.rows;
+            _this.total = reData.total;
             for (let i = 0;i<_this.resourceList.length;i++){
               if(localStorage.getItem("isZan"+_this.resourceList[i]._id)=='zan'){
                 _this.$set(_this.resourceList[i],"isZan",true);
@@ -72,6 +84,11 @@
           }
         });
       },
+      //分页页面点击子组件触发事件
+      pagechange:function(currentPage){
+        this.current = currentPage;
+        this.initResourceData();
+      }
     },
     created:function () {
       this.initResourceData();
@@ -147,6 +164,14 @@
           }
         }
 
+      }
+
+      .my_pagination{
+        width: 100%;
+        text-align: center;
+        bottom: 30px;
+        margin: 30px auto;
+        clear: both;
       }
     }
   }

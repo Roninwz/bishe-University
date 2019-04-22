@@ -46,6 +46,12 @@
                 </div>
               </section>
             </div>
+            <!--分页实现-->
+            <div class="my_pagination">
+              <v-pagination :total="total" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
+            </div>
+
+
 
           </section>
           <aside class="col-md-4 myAside" id="sidebar">
@@ -81,11 +87,11 @@
                 </div>
                 <div class="panel-body">
                   <ul class="list-group">
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net2">网络日志</li>
+                    <li class="clearfix new_net"> <a target="_blank" href="https://gitee.com/forezp/SpringCloudLearning">史上最简单spring cloud教程源码</a> </li>
+                    <li class="clearfix new_net"> <a target="_blank" href="https://gitee.com/didispace/SpringBoot-Learning">Spring Boot基础教程，Spring Boot 2.x版本连载中！！！</a></li>
+                    <li class="clearfix new_net"> <a target="_blank" href="http://www.jenkins.org.cn/">最流行的开源免费持续集成工具jenkins</a></li>
+                    <li class="clearfix new_net"> <a target="_blank" href="https://backlog.com/git-tutorial/cn/">猴子都能懂的git入门</a></li>
+                    <li class="clearfix new_net2"> <a target="_blank" href="http://dubbo.apache.org/zh-cn/">Apache Dubbo™ (incubating)是一款高性能Java RPC框架。</a></li>
                   </ul>
                 </div>
               </div>
@@ -97,7 +103,7 @@
                   站点统计
                 </div>
                 <div class="panel-body">
-                  <p class="panel_p">文章总数：{{technologyList.length}}篇</p>
+                  <p class="panel_p">文章总数：{{total}}篇</p>
                   <p class="panel_p">浏览总数：{{lookSumNum}}</p>
                 </div>
               </div>
@@ -115,9 +121,11 @@
 
 <script>
   import {formatDate} from '../../util/date.js';
-
+  import pagination from '@/components/pagination'
   export default {
-
+    components: {
+      'v-pagination': pagination,
+    },
     data: function () {
       return {
         url: {
@@ -134,6 +142,9 @@
         lastFiveArticles: [],
         lookSumNum: 0,
         searchTxt:'',
+        total: 10,     // 记录总条数
+        display: 5,   // 每页显示条数
+        current: 1,   // 当前的页数
       };
     },
     filters: {
@@ -160,12 +171,18 @@
         //   }
         // });
         let _this = this;
-        _this.$fetch(this.url.find).then(reData => {
+        _this.$post(this.url.list+'?pageSize='+_this.display+'&pageNumber='+ parseInt(_this.current - 1)).then(reData => {
           if (reData.success) {
 
-            _this.technologyList = reData.rows;
+            _this.technologyList = reData.rows
+            _this.total = reData.total;
             _this.technologyListAll = reData.rows;
-            _this.technologyList.forEach(te => {
+          }
+        });
+        _this.$fetch(this.url.find).then(reData => {
+          if (reData.success) {
+            _this.lookSumNum = 0;
+            reData.rows.forEach(te => {
               _this.lookSumNum += te.lookNum;
             });
           }
@@ -195,6 +212,11 @@
           this.technologyList = this.technologyListAll;
         }
 
+      },
+      //分页页面点击子组件触发事件
+      pagechange:function(currentPage){
+        this.current = currentPage;
+        this.initArticleData();
       }
 
     },
@@ -329,6 +351,11 @@
           -webkit-box-orient: vertical;
         }
       }
+
+      .my_pagination{
+        margin: 30px 0 30px 0;
+      }
+
     }
     .myAside {
       .search_bj {

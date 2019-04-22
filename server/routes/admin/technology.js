@@ -29,7 +29,7 @@ router.post('/list', function (req, res, next) {
     condition = reqUtil.formatCondition(condition);
 
     service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate)
+        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate,{createTime: -1})
         .then(
             data => res.send(resUtil.success(data)),
             err => res.send(resUtil.error())
@@ -52,7 +52,7 @@ router.get('/find', function (req, res, next) {
 router.get('/findLastFive', function (req, res, next) {
     let populate = "creater";
     service
-        .aggregate(req.curUser, [{$limit:5},{$sort: {createTime: -1}}])
+        .aggregate(req.curUser, [{$sort: {createTime: -1}},{$limit:5}])
         .then(
             data => res.send(resUtil.success({rows: data})),
             err => res.send(resUtil.error())

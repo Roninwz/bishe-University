@@ -106,7 +106,7 @@
         this.$refs.list.query(this.queryConditions);
       },
       add:function () {
-        this.$router.replace('/view/admin/softwareEdit');
+        this.$router.push('/view/admin/softwareEdit');
       },
       removeOne: function (id) {
 
