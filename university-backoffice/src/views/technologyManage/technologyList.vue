@@ -32,13 +32,14 @@
       <el-table-column prop="title" label="标题"/>
       <!--<el-table-column prop="content" label="内容"/>-->
       <el-table-column prop="createTime" label="创建时间"/>
-      <el-table-column prop="_id" width="90px" label="">
+      <el-table-column prop="_id" width="190px" label="">
         <template slot-scope="scope">
           <el-button slot="button" type="text">
             <router-link tag="a" :to="{path:'/view/admin/technologyDetail',query:{technologyId:scope.row._id}}">
               <i class="fa fa-search"></i>
             </router-link>
           </el-button>
+
           <el-button slot="button" type="text">
             <router-link tag="a" :to="{path:'/view/admin/technologyEdit',query:{technologyId:scope.row._id}}">
               <i class="fa fa-edit"></i>
@@ -48,6 +49,16 @@
           <el-button slot="button" type="text" @click="removeOne(scope.row._id)">
             <i class="fa fa-trash"></i>
           </el-button>
+          <template v-if="scope.row.isTop==0">
+          <el-button slot="button" type="text" @click="topUp(scope.row._id,1)">
+            <i class="fa fa-level-up"></i>
+          </el-button>
+          </template>
+          <template v-else>
+          <el-button slot="button" type="text" @click="topUp(scope.row._id,0)">
+            <i class="fa fa-level-down"></i>
+          </el-button>
+          </template>
         </template>
       </el-table-column>
     </dol-list>
@@ -65,6 +76,7 @@
           removeOne: '/api/admin/technology/remove/{id}',
           save: '/api/admin/technology/save/{id}',
           detail: '/api/admin/technology/detail/{id}',
+          updateTop: '/api/admin/technology/updateTop/{id}',
         },
         queryConditions:{},
 
@@ -110,6 +122,59 @@
 
 
       },
+
+      topUp:function (id,isTop) {
+        let _this = this;
+        if(isTop==1){
+          _this.$confirm('是否置顶?', '提示', {
+            distinguishCancelAndClose: true,
+            confirmButtonText: '是',
+            cancelButtonText: '取消',
+            type: 'warning',
+            center: true
+          }).then(() => {
+            _this.$ajax({
+              url: this.url.updateTop,
+              method:'post',
+              pathData: {id: id},
+              data: {isTop:isTop},
+            }).then(reData => {
+              _this.$message({
+                message: '置顶成功',
+                type: 'success'
+              });
+              _this.query();
+            });
+
+
+          }).catch(() => {
+            this.$message('已取消');
+          });
+        }else {
+          _this.$confirm('是否取消置顶?', '提示', {
+            distinguishCancelAndClose: true,
+            confirmButtonText: '是',
+            cancelButtonText: '取消',
+            type: 'warning',
+            center: true
+          }).then(() => {
+            _this.$ajax({
+              url: this.url.updateTop,
+              method:'post',
+              pathData: {id: id},
+              data: {isTop:isTop},
+            }).then(reData => {
+              _this.$message("取消置顶成功");
+              _this.query();
+            });
+
+
+          }).catch(() => {
+            this.$message('已取消');
+          });
+        }
+
+      }
 
     },
     created() {

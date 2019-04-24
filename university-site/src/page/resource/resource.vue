@@ -15,7 +15,7 @@
 
       </div>
       <div class="my_pagination">
-        <v-pagination :total="total" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
+        <v-pagination :total="total" :isShow="isShow" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
       </div>
     </div>
   </div>
@@ -41,6 +41,7 @@
         total: 0,     // 记录总条数
         display: 12,   // 每页显示条数
         current: 1,   // 当前的页数
+        isShow:false,
       };
     },
     methods:{
@@ -65,6 +66,7 @@
           if (reData.success) {
 
             _this.resourceList = reData.rows;
+            _this.isShow = true;
             _this.total = reData.total;
             for (let i = 0;i<_this.resourceList.length;i++){
               if(localStorage.getItem("isZan"+_this.resourceList[i]._id)=='zan'){

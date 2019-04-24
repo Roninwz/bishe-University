@@ -22,6 +22,7 @@
             <div class="article clearfix" v-for="article in technologyList">
               <section class="visible-md visible-lg">
                 <span class="label  art_tag"><router-link to="/view/user/technology">技术教程</router-link></span>
+                <span class="label  art_tag2" v-if="article.isTop==1">置顶</span>
                 <!--标题-->
                 <router-link :to="{path:'/view/user/technologyArticleDetail',query:{id:article.id}}">
                   <h3>{{article.title}}</h3>
@@ -48,7 +49,7 @@
             </div>
             <!--分页实现-->
             <div class="my_pagination">
-              <v-pagination :total="total" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
+              <v-pagination :total="total" :isShow="isShow" :display="display" :current-page='current' @pagechange="pagechange"></v-pagination>
             </div>
 
 
@@ -144,7 +145,8 @@
         searchTxt:'',
         total: 10,     // 记录总条数
         display: 5,   // 每页显示条数
-        current: 1,   // 当前的页数
+        current: 1,   // 当前的页数,
+        isShow:false,
       };
     },
     filters: {
@@ -177,6 +179,7 @@
             _this.technologyList = reData.rows
             _this.total = reData.total;
             _this.technologyListAll = reData.rows;
+            _this.isShow = true;
           }
         });
         _this.$fetch(this.url.find).then(reData => {
@@ -221,8 +224,12 @@
 
     },
     created: function () {
-      this.initArticleData();
-      this.initLastFiveArticlesData();
+      let _this = this;
+      _this.$nextTick(() => {
+        _this.initArticleData();
+        _this.initLastFiveArticlesData();
+      });
+
     }
 
   }
@@ -299,6 +306,20 @@
           font-weight: 700;
           white-space: nowrap;
           vertical-align: baseline;
+          a {
+            color: #fff;
+          }
+        }
+        .art_tag2 {
+          border-radius: 0 !important;
+          background-color: #16a085;
+          color: #fff;
+          font-size: 12px;
+          padding: 5px;
+          font-weight: 700;
+          white-space: nowrap;
+          vertical-align: baseline;
+          float: right;
           a {
             color: #fff;
           }

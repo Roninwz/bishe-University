@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul class="pagination">
+    <ul class="pagination" v-if="isShow">
       <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)"> « </a></li>
       <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
       <li v-for="p in grouplist" :class="{'active': current == p.val}"><a href="javascript:;"
@@ -39,7 +39,11 @@
           v = v > 0 ? v : 5;
           return v % 2 === 1 ? v : v + 1;
         }
-      }
+      },
+      isShow:{// 用户父组件数据请求完成后显示分页dom
+        type: Boolean,
+        default: false
+      },
     },
     computed: {
       page: function () { // 总页数

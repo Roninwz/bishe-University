@@ -1,0 +1,7 @@
+{
+  "www": {
+    "host": "localhost",
+    "address": "0.0.0.0",
+    "port": 10016
+  }
+}

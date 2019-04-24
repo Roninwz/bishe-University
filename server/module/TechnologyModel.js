@@ -23,6 +23,8 @@ const schema = new Schema({
     imgUrl: {type: String},                          //图片
     lookNum: {type: Number,default:0}, //浏览量
     zanNum: {type: Number,default:0},  //点赞量
+    topTime:{type: Date},//置顶时间
+    isTop:{type: Number,default:0},//是否置顶
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者

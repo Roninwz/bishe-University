@@ -29,7 +29,7 @@ router.post('/list', function (req, res, next) {
     condition = reqUtil.formatCondition(condition);
 
     service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate,{createTime: -1})
+        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate,{isTop:-1,topTime:-1,createTime: -1})
         .then(
             data => res.send(resUtil.success(data)),
             err => res.send(resUtil.error())
@@ -76,6 +76,25 @@ router.post('/updateLookNum/:id', function (req, res, next) {
 
     });
 });
+
+
+//是否置顶文章
+router.post('/updateTop/:id', function (req, res, next) {
+    let _id = req.params.id;
+    let isTop = req.body.isTop;
+    let populate = "creater";
+    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+        result.isTop =  isTop;
+        result.topTime =  new Date();
+        service.updateById(req.curUser,_id,result).then(
+            res.send(resUtil.success({data: result})),
+            err => res.send(resUtil.error())
+        );
+
+
+    });
+});
+
 
 //更新
 router.post('/save/:id', function (req, res, next) {
