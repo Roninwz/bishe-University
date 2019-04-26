@@ -178,9 +178,11 @@
       .soft_list {
         width: 88%;
         .soft_one {
-          width: 100px;
-          height: 140px;
+          width: 140px;
+          height: 160px;
           text-align: center;
+          margin: 5px 5px 5px 5px;
+          float: left;
           .soft_one_img {
             display: inline-block;
             width: 100%;

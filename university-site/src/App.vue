@@ -1,91 +1,100 @@
 <template>
   <div id="app">
-    <div class="nav">
-      <el-row :gutter="20">
-        <el-col :span="8">
-          <div class="grid-content bg-purple">
-            <img class="logo" src="../static/img/logo1.png" alt="">
+    <div class="my_main">
+      <div class="nav">
+        <el-row :gutter="20">
+          <el-col :span="8">
+            <div class="grid-content bg-purple">
+              <img class="logo" src="../static/img/logo1.png" alt="">
+            </div>
+          </el-col>
+          <el-col :span="16">
+            <div class="grid-content bg-purple">
+              <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" border="0" router>
+                <el-menu-item index="/view/user/index">首页</el-menu-item>
+                <el-menu-item index="/view/user/technology">技术分享</el-menu-item>
+                <el-menu-item index="/view/user/topic">话题</el-menu-item>
+                <el-menu-item index="/view/user/resource">资源分享</el-menu-item>
+                <el-menu-item index="/view/user/software">软件中心</el-menu-item>
+                <!--<el-menu-item index="/view/user/person">我的</el-menu-item>-->
+                <template v-if="userInfo!=null&&userInfo">
+                  <el-submenu index="/view/user">
+                    <template slot="title">个人中心</template>
+                    <el-menu-item index="/view/user/person">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的主页</el-menu-item>
+                    <el-menu-item index="/view/user/index" @click="logout">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出
+                    </el-menu-item>
+                  </el-submenu>
+                </template>
+              </el-menu>
+            </div>
+          </el-col>
+        </el-row>
+        <div v-if="userInfo==null||!userInfo" class="login_and_register">
+          <span style="padding:0 5px 0 5px;color:#16a085;" @click="isLogin=true">登陆</span>|
+          <span style="padding: 0 5px 0 5px;color:#16a085;" @click="isRegister=true">注册</span>
+        </div>
+      </div>
+
+      <div class="login_div" v-if="isLogin">
+        <div class="login_info">
+          <div class="login_title">
+            <span class="login_txt">登陆</span>
+            <img class="login_close" src="../static/img/close.png" alt="" @click="isLogin=false">
           </div>
-        </el-col>
-        <el-col :span="16">
-          <div class="grid-content bg-purple">
-            <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" border="0" router>
-              <el-menu-item index="/view/user/index">首页</el-menu-item>
-              <el-menu-item index="/view/user/technology">技术分享</el-menu-item>
-              <el-menu-item index="/view/user/topic">话题</el-menu-item>
-              <el-menu-item index="/view/user/resource">资源分享</el-menu-item>
-              <el-menu-item index="/view/user/software">软件中心</el-menu-item>
-              <!--<el-menu-item index="/view/user/person">我的</el-menu-item>-->
-              <template v-if="userInfo!=null&&userInfo">
-                <el-submenu index="/view/user">
-                  <template slot="title">个人中心</template>
-                  <el-menu-item index="/view/user/person">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的主页</el-menu-item>
-                  <el-menu-item index="/view/user/index" @click="logout">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</el-menu-item>
-                </el-submenu>
-              </template>
-            </el-menu>
+          <div class="login_input">
+            <input type="text" v-model="loginUser.name" placeholder="请输入用户名">
+            <input type="password" v-model="loginUser.password" placeholder="请输入密码">
           </div>
-        </el-col>
-      </el-row>
-      <div v-if="userInfo==null||!userInfo" class="login_and_register">
-        <span style="padding:0 5px 0 5px;color:#16a085;" @click="isLogin=true">登陆</span>|
-        <span style="padding: 0 5px 0 5px;color:#16a085;" @click="isRegister=true">注册</span>
-      </div>
-    </div>
-
-    <div class="login_div" v-if="isLogin">
-      <div class="login_info">
-        <div class="login_title">
-          <span class="login_txt">登陆</span>
-          <img class="login_close" src="../static/img/close.png" alt="" @click="isLogin=false">
-        </div>
-        <div class="login_input">
-          <input type="text" v-model="loginUser.name" placeholder="请输入用户名">
-          <input type="password" v-model="loginUser.password" placeholder="请输入密码">
-        </div>
-        <div class="login_btn" @click="login">
-          登陆
-        </div>
-        <div class="no_account">
-          <span class="no_account_txt">没有账号？</span>
-          <span class="no_register" @click="isLogin=false,isRegister=true">注册</span>
-          <span class="no_forget">忘记密码?</span>
+          <div class="login_btn" @click="login">
+            登陆
+          </div>
+          <div class="no_account">
+            <span class="no_account_txt">没有账号？</span>
+            <span class="no_register" @click="isLogin=false,isRegister=true">注册</span>
+            <span class="no_forget">忘记密码?</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="register_div" v-if="isRegister">
-      <div class="login_info">
-        <div class="login_title">
-          <span class="login_txt">注册</span>
-          <img class="login_close" src="../static/img/close.png" alt="" @click="isRegister=false">
-        </div>
-        <div class="login_input">
-          <input type="text" v-model="user.name" onblur="findUserName" placeholder="请输入用户名">
-          <input type="text" v-model="user.phone" placeholder="请输入手机号">
-          <input type="text" v-model="user.code" placeholder="请输入验证码">
-          <span class="code" v-if="!isGetCode" @click="getCode">获取验证码</span>
-          <span class="code" v-if="isGetCode">{{identifyingTime}}秒后重新发送验证码</span>
-          <input type="password" v-model="user.password" placeholder="请输入密码">
-        </div>
-        <div class="login_btn" @click="register">
-          注册
-        </div>
-        <div class="no_account">
-          <span class="no_account_txt">已账号？</span>
-          <span class="no_register" @click="isRegister=false,isLogin=true">登录</span>
+      <div class="register_div" v-if="isRegister">
+        <div class="login_info">
+          <div class="login_title">
+            <span class="login_txt">注册</span>
+            <img class="login_close" src="../static/img/close.png" alt="" @click="isRegister=false">
+          </div>
+          <div class="login_input">
+            <input type="text" v-model="user.name" onblur="findUserName" placeholder="请输入用户名">
+            <input type="text" v-model="user.phone" placeholder="请输入手机号">
+            <input type="text" v-model="user.code" placeholder="请输入验证码">
+            <span class="code" v-if="!isGetCode" @click="getCode">获取验证码</span>
+            <span class="code" v-if="isGetCode">{{identifyingTime}}秒后重新发送验证码</span>
+            <input type="password" v-model="user.password" placeholder="请输入密码">
+          </div>
+          <div class="login_btn" @click="register">
+            注册
+          </div>
+          <div class="no_account">
+            <span class="no_account_txt">已账号？</span>
+            <span class="no_register" @click="isRegister=false,isLogin=true">登录</span>
+          </div>
         </div>
       </div>
+
+      <router-view></router-view>
     </div>
 
-    <router-view></router-view>
+    <my_footer></my_footer>
   </div>
 </template>
 
 <script>
   import $ from "jquery"
+  import footer from '@/components/footer'
 
   export default {
+    components: {
+      'my_footer': footer,
+    },
     data() {
       return {
         url: {
@@ -175,7 +184,7 @@
           });
         }
       },
-      findUserName:function () {
+      findUserName: function () {
         this.$fetch(this.url.findUserName, {name: this.user.name}).then(reData => {
           if (reData.success) {
             this.$message({
@@ -195,23 +204,26 @@
             message: '用户名不能为空',
             type: 'warning'
           });
-        }else if (_this.loginUser.password == null || _this.loginUser.password == '') {
+        } else if (_this.loginUser.password == null || _this.loginUser.password == '') {
           _this.$message({
             message: '密码不能为空',
             type: 'warning'
           });
-        }else {
-          _this.$post(_this.url.login, {name: _this.loginUser.name,password:_this.loginUser.password}).then(reData => {
+        } else {
+          _this.$post(_this.url.login, {
+            name: _this.loginUser.name,
+            password: _this.loginUser.password
+          }).then(reData => {
             if (reData.success) {
               _this.$message({
                 message: reData.message,
                 type: 'warning'
               });
-               localStorage.setItem("userInfo",JSON.stringify(reData.data));
-               _this.userInfo = reData.data;
+              localStorage.setItem("userInfo", JSON.stringify(reData.data));
+              _this.userInfo = reData.data;
               _this.isLogin = false;
-              _this.$store.dispatch('saveUserInfo',_this.userInfo);
-            }else {
+              _this.$store.dispatch('saveUserInfo', _this.userInfo);
+            } else {
               _this.$message({
                 message: reData.message,
                 type: 'error'
@@ -220,17 +232,17 @@
           });
         }
       },
-      logout:function () {
+      logout: function () {
         this.userInfo = null;
-        this.loginUser={};
-        localStorage.setItem("userInfo",'');
-        this.$store.dispatch('saveUserInfo',null);
+        this.loginUser = {};
+        localStorage.setItem("userInfo", '');
+        this.$store.dispatch('saveUserInfo', null);
       }
     },
     created() {
-      if(localStorage.getItem("userInfo")){
+      if (localStorage.getItem("userInfo")) {
         this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        this.$store.dispatch('saveUserInfo',this.userInfo);
+        this.$store.dispatch('saveUserInfo', this.userInfo);
       }
 
     }
@@ -256,6 +268,10 @@
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+  }
+
+  .my_main {
+    position: relative;
   }
 
   img {

@@ -21,6 +21,15 @@
           </el-col>
 
         </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-form-item label="摘要">
+              {{ editForm.abstract}}
+            </el-form-item>
+          </el-col>
+
+        </el-row>
       </el-card>
 
       <el-card>

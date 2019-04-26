@@ -21,6 +21,14 @@
           </el-col>
 
         </el-row>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-form-item label="摘要">
+              <el-input type="textarea" rows="3" aria-placeholder="请少于200字" v-model="editForm.abstract"></el-input>
+            </el-form-item>
+          </el-col>
+
+        </el-row>
       </el-card>
 
       <el-card>

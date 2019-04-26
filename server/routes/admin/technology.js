@@ -58,6 +58,16 @@ router.get('/findLastFive', function (req, res, next) {
             err => res.send(resUtil.error())
         );
 });
+//最热的6篇文章
+router.get('/findLastLook', function (req, res, next) {
+    let populate = "creater";
+    service
+        .aggregate(req.curUser, [{$sort: {lookNum: -1}},{$limit:6}])
+        .then(
+            data => res.send(resUtil.success({rows: data})),
+            err => res.send(resUtil.error())
+        );
+});
 
 
 //更新浏览量

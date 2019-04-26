@@ -129,7 +129,7 @@
     methods: {
       initTopicData: function () {
         let _this = this;
-        _this.$fetch(this.url.find, {topic: _this.topicId}).then(reData => {
+        _this.$fetch(this.url.find+'?topic='+_this.topicId).then(reData => {
           if (reData.success) {
             if (reData.rows.length > 0) {
               _this.topicPostList = reData.rows;

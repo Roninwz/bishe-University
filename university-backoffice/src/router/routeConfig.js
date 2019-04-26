@@ -22,6 +22,7 @@ import AdminManage from '../views/auth/admin.vue'
 import RoleManage from '../views/auth/role.vue'
 import MenuManage from '../views/auth/menu.vue'
 import FileManage from '../views/system/file.vue'
+import NoticeManage from '../views/system/noticeList.vue'
 import LoginLogList from '../views/logManage/loginLogList.vue'
 
 
@@ -118,6 +119,7 @@ export default {
       iconCls: 'fa fa-list-alt',
       children: [
         { path: '/view/admin/fileManage', component: FileManage, name: '文件管理' },
+        { path: '/view/admin/noticeManage', component: NoticeManage, name: '公告管理' },
       ]
     },
     {

@@ -7,13 +7,16 @@
             <div class="soft_img">
               <img :src="$Roninwz.path.publicPath+software.imgUrl" alt="">
             </div>
+            <a target="_blank" :href="software.link">
             <div class="soft_btn">
               下载
             </div>
+            </a>
             <p class="soft_info">类别：{{softwareType}}</p>
             <p class="soft_info">版本：{{software.version}}</p>
             <p class="soft_info">大小：{{software.size}}</p>
             <p class="soft_info">更新时间：{{software.updateTime | formatDate}}</p>
+            <p class="soft_info">密码：{{software.pass}}</p>
           </aside>
           <section class="col-md-8 mySoftware" id="mainstay">
             <div class="software clearfix">

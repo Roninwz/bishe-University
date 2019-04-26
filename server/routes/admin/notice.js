@@ -1,9 +1,10 @@
 /**
  *
  * @author Roninwz
- * @date 2019/4/12 下午13:44
+ * @date 2018/12/10 18:08
  * @since 1.0.0
  */
+
 
 'use strict';
 const express = require('express');
@@ -14,7 +15,8 @@ const logger = require('log4js').getLogger("sys");
 const resUtil = require("../../module/util/resUtil");
 const reqUtil = require("../../module/util/reqUtil");
 
-const service = require("../../service/ResourceService");
+const service = require("../../service/NoticeService");
+const adminService = require("../../service/adminService");
 
 const formidable = require('formidable');
 const xlsx = require('node-xlsx');
@@ -24,11 +26,15 @@ const fs = require('fs');
 //列表
 router.post('/list', function (req, res, next) {
     let condition = req.body, query = req.query,
-        populate = 'creater updater menus';
+        populate = 'creater updater';
     condition = reqUtil.formatCondition(condition);
 
     service
-        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate,{createTime: -1})
+        .findForPage(req.curUser, query.pageSize, query.pageNumber, condition, populate, {
+            isTop: -1,
+            topTime: -1,
+            createTime: -1
+        })
         .then(
             data => res.send(resUtil.success(data)),
             err => res.send(resUtil.error())
@@ -40,7 +46,7 @@ router.get('/find', function (req, res, next) {
     condition = reqUtil.formatCondition(condition);
     let populate = "creater";
     service
-        .find(req.curUser, condition,populate, {createTime: -1})
+        .find(req.curUser, condition, populate, {createTime: -1})
         .then(
             data => res.send(resUtil.success({rows: data})),
             err => res.send(resUtil.error())
@@ -48,45 +54,16 @@ router.get('/find', function (req, res, next) {
 });
 
 //查找最新的五篇文章
-router.get('/findMoreSix', function (req, res, next) {
+router.get('/findLastFive', function (req, res, next) {
     let populate = "creater";
     service
-        .aggregate(req.curUser, [{$limit:5},{$sort: {lookNum: -1}}])
+        .aggregate(req.curUser, [{$sort: {createTime: -1}}, {$limit: 5}])
         .then(
             data => res.send(resUtil.success({rows: data})),
             err => res.send(resUtil.error())
         );
 });
 
-
-//最热的6个资源
-router.get('/findLastLook', function (req, res, next) {
-    let populate = "creater";
-    service
-        .aggregate(req.curUser, [{$sort: {lookNum: -1}},{$limit:8}])
-        .then(
-            data => res.send(resUtil.success({rows: data})),
-            err => res.send(resUtil.error())
-        );
-});
-
-
-router.get('/updateZanNum', function (req, res, next) {
-    let _id = req.query.id;
-    let zanNum = req.query.zanNum;
-    let condition = req.body;
-    condition = reqUtil.formatCondition(condition);
-    let populate = "creater";
-    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
-        result.zanNum = zanNum;
-        service.updateById(req.curUser,_id,result).then(
-            res.send(resUtil.success({data: result})),
-            err => res.send(resUtil.error())
-        );
-
-
-    });
-});
 
 //更新浏览量
 router.post('/updateLookNum/:id', function (req, res, next) {
@@ -94,9 +71,9 @@ router.post('/updateLookNum/:id', function (req, res, next) {
     let condition = req.body;
     condition = reqUtil.formatCondition(condition);
     let populate = "creater";
-    service.findOne(req.curUser, {_id:_id},populate).then((result) => {
+    service.findOne(req.curUser, {_id: _id}, populate).then((result) => {
         result.lookNum = result.lookNum + 1;
-        service.updateById(req.curUser,_id,result).then(
+        service.updateById(req.curUser, _id, result).then(
             res.send(resUtil.success({data: result})),
             err => res.send(resUtil.error())
         );
@@ -105,6 +82,31 @@ router.post('/updateLookNum/:id', function (req, res, next) {
     });
 });
 
+
+// router.get('/findLastTimeTen', function (req, res, next) {
+//     let populate = "creater";
+//     service
+//         .aggregate(req.curUser, [{$lookup:{
+//                 from: "M_Admin", // 关联到order表
+//                 localField: "creater", // user 表关联的字段
+//                 foreignField: "_id", // order 表关联的字段
+//                 as: "user"
+//             }},{$sort: {createTime: -1}},{$limit: 10}]).then(data => {
+//
+//                 res.send(resUtil.success({data: data})),
+//                     err => res.send(resUtil.error())
+//         });
+// });
+
+
+router.get('/findLastTimeTen', function (req, res, next) {
+    let populate = "creater";
+    service
+        .aggregate(req.curUser, [{$sort: {createTime: -1}},{$limit: 10}]).then(data => {
+                res.send(resUtil.success({data: data})),
+                    err => res.send(resUtil.error())
+        });
+});
 
 //更新
 router.post('/save/:id', function (req, res, next) {
@@ -155,7 +157,7 @@ router.post('/remove', function (req, res, next) {
 //详情
 router.get('/detail/:id', function (req, res, next) {
     let _id = req.params.id;
-    let populate = "menus";
+    let populate = "creater";
 
     service
         .findById(req.curUser, _id, populate)

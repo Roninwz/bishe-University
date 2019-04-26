@@ -6,7 +6,7 @@
 'use strict';
 
 /**
- *技术文章表
+ *公告表
  */
 
 const uuid = require('uuid');
@@ -19,13 +19,10 @@ const tool = require('./util/tool');
 const schema = new Schema({
     _id: {type: String, default: uuid.v4},
     title: {type: String, default: 'default'},     //标题
+    tag:{type:String, default: 'IT大学网'},
     content: {type: String},                    //内容
-    imgUrl: {type: String},                          //图片
     lookNum: {type: Number,default:0}, //浏览量
     zanNum: {type: Number,default:0},  //点赞量
-    abstract:{type: String},//摘要
-    topTime:{type: Date},//置顶时间
-    isTop:{type: Number,default:0},//是否置顶
     state: {type: Number, default: 1},           //状态  1启用 0禁用
     createTime: {type: Date, default: Date.now},    //创建时间
     creater: {type: String, ref: "M_Admin", default: config.dbUser.robot._id},          //创建者
@@ -35,5 +32,5 @@ const schema = new Schema({
 schema.path('createTime').get(v => tool.date2string(v, 'yyyy-MM-dd hh:mm'));
 schema.set('toJSON', {getters: true});
 
-const Model = mongoose.model('T_Technology', schema, 't_technology');
+const Model = mongoose.model('T_Notice', schema, 't_notice');
 module.exports = Model;

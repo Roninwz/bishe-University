@@ -270,6 +270,7 @@
         .topic_one {
           width: 30%;
           height: 100px;
+          float: left;
           .topic_img {
             width: 30%;
             height: 100%;
