@@ -16,6 +16,7 @@ import SoftwareDetail from '../page/software/softwareDetail'
 import Topic from '../page/topic/topic'
 import TopicDetail from '../page/topic/topicDetal'
 import Person from '../page/person/person'
+import Updatepass from '../page/person/updatepass'
 
 Vue.use(Router);
 
@@ -24,8 +25,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      redirect:'/view/user/index'
     },
     {
       path: '/view/user/index',
@@ -78,6 +78,11 @@ export default new Router({
       path: '/view/user/person',
       name: 'Person',
       component: Person
-    }
+    },
+    {
+      path: '/view/user/updatepass',
+      name: 'Updatepass',
+      component: Updatepass
+    },
   ]
 })

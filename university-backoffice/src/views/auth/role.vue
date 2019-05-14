@@ -59,7 +59,7 @@
               <el-tree
                 ref="tree"
                 show-checkbox
-                :check-strictly="true"
+                :check-strictly="false"
                 node-key="_id"
                 :default-checked-keys="checkedMenu"
                 :data="menuData"

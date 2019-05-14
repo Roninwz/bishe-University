@@ -43,7 +43,8 @@
                 <div class="pull-right post-info"><span><i class="fa fa-calendar"></i> {{article.createTime | formatDate}}</span>
                   <span><i
                     class="fa fa-user"></i> <span class="upp">{{article.creater.name}}</span></span> <span><i
-                    class="fa fa-eye"></i> {{article.lookNum}}人</span> <span><i class="fa fa-comment"></i> 暂无</span>
+                    class="fa fa-eye"></i> {{article.lookNum}}人</span>
+                  <!--<span><i class="fa fa-comment"></i> 暂无</span>-->
                 </div>
               </section>
             </div>

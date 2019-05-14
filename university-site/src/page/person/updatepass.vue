@@ -11,74 +11,45 @@
                 <span class="phone">手机号：{{userInfo.phone}}</span>
               </div>
               <a target="_blank" :href="userInfo.github?userInfo.github:'#'" > <img class="github"
-                                                                                     src="../../../static/img/github.png"
-                                                                                     alt=""></a>
+                                                                                    src="../../../static/img/github.png"
+                                                                                    alt=""></a>
               <a target="_blank" :href="userInfo.blog?userInfo.blog:'#'" ><img class="csdn"
-                                                                                     src="../../../static/img/csdn.png"
-                                                                                     alt=""></a>
+                                                                               src="../../../static/img/csdn.png"
+                                                                               alt=""></a>
             </div>
 
 
             <div class="update_userInfo_div">
               <p class="user_title">个人资料</p>
               <div class="my_hr"></div>
-
               <div class="update_head_img">
                 <div class="update_label">
-                  头像
+                  旧密码
                 </div>
                 <div class="update_content">
-                  <img :src="$Roninwz.path.publicPath+userInfo.imgUrl" alt="">
-                  <div class="head">
-                    <span>支持 jpg、png 格式大小 5M 以内的图片</span>
-                    <div class="updateHeadImg">
-                      <dol-upload v-model="userInfo.imgUrl" :on-success="uploadSuccess" type="user"
-                                  maxWidth="300px" maxHeight="200px">
-                        <div class="upload-img">点击上传</div>
-                      </dol-upload>
-                    </div>
-                  </div>
+                  <input type="password" name="userInfo.name" v-model="oldpass" placeholder="旧密码" autofocus>
                 </div>
               </div>
               <div class="my_hr"></div>
               <div class="update_head_img">
                 <div class="update_label">
-                  用户名
+                  新密码
                 </div>
                 <div class="update_content">
-                  <input type="text" name="userInfo.name" v-model="userInfo.name" placeholder="请输入用户名" autofocus>
+                  <input type="password" v-model="newpass"  placeholder="新密码" autofocus>
                 </div>
               </div>
               <div class="my_hr"></div>
               <div class="update_head_img">
                 <div class="update_label">
-                  github
+                  确认密码
                 </div>
                 <div class="update_content">
-                  <input type="text" v-model="userInfo.github"  placeholder="请输入github账户地址" autofocus>
+                  <input type="password"  v-model="surepass"   placeholder="确认密码">
                 </div>
               </div>
-              <div class="my_hr"></div>
-              <div class="update_head_img">
-                <div class="update_label">
-                  blog
-                </div>
-                <div class="update_content">
-                  <input type="text"  v-model="userInfo.blog"  placeholder="请输入blog地址">
-                </div>
-              </div>
-              <div class="my_hr"></div>
-              <div class="update_head_img">
-                <div class="update_label">
-                  个人介绍
-                </div>
-                <div class="update_content">
-                  <input type="text" v-model="userInfo.introduce"  placeholder="请输入个人介绍">
-                </div>
-              </div>
-
               <div class="update_user_btn" @click="saveUserInfoBtn">
-                保存更改
+                确认修改
               </div>
 
             </div>
@@ -112,7 +83,7 @@
 
 <script>
   export default {
-    name: "person",
+    name: "updatepass",
     data: function () {
       return {
         topicNum: 0,
@@ -123,7 +94,9 @@
         blog:'',
         introduce:'',
         userInfo: {},
-        uniformFile: false,
+        oldpass: "",
+        newpass: "",
+        surepass: "",
       };
     },
     methods: {
@@ -149,18 +122,25 @@
           }
         });
       },
-      /*
-   * 图片上传成功回调
-   * */
-      uploadSuccess(response, file, fileList) {
-
-        this.userInfo.imgUrl = response.data.filePath;
-        this.$set(this, 'uniformFile', response.data);
-
-      },
 
       saveUserInfoBtn:function () {
-          let _this = this;
+        let _this = this;
+
+
+        if(_this.oldpass!=_this.userInfo.password){
+          _this.$message({
+            message: "旧密码输入错误，请重新输入",
+            type: 'warning',
+            duration:1000
+          });
+        }else if(_this.newpass!=_this.surepass){
+          _this.$message({
+            message: "两次密码输入不一致",
+            type: 'warning',
+            duration:1000
+          });
+        }else {
+          _this.$set(_this.userInfo,"password",_this.surepass);
           _this.$post(_this.saveUserInfo+_this.userInfo._id, _this.userInfo).then(reData => {
             if (reData.success) {
               _this.$message({
@@ -168,9 +148,11 @@
                 type: 'success',
                 duration:1000
               });
-              _this.initUserInfo();
+              _this.$router.replace("/view/user/person");
             }
           });
+        }
+
       }
     },
 

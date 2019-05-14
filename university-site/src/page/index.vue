@@ -399,11 +399,16 @@
           margin-left: 2%;
           margin-top: 60px;
           float: left;
+
           p{
+            text-align: center;
             width: 100%;
             padding-left: 5px;
             padding-top: 5px;
             line-height: 25px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
           }
           .art_content{
             width: 100%;
@@ -415,12 +420,12 @@
             .art_con{
               width: 54%;
               height: 100%;
-              padding: 3px 3px 3px 8px;
+              padding: 3px 3px 0 8px;
               float: left;
               overflow : hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
-              -webkit-line-clamp: 3;
+              -webkit-line-clamp: 5;
               -webkit-box-orient: vertical;
               color:#888888;
             }

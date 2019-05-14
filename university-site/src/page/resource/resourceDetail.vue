@@ -34,16 +34,11 @@
             <aside>
               <div class="panel">
                 <div class="panel-heading">
-                  网络收藏
+                  资源链接下载
                 </div>
                 <div class="panel-body">
-                  <ul class="list-group">
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net">网络日志</li>
-                    <li class="clearfix new_net2">网络日志</li>
-                  </ul>
+                  <p> 链接：<a :href="resource.link" target="_blank"><span style="text-align: center;">{{resource.link}}</span></a></p>
+                  <p> 密码：<span style="text-align: center;">{{resource.pass}}</span></p>
                 </div>
               </div>
             </aside>
