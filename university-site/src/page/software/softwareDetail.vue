@@ -132,6 +132,7 @@
     height: 100%;
     min-height: 900px;
     background-color: #F6F6F6;
+    padding-bottom: 20px;
     .myAside {
       margin-top: 20px;
       padding-left: 50px;

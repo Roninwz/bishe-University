@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import Index from '../page/index'
+import Notice from '../page/notice'
 
 import Technology from '../page/technology/technology2'
 import TechnologyArticleDetail from '../page/technology/articleDetail'
@@ -31,6 +32,11 @@ export default new Router({
       path: '/view/user/index',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/view/user/notice',
+      name: 'Notice',
+      component: Notice
     },
     {
       path: '/view/user/technology',

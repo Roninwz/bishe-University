@@ -107,7 +107,7 @@
     .my_contain {
       max-width: 1280px;
       width: 80%;
-      margin: 20px auto;
+      margin: 0 auto;
       min-height: 800px;
       padding-top: 2%;
       .resource_div {

@@ -111,6 +111,16 @@
             pathData: {id: id},
           }).then(reData => {
 
+            let operateLog = {
+              name: '删除技术文章',
+              type: 'delete',
+              action: this.url.removeOne,
+              status: 1,
+            };
+            this.$store.dispatch('operateLog', operateLog).then(data => {
+
+            });
+
             this.$message(reData.message);
             this.query();
           });

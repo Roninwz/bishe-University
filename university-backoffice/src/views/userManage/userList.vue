@@ -222,7 +222,6 @@
           url: '/api/users/list',
         }).then(data => {
           console.log("data:" + data);
-          console.log("data:" + JSON.stringify(data.data.rows));
         });
       },
 
@@ -268,6 +267,17 @@
             if (reData.success) {
               this.query();
               this.$message("删除成功");
+              let operateLog = {
+                name: '删除用户',
+                type: 'delete',
+                action: this.url.removeUser,
+                status: 1,
+              };
+
+                this.$store.dispatch('operateLog', operateLog).then(data => {
+
+                });
+
             } else {
               this.$message(reData.message);
             }
@@ -294,6 +304,15 @@
               _this.$message({
                 type: 'success',
                 message: "更新用户成功"
+              });
+              let operateLog = {
+                name: '更新用户',
+                type: 'update',
+                action: this.url.saveUser,
+                status: 1,
+              };
+              this.$store.dispatch('operateLog', operateLog).then(data => {
+
               });
             } else {
               _this.$message({

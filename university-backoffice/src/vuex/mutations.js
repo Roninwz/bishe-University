@@ -17,5 +17,9 @@ export default {
     state.adminInfo = adminInfo;
     this.commit('session');
   },
+  saveOperarteLog(state, operarteLog){
+    state.operarteLog = operarteLog;
+    this.commit('session');
+  },
 }
 

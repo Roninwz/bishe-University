@@ -26,6 +26,14 @@ class ModuleService extends CommonService{
     }
 
 
+    /**
+     * 通过百度地图接口获取地址
+     * @param api
+     * @param ak
+     * @param coor
+     * @param ip
+     * @returns {Promise<any>}
+     */
      getAddress(api,ak,coor,ip){
         return new Promise((resolve,reject)=>{
             request({

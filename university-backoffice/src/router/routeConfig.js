@@ -24,6 +24,7 @@ import MenuManage from '../views/auth/menu.vue'
 import FileManage from '../views/system/file.vue'
 import NoticeManage from '../views/system/noticeList.vue'
 import LoginLogList from '../views/logManage/loginLogList.vue'
+import OperateLogList from '../views/logManage/operateLogList.vue'
 
 
 export default {
@@ -129,7 +130,7 @@ export default {
       iconCls: 'fa fa-list-alt',
       children: [
         { path: '/view/admin/loginLogManage', component: LoginLogList, name: '登录日志' },
-        { path: '/view/admin/operaLogManage', component: FileManage, name: '操作日志' },
+        { path: '/view/admin/operaLogManage', component: OperateLogList, name: '操作日志' },
       ]
     },
   ],

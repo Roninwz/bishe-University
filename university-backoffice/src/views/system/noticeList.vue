@@ -216,7 +216,7 @@
       // this.getUser();
     },
     created: function () {
-      this.initUserList();
+      // this.initUserList();
     }
   };
 

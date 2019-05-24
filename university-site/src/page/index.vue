@@ -37,7 +37,7 @@
             <div class="text item">
               <ul>
                 <li v-for="notice in lastTimeNoticeList">
-                  <router-link to=""><span class="notice-a">{{notice.title}}</span><span
+                  <router-link :to="{path:'/view/user/notice',query:{id:notice._id}}"><span class="notice-a">{{notice.title}}</span><span
                     class="notice-tag">{{notice.tag}}</span></router-link>
                 </li>
 

@@ -12,10 +12,10 @@
               </div>
               <a target="_blank" :href="userInfo.github?userInfo.github:'#'" > <img class="github"
                                                                                      src="../../../static/img/github.png"
-                                                                                     alt=""></a>
+                                                                                     alt="github地址" title="github地址"></a>
               <a target="_blank" :href="userInfo.blog?userInfo.blog:'#'" ><img class="csdn"
                                                                                      src="../../../static/img/csdn.png"
-                                                                                     alt=""></a>
+                                                                                     alt="博客地址" title="博客地址"></a>
             </div>
 
 
@@ -52,10 +52,19 @@
               <div class="my_hr"></div>
               <div class="update_head_img">
                 <div class="update_label">
+                  邮箱
+                </div>
+                <div class="update_content">
+                  <input type="text" name="userInfo.email" v-model="userInfo.email" placeholder="请输入邮箱">
+                </div>
+              </div>
+              <div class="my_hr"></div>
+              <div class="update_head_img">
+                <div class="update_label">
                   github
                 </div>
                 <div class="update_content">
-                  <input type="text" v-model="userInfo.github"  placeholder="请输入github账户地址" autofocus>
+                  <input type="text" v-model="userInfo.github"  placeholder="请输入github账户地址">
                 </div>
               </div>
               <div class="my_hr"></div>

@@ -97,6 +97,26 @@
               message: reData.message,
               type: 'success'
             });
+            var operateLog = null;
+            if(this.technologyId){
+               operateLog = {
+                name: '更新技术文章',
+                type: 'update',
+                action: this.url.save,
+                status: 1,
+              };
+            }else {
+               operateLog = {
+                name: '添加技术文章',
+                type: 'add',
+                action: this.url.save,
+                status: 1,
+              };
+            }
+
+            this.$store.dispatch('operateLog', operateLog).then(data => {
+
+            });
             this.$router.push("/view/admin/technologyManage");
           }
 

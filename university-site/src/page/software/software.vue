@@ -11,9 +11,9 @@
           <span @click="softTypeSelect(4,'实用工具')" class="nav_title" :class="{'active':softType==4}">实用工具</span>
           <span @click="softTypeSelect(5,'其它')" class="nav_title" :class="{'active':softType==5}">其它</span>
           <div class="search_div">
-            <input class="search" type="text" placeholder="请输入软件名" onfocus="this.placeholder=''"
+            <input class="search" type="text" v-model="searchSoftwareName" placeholder="请输入软件名" onfocus="this.placeholder=''"
                    onblur="this.placeholder='请输入软件名'">
-            <div class="search_btn" id="flymeSearchBtn"><img src="../../../static/img/search.png" alt=""></div>
+            <div class="search_btn" id="flymeSearchBtn" @click="searchSoftware"><img src="../../../static/img/search.png" alt=""></div>
           </div>
         </div>
 
@@ -57,7 +57,8 @@
         softwareList: [],
         softwareListTime: [],
         softType: 'all',
-        softTypeTxt: '所有'
+        softTypeTxt: '所有',
+        searchSoftwareName:"",
       };
     },
     methods: {
@@ -86,6 +87,16 @@
         }
         this.softType = type;
         this.softTypeTxt = typeTxt;
+      },
+
+      searchSoftware:function () {
+        let _this = this;
+        _this.$fetch(this.url.findSoftWare,{'name_like':_this.searchSoftwareName}).then(reData => {
+          if (reData.success) {
+            _this.softwareList = reData.rows;
+            _this.softwareListTime = reData.rows;
+          }
+        });
       }
     },
     created: function () {

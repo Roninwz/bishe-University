@@ -217,7 +217,7 @@
             if (reData.success) {
               _this.$message({
                 message: reData.message,
-                type: 'warning'
+                type: 'success'
               });
               localStorage.setItem("userInfo", JSON.stringify(reData.data));
               _this.userInfo = reData.data;
