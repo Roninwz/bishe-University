@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const logger = require('log4js').getLogger("sys");
-
+const nodemailer = require('nodemailer');
 const resUtil = require("../module/util/resUtil");
 const reqUtil = require("../module/util/reqUtil");
 const config = require("../config/config");
@@ -146,18 +146,27 @@ router.post('/register', function (req, res, next) {
     let user = {name:myData.name, password: myData.password, phone: myData.phone};
     if (req.session['identifyingCode'] && req.session['identifyingCode'].toString() === myData.code.toString()){
 
-        service.findOne(config['dbUser']['robot'], {name:myData.name},populate).then((result) => {
+        service.findOne(config['dbUser']['robot'], {name:myData.name}).then((result) => {
             if(result){
                 res.send(resUtil.error({message: '用户名已存在'}));
             }else {
-                service
-                    .save(config['dbUser']['robot'], user)
-                    .then(
-                        data => {
-                            res.send(resUtil.success({data: data,message: '注册成功'}))
-                        },
-                        err => res.send(resUtil.error())
-                    );
+
+                service.findOne(config['dbUser']['robot'], {phone:myData.phone}).then((result2) => {
+                    if (result2) {
+                        res.send(resUtil.error({message: '手机号已存在'}));
+                    } else {
+
+                        service
+                            .save(config['dbUser']['robot'], user)
+                            .then(
+                                data => {
+                                    res.send(resUtil.success({data: data, message: '注册成功'}))
+                                },
+                                err => res.send(resUtil.error())
+                            );
+                    }
+                });
+
             }
 
         });
@@ -186,6 +195,54 @@ router.post('/login', function (req, res, next) {
             },
 
             err => res.send(resUtil.error({message:'登录失败'}))
+        );
+});
+
+/**
+ * 忘记密码
+ */
+router.get('/forget', function (req, res, next) {
+    let condition = req.query;
+    service
+        .findOne(config['dbUser']['robot'], {email:condition.email})
+        .then(
+            data => {
+                if(data){
+
+                    let transporter = nodemailer.createTransport({
+                        // host: 'smtp.ethereal.email',
+                        service: 'QQ', // 使用了内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known/
+                        port: 465, // SMTP 端口
+                        secureConnection: true, // 使用了 SSL
+                        auth: {
+                            user: '1947914887@qq.com',
+                            // 这里密码不是qq密码，是你设置的smtp授权码
+                            pass: 'bfohugrudpwvfche',
+                        }
+                    });
+
+                    let mailOptions = {
+                        from: '1947914887@qq.com',
+                        to: condition.email, // list of receivers
+                        subject: '密码找回', // Subject line
+                        // 发送text或者html格式
+                        text: "您的密码为："+data.password +"为了您的密码安全，请及时修改您的密码。",
+                    };
+
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log('Message sent: %s', info.messageId);
+                    });
+
+                    res.send(resUtil.success({data: data,message:'密码已发送到您的邮箱'}))
+                }else {
+                    res.send(resUtil.error({data: data,message:'邮箱不正确'}))
+                }
+            },
+
+            err => res.send(resUtil.error({message:'找回密码失败'}))
         );
 });
 

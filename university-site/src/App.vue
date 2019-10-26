@@ -51,7 +51,7 @@
           <div class="no_account">
             <span class="no_account_txt">没有账号？</span>
             <span class="no_register" @click="isLogin=false,isRegister=true">注册</span>
-            <span class="no_forget">忘记密码?</span>
+            <span class="no_forget" @click="isLogin=false,isForget=true">忘记密码?</span>
           </div>
         </div>
       </div>
@@ -80,6 +80,25 @@
         </div>
       </div>
 
+
+      <div class="forget_div" v-if="isForget">
+        <div class="login_info">
+          <div class="login_title">
+            <span class="login_txt">忘记密码</span>
+            <img class="login_close" src="../static/img/close.png" alt="" @click="isForget=false">
+          </div>
+          <div class="login_input">
+            <input type="text" v-model="forgetEmail" placeholder="请输入邮箱">
+          </div>
+          <div class="login_btn" @click="forgetPassword">
+            确定
+          </div>
+          <div class="no_account">
+            <span class="no_register" @click="isForget=false,isLogin=true">登录</span>
+          </div>
+        </div>
+      </div>
+
       <router-view></router-view>
     </div>
 
@@ -89,16 +108,17 @@
 
 <script>
   import $ from "jquery"
-  import footer from '@/components/footer'
+  import myfooter from '@/components/footer'
 
   export default {
     components: {
-      'my_footer': footer,
+      'my_footer': myfooter,
     },
     data() {
       return {
         url: {
           getCode: '/api/users/getCode',
+          forgetPass: '/api/users/forget',
           register: '/api/users/register',
           login: '/api/users/login',
           findUserName: '/api/users/find'
@@ -114,7 +134,9 @@
         isLogin: false,
         isRegister: false,
         isGetCode: false,
+        isForget: false,
         identifyingTime: 0,
+        forgetEmail:'',
       };
 
     },
@@ -122,6 +144,8 @@
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
+
+      //获取验证码
       getCode: function () {
         let _this = this;
         _this.isGetCode = true;
@@ -145,16 +169,31 @@
           });
         }
       },
+
+      //注册
       register: function () {
+        function isPoneAvailable(phone) {
+          let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+          if (!myreg.test(phone)) {
+            return false;
+          } else {
+            return true;
+          }
+        }
         let _this = this;
         if (_this.user.name == null || _this.user.name == '') {
           _this.$message({
             message: '用户名不能为空',
             type: 'warning'
           });
-        } else if (_this.user.phone == null || _this.user.phone == '') {
+        }else if (_this.user.phone == null || _this.user.phone == '') {
           _this.$message({
             message: '手机号不能为空',
+            type: 'warning'
+          });
+        } else if (!isPoneAvailable(_this.user.phone)) {
+          _this.$message({
+            message: '手机号格式不正确',
             type: 'warning'
           });
         } else if (_this.user.code == null || _this.user.code == '') {
@@ -184,6 +223,7 @@
           });
         }
       },
+
       findUserName: function () {
         this.$fetch(this.url.findUserName, {name: this.user.name}).then(reData => {
           if (reData.success) {
@@ -232,11 +272,27 @@
           });
         }
       },
+
+      //注销
       logout: function () {
         this.userInfo = null;
         this.loginUser = {};
         localStorage.setItem("userInfo", '');
         this.$store.dispatch('saveUserInfo', null);
+      },
+
+      // 忘记密码
+      forgetPassword: function () {
+        let _this = this;
+          _this.$fetch(this.url.forgetPass, {email: _this.forgetEmail}).then(reData => {
+            if (reData.success) {
+              _this.$message({
+                message: reData.message,
+                type: 'success'
+              });
+              _this.isForget = false;
+            }
+          });
       }
     },
     created() {
@@ -503,6 +559,107 @@
         top: 20px;
         width: 100%;
         padding: 20px 20px 20px 20px;
+        .no_account_txt {
+          color: #8b9196;
+          font-size: 14px;
+        }
+        .no_register {
+          color: #16a085;
+          font-size: 14px;
+        }
+        .no_forget {
+          color: #16a085;
+          font-size: 14px;
+          float: right;
+        }
+      }
+
+    }
+  }
+  .forget_div {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .3);
+
+    .login_info {
+      width: 300px;
+      height: 230px;
+      margin: 250px auto;
+      background-color: #fff;
+      box-shadow: 0 0 2px #fff;
+      border-radius: 2px;
+      box-sizing: border-box;
+      .login_title {
+        position: relative;
+        width: 100%;
+        top: 20px;
+        .login_txt {
+          position: relative;
+          left: 5px;
+          padding: 25px 5px 5px 15px;
+          font-size: 18px;
+          color: black;
+          font-weight: bold;
+        }
+        .login_close {
+          position: relative;
+          float: right;
+          right: 15px;
+          width: 22px;
+          height: 22px;
+        }
+      }
+      .login_input {
+        position: relative;
+        top: 10px;
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        input {
+          position: relative;
+          margin-top: 15px;
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          padding: 10px;
+          border: 1px solid #e9e9e9;
+          border-radius: 2px;
+          outline: none;
+          font-size: 14px;
+        }
+        input:focus {
+          border: 1px solid #16a085;
+        }
+        .code {
+          position: absolute;
+          top: 156px;
+          right: 38px;
+          float: right;
+          color: #16a085;
+          font-size: 13px;
+        }
+      }
+      .login_btn {
+        position: relative;
+        top: 20px;
+        left: 20px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        margin-right: 20px;
+        width: 87%;
+        background-color: #16a085;
+        color: white;
+        border-radius: 2px;
+      }
+      .no_account {
+        position: relative;
+        top: 20px;
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        text-align: center;
         .no_account_txt {
           color: #8b9196;
           font-size: 14px;

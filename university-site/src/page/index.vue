@@ -42,7 +42,7 @@
                 </li>
 
               </ul>
-              <router-link to=""><span class="notice-more">>>更多</span></router-link>
+              <router-link :to="{path:'/view/user/notice'}"><span class="notice-more">>>更多</span></router-link>
             </div>
           </div>
         </el-col>

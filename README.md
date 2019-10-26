@@ -10,8 +10,7 @@ backoffice：
        http://localhost:8881    
 
 
-模仿网址：  
-http://www.zhanzhangs.com/
+
 
 
 ####技术介绍  
